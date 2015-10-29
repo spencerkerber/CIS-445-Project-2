@@ -1,0 +1,824 @@
+NOTE: PROCEDURE PRINTTO used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+1 
+Traverser: Traverser invoked.  MPCONNECT command is sas. 
+Traverser: Beginning flow traversal 
+*------------------------------------------------------------* 
+* 
+* Ids : Beginning Update 
+* datetime : 11OCT2015:15:09:10 
+* 
+*------------------------------------------------------------* 
+*------------------------------------------------------------* 
+* 
+* Ids : End Update 
+* datetime : 11OCT2015:15:09:10 
+* 
+*------------------------------------------------------------* 
+Traverser: WaitingNode "TREE2" 
+Traverser: WaitingNode "TREE" 
+Traverser: WaitingNode "BOOST" 
+Traverser: WaitingNode "REG" 
+Traverser: WaitingNode "PART" 
+Traverser: WaitingNode "REPL" 
+Traverser: WaitingNode "CNTRL" 
+Traverser: WaitingNode "IMPT" 
+Traverser: WaitingNode "TRANS" 
+Traverser: WaitingNode "VARSEL" 
+Traverser: WaitingNode "NEURAL" 
+Traverser: WaitingNode "CNTRL2" 
+Traverser: WaitingNode "MDLCOMP" 
+Traverser: WaitingNode "SCORE" 
+Traverser: WaitingNode "EMCODE" 
+traverser_readyNode_note 
+traverser_readyNode_note 
+*------------------------------------------------------------* 
+* 
+* Ids2 : Beginning Update 
+* datetime : 11OCT2015:15:09:11 
+* 
+*------------------------------------------------------------* 
+*------------------------------------------------------------* 
+* 
+* Ids2 : End Update 
+* datetime : 11OCT2015:15:09:11 
+* 
+*------------------------------------------------------------* 
+Traverser: WaitingNode "TREE2" 
+Traverser: WaitingNode "TREE" 
+Traverser: WaitingNode "BOOST" 
+Traverser: WaitingNode "REG" 
+Traverser: WaitingNode "PART" 
+Traverser: WaitingNode "REPL" 
+Traverser: WaitingNode "CNTRL" 
+Traverser: WaitingNode "IMPT" 
+Traverser: WaitingNode "TRANS" 
+Traverser: WaitingNode "VARSEL" 
+Traverser: WaitingNode "NEURAL" 
+Traverser: WaitingNode "CNTRL2" 
+Traverser: WaitingNode "MDLCOMP" 
+Traverser: WaitingNode "SCORE" 
+Traverser: WaitingNode "EMCODE" 
+traverser_readyNode_note 
+*------------------------------------------------------------* 
+* 
+* Stat : Beginning Update 
+* datetime : 11OCT2015:15:09:11 
+* 
+*------------------------------------------------------------* 
+*------------------------------------------------------------* 
+* 
+* Stat : End Update 
+* datetime : 11OCT2015:15:09:12 
+* 
+*------------------------------------------------------------* 
+Traverser: WaitingNode "TREE2" 
+Traverser: WaitingNode "TREE" 
+Traverser: WaitingNode "BOOST" 
+Traverser: WaitingNode "REG" 
+Traverser: WaitingNode "REPL" 
+Traverser: WaitingNode "CNTRL" 
+Traverser: WaitingNode "IMPT" 
+Traverser: WaitingNode "TRANS" 
+Traverser: WaitingNode "VARSEL" 
+Traverser: WaitingNode "NEURAL" 
+Traverser: WaitingNode "CNTRL2" 
+Traverser: WaitingNode "MDLCOMP" 
+Traverser: WaitingNode "SCORE" 
+Traverser: WaitingNode "EMCODE" 
+traverser_readyNode_note 
+*------------------------------------------------------------* 
+* 
+* Part : Beginning Update 
+* datetime : 11OCT2015:15:09:12 
+* 
+*------------------------------------------------------------* 
+*------------------------------------------------------------* 
+* 
+* Part : End Update 
+* datetime : 11OCT2015:15:09:12 
+* 
+*------------------------------------------------------------* 
+Traverser: WaitingNode "TREE2" 
+Traverser: WaitingNode "TREE" 
+Traverser: WaitingNode "BOOST" 
+Traverser: WaitingNode "REG" 
+Traverser: WaitingNode "CNTRL" 
+Traverser: WaitingNode "IMPT" 
+Traverser: WaitingNode "TRANS" 
+Traverser: WaitingNode "VARSEL" 
+Traverser: WaitingNode "NEURAL" 
+Traverser: WaitingNode "CNTRL2" 
+Traverser: WaitingNode "MDLCOMP" 
+Traverser: WaitingNode "SCORE" 
+Traverser: WaitingNode "EMCODE" 
+traverser_readyNode_note 
+*------------------------------------------------------------* 
+* 
+* Repl : Beginning Update 
+* datetime : 11OCT2015:15:09:13 
+* 
+*------------------------------------------------------------* 
+PERFORMANCE  DETAILS
+27719      %let emexceptionString =;
+27720      %let EMEXCEPTIONSTRING=;
+27721      *------------------------------------------------------------*;
+27722      * UPDATE: Repl;
+27723      *------------------------------------------------------------*;
+27724      %let EM_ACTION = UPDATE;
+27725      %let syscc = 0;
+27726      filename x CATALOG 'SASHELP.EMUTIL.EM_VARMACRO.SOURCE';
+27727      %inc x;
+NOTE: %INCLUDE (level 1) file X is file SASHELP.EMUTIL.EM_VARMACRO.SOURCE.
+27728     +
+27729     +%macro em_varMacro(name=emMacro, metadata=, where=, key=NAME, nummacro=);
+27730     +
+27731     +   filename macFile catalog 'work.emutil.macro.source';
+27732     +   %let _METAOBS = 0;
+27733     +
+27734     +   %if (%sysfunc(exist(&metadata))<1 and %sysfunc(exist(&metadata, VIEW))<1)
+27735     +                   or (&metadata eq ) %then %do;
+27736     +       %put * No metadata data set defined;
+27737     +       %goto doend;
+27738     +   %end;
+27739     +
+27740     +   data _null_;
+27741     +      length _STRING_ $80;
+27742     +      retain _STRING_;
+27743     +      set &metadata end=eof;
+27744     +      file macFile;
+27745     +      %if %nrbquote(&where) ne %then %do;
+27746     +          %let whereClause = where (%nrbquote(&where));
+27747     +          %unquote(&whereClause);
+27748     +      %end;
+27749     +      if _N_=1 then do;
+27750     +         string = "%"!!"macro &name;";
+27751     +         put string;
+27752     +      end;
+27753     +      if (length(_STRING_) + length(trim(&key))+ 1 < 80) then do;
+27754     +         _STRING_ = trim(_STRING_)!!' '!!trim(&key);
+27755     +         if eof then do;
+27756     +            put _STRING_;
+27757     +            string = "%"!!"mend &name;";
+27758     +            put string;
+27759     +            %if (&nummacro ne ) %then %do;
+27760     +                string = strip(put(_N_, best.));
+27761     +                put "%" "global &nummacro;";
+27762     +                put "%" "let &nummacro = " string ";";
+27763     +                call symput('_METAOBS', string);
+27764     +            %end;
+27765     +         end;
+27766     +      end;
+27767     +      else do;
+27768     +         put _STRING_;
+27769     +         _string_ = TRIM(&key);
+27770     +         if eof then do;
+27771     +            put _STRING_;
+27772     +            string = "%"!!"mend &name;";
+27773     +            put string;
+27774     +        end;
+27775     +      end;
+27776     +      if eof then do;
+27777     +         string = strip(put(_N_, best.));
+27778     +         call symput('_METAOBS', string);
+27779     +         %if (&nummacro ne ) %then %do;
+27780     +             put "%" "global &nummacro;";
+27781     +             put "%" "let &nummacro = " string ";";
+27782     +         %end;
+27783     +      end;
+27784     +   run;
+27785     +
+27786     +   %doend:
+27787     +   %if ^&_METAOBS %then %do;
+27788     +       data _null_;
+27789     +          file macFile;
+27790     +          put "%" "macro &name;";
+27791     +          put "%" "mend &name;";
+27792     +          %if (&nummacro ne ) %then %do;
+27793     +              put "%" "global &nummacro;";
+27794     +              put "%" "let &nummacro = 0;";
+27795     +          %end;
+27796     +      run;
+27797     +   %end;
+27798     +   %inc macFile;
+27799     +   filename macFile;
+27800     +%mend em_varMacro;
+NOTE: %INCLUDE (level 1) ending.
+27801      filename X;
+NOTE: Fileref X has been deassigned.
+27802       %macro main;
+27803      
+27804         filename temp catalog 'sashelp.emmdfy.Replace_macros.source';
+27805         %include temp;
+27806         filename temp;
+27807      
+27808         %if %upcase(&EM_ACTION) = CREATE %then %do;
+27809      
+27810             filename temp catalog 'sashelp.emmdfy.Replace_create.source';
+27811             %include temp;
+27812             filename temp;
+27813             %create;
+27814         %end;
+27815         %else
+27816         %if %upcase(&EM_ACTION) = TRAIN %then %do;
+27817      
+27818             filename temp catalog 'sashelp.emmdfy.Replace_train.source';
+27819             %include temp;
+27820             filename temp;
+27821             %train;
+27822         %end;
+27823         %else
+27824         %if %upcase(&EM_ACTION) = SCORE %then %do;
+27825      
+27826             filename temp catalog 'sashelp.emmdfy.Replace_score.source';
+27827             %include temp;
+27828             filename temp;
+27829             %score;
+27830         %end;
+27831         %if %upcase(&EM_ACTION) = REPORT %then %do;
+27832      
+27833             filename temp catalog 'sashelp.emmdfy.Replace_report.source';
+27834             %include temp;
+27835             filename temp;
+27836             %report;
+27837         %end;
+27838         %if %upcase(&EM_ACTION) = OPENOUTCLASSTABLE %then %do;
+27839             filename temp catalog 'sashelp.emmdfy.replace_makeoutclass.source';
+27840             %include temp;
+27841             filename temp;
+27842             %em_replace_openoutclass;
+27843         %end;
+27844         %if %upcase(&EM_ACTION) = CLOSEOUTCLASSTABLE %then %do;
+27845             filename temp catalog 'sashelp.emmdfy.replace_makeoutclass.source';
+27846             %include temp;
+27847             filename temp;
+27848             %em_replace_closeoutclass;
+27849         %end;
+27850      %mend main;
+27851      
+27852      %main;
+NOTE: %INCLUDE (level 1) file TEMP is file SASHELP.EMMDFY.REPLACE_MACROS.SOURCE.
+27853     +%macro SetProperties;
+27854     +   %em_checkmacro(name=EM_PROPERTY_UNKNOWNLEVEL,    global=Y, value=MODE);
+27855     +   %em_checkmacro(name=EM_PROPERTY_CALCMETHOD,      global=Y, value=NONE);
+27856     +   %em_checkmacro(name=EM_PROPERTY_PERCENTSCUTOFF,  global=Y, value=0.5);
+27857     +   %em_checkmacro(name=EM_PROPERTY_SPACINGSCUTOFF,  global=Y, value=9);
+27858     +   %em_checkMacro(name=EM_PROPERTY_MADSCUTOFF,      global=Y, value=9);
+27859     +   %em_checkMacro(name=EM_PROPERTY_STDDEVCUTOFF,    global=Y, value=3);
+27860     +   %em_checkmacro(name=EM_PROPERTY_REPLACEMETHOD,   global=Y, value=COMPUTED);
+27861     +   %em_checkmacro(name=EM_PROPERTY_HIDEVARIABLE,    global=Y, value=N);
+27862     +   %em_checkmacro(name=EM_PROPERTY_INTERVALMETHOD,  global=Y, value=NONE);
+27863     +   %em_checkmacro(name=EM_PROPERTY_REPORTCOUNT,     global=Y, value=Y);
+27864     +
+27865     +%mend SetProperties;
+27866     +
+NOTE: %INCLUDE (level 1) ending.
+NOTE: Fileref TEMP has been deassigned.
+27867      *------------------------------------------------------------*;
+27868      * End UPDATE: Repl;
+27869      *------------------------------------------------------------*;
+27870      
+
+27871      %em_delMacro;
+
+*------------------------------------------------------------* 
+* 
+* Repl : End Update 
+* datetime : 11OCT2015:15:09:13 
+* 
+*------------------------------------------------------------* 
+Traverser: WaitingNode "TREE2" 
+Traverser: WaitingNode "TREE" 
+Traverser: WaitingNode "BOOST" 
+Traverser: WaitingNode "REG" 
+Traverser: WaitingNode "IMPT" 
+Traverser: WaitingNode "TRANS" 
+Traverser: WaitingNode "VARSEL" 
+Traverser: WaitingNode "NEURAL" 
+Traverser: WaitingNode "CNTRL2" 
+Traverser: WaitingNode "MDLCOMP" 
+Traverser: WaitingNode "SCORE" 
+Traverser: WaitingNode "EMCODE" 
+traverser_readyNode_note 
+Traverser: WaitingNode "REG" 
+Traverser: WaitingNode "TRANS" 
+Traverser: WaitingNode "VARSEL" 
+Traverser: WaitingNode "NEURAL" 
+Traverser: WaitingNode "CNTRL2" 
+Traverser: WaitingNode "MDLCOMP" 
+Traverser: WaitingNode "SCORE" 
+Traverser: WaitingNode "EMCODE" 
+traverser_readyNode_note 
+traverser_readyNode_note 
+traverser_readyNode_note 
+traverser_readyNode_note 
+*------------------------------------------------------------* 
+* 
+* Impt : Beginning Update 
+* datetime : 11OCT2015:15:09:14 
+* 
+*------------------------------------------------------------* 
+*------------------------------------------------------------* 
+* 
+* Impt : End Update 
+* datetime : 11OCT2015:15:09:14 
+* 
+*------------------------------------------------------------* 
+Traverser: WaitingNode "REG" 
+Traverser: WaitingNode "VARSEL" 
+Traverser: WaitingNode "NEURAL" 
+Traverser: WaitingNode "CNTRL2" 
+Traverser: WaitingNode "MDLCOMP" 
+Traverser: WaitingNode "SCORE" 
+Traverser: WaitingNode "EMCODE" 
+traverser_readyNode_note 
+traverser_readyNode_note 
+traverser_readyNode_note 
+traverser_readyNode_note 
+*------------------------------------------------------------* 
+* 
+* Tree2 : Beginning Update 
+* datetime : 11OCT2015:15:09:15 
+* 
+*------------------------------------------------------------* 
+PERFORMANCE  DETAILS
+28301      data EM_TARGETDECINFO;
+28302      length TARGET $32 DECDATA DECMETA $43;
+28303      TARGET="TARGET_B";
+28304      DECDATA="EMWS1.Ids_TARGET_B_DD";
+28305      DECMETA="EMWS1.Ids_TARGET_B_DM";
+28306      output;
+28307      run;
+
+NOTE: The data set WORK.EM_TARGETDECINFO has 1 observations and 3 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+28308      %let emexceptionString =;
+28309      %let EMEXCEPTIONSTRING=;
+28310      *------------------------------------------------------------*;
+28311      * UPDATE: Tree2;
+28312      *------------------------------------------------------------*;
+28313      %let EM_ACTION = UPDATE;
+28314      %let syscc = 0;
+28315      %macro main;
+28316      
+28317        %if %upcase(&EM_ACTION) = CREATE %then %do;
+28318          filename temp catalog 'sashelp.emmodl.tree_create.source';
+28319          %include temp;
+28320          filename temp;
+28321      
+28322          %em_tree_create;
+28323        %end;
+28324      
+28325         %else
+28326         %if %upcase(&EM_ACTION) = TRAIN %then %do;
+28327      
+28328             filename temp catalog 'sashelp.emmodl.tree_train.source';
+28329             %include temp;
+28330             filename temp;
+28331             %em_tree_train;
+28332         %end;
+28333      
+28334        %else
+28335        %if %upcase(&EM_ACTION) = SCORE %then %do;
+28336          filename temp catalog 'sashelp.emmodl.tree_score.source';
+28337          %include temp;
+28338          filename temp;
+28339      
+28340          %em_tree_score;
+28341      
+28342        %end;
+28343      
+28344        %else
+28345        %if %upcase(&EM_ACTION) = REPORT %then %do;
+28346      
+28347             filename temp catalog 'sashelp.emmodl.tree_report.source';
+28348             %include temp;
+28349             filename temp;
+28350      
+28351             %em_tree_report;
+28352         %end;
+28353      
+28354        %else
+28355        %if %upcase(&EM_ACTION) = OPENINT %then %do;
+28356      
+28357             filename temp catalog 'sashelp.emmodl.tree_actions.source';
+28358             %include temp;
+28359             filename temp;
+28360             %EM_TREE_OPENTREEVIEWER;
+28361      
+28362         %end;
+28363      
+28364        %else
+28365        %if %upcase(&EM_ACTION) = CLOSEINT %then %do;
+28366      
+28367             filename temp catalog 'sashelp.emmodl.tree_actions.source';
+28368             %include temp;
+28369             filename temp;
+28370             %EM_TREE_CLOSETREEVIEWER;
+28371      
+28372         %end;
+28373      
+28374      
+28375         %doendm:
+28376      %mend main;
+28377      
+28378      %main;
+28379      
+28380      *------------------------------------------------------------*;
+28381      * End UPDATE: Tree2;
+28382      *------------------------------------------------------------*;
+
+28383      %em_delMacro;
+
+*------------------------------------------------------------* 
+* 
+* Tree2 : End Update 
+* datetime : 11OCT2015:15:09:16 
+* 
+*------------------------------------------------------------* 
+Traverser: WaitingNode "REG" 
+Traverser: WaitingNode "VARSEL" 
+Traverser: WaitingNode "NEURAL" 
+Traverser: WaitingNode "CNTRL2" 
+Traverser: WaitingNode "MDLCOMP" 
+Traverser: WaitingNode "SCORE" 
+Traverser: WaitingNode "EMCODE" 
+traverser_readyNode_note 
+traverser_readyNode_note 
+traverser_readyNode_note 
+*------------------------------------------------------------* 
+* 
+* Boost : Beginning Update 
+* datetime : 11OCT2015:15:09:16 
+* 
+*------------------------------------------------------------* 
+PERFORMANCE  DETAILS
+28736      data EM_TARGETDECINFO;
+28737      length TARGET $32 DECDATA DECMETA $43;
+28738      TARGET="TARGET_B";
+28739      DECDATA="EMWS1.Ids_TARGET_B_DD";
+28740      DECMETA="EMWS1.Ids_TARGET_B_DM";
+28741      output;
+28742      run;
+
+NOTE: The data set WORK.EM_TARGETDECINFO has 1 observations and 3 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+28743      %let emexceptionString =;
+28744      %let EMEXCEPTIONSTRING=;
+28745      *------------------------------------------------------------*;
+28746      * UPDATE: Boost;
+28747      *------------------------------------------------------------*;
+28748      %let EM_ACTION = UPDATE;
+28749      %let syscc = 0;
+28750      %macro main;
+28751      
+28752        filename temp catalog 'sashelp.emmodl.boost_macros.source';
+28753        %include temp;
+28754        filename temp;
+28755      
+28756        %setProperties;
+28757      
+28758        %if %upcase(&EM_ACTION) = CREATE %then %do;
+28759          filename temp catalog 'sashelp.emmodl.boost_create.source';
+28760          %include temp;
+28761          filename temp;
+28762      
+28763          %create;
+28764        %end;
+28765      
+28766         %else
+28767         %if %upcase(&EM_ACTION) = TRAIN %then %do;
+28768      
+28769             filename temp catalog 'sashelp.emmodl.boost_train.source';
+28770             %include temp;
+28771             filename temp;
+28772             %train;
+28773         %end;
+28774      
+28775        %else
+28776        %if %upcase(&EM_ACTION) = SCORE %then %do;
+28777          filename temp catalog 'sashelp.emmodl.boost_score.source';
+28778          %include temp;
+28779          filename temp;
+28780      
+28781          %score;
+28782      
+28783        %end;
+28784      
+28785        %else
+28786        %if %upcase(&EM_ACTION) = REPORT %then %do;
+28787      
+28788             filename temp catalog 'sashelp.emmodl.boost_report.source';
+28789             %include temp;
+28790             filename temp;
+28791      
+28792             %report;
+28793         %end;
+28794      
+28795         %doendm:
+28796      %mend main;
+28797      
+28798      %main;
+NOTE: %INCLUDE (level 1) file TEMP is file SASHELP.EMMODL.BOOST_MACROS.SOURCE.
+28799     +
+28800     +%macro SetProperties;
+28801     +
+28802     +     /* boost options */
+28803     +     %em_checkmacro(name=EM_PROPERTY_ITERATIONS,   value=50, global=Y);
+28804     +     %em_checkmacro(name=EM_PROPERTY_TRAINPROPORTION,   value=60, global=Y);
+28805     +     %em_checkmacro(name=EM_PROPERTY_CATEGORICALBINS, value=30, global=Y);
+28806     +     %em_checkmacro(name=EM_PROPERTY_INTERVALBINS, value=100, global=Y);
+28807     +     %em_checkmacro(name=EM_PROPERTY_HUBER, value=NO, global=Y);
+28808     +     %em_checkmacro(name=EM_PROPERTY_SEED,   value=12345, global=Y);
+28809     +     %em_checkmacro(name=EM_PROPERTY_SHRINKAGE,   value=0.1, global=Y);
+28810     +     %em_checkmacro(name=EM_PROPERTY_LEAFFRACTION,   value=0.1, global=Y);
+28811     +     %em_checkmacro(name=EM_PROPERTY_SPLITSIZE,   value=., global=Y);
+28812     +     %em_checkmacro(name=EM_PROPERTY_NODESIZE,   value=20000, global=Y);
+28813     +     %em_checkmacro(name=EM_PROPERTY_SUBSERIES,   value=BEST, global=Y);
+28814     +     %em_checkmacro(name=EM_PROPERTY_ITERATIONNUM,   value=1, global=Y);
+28815     +
+28816     +     %em_checkmacro(name=EM_PROPERTY_PRECISION,    value=0, global=Y);
+28817     +     %em_checkmacro(name=EM_PROPERTY_MISSING,      value=USEINSEARCH, global=Y);
+28818     +     %em_checkmacro(name=EM_PROPERTY_MINCATSIZE, value=5, global=Y);
+28819     +     %em_checkmacro(name=EM_PROPERTY_MAXBRANCH,  value=2, global=Y);
+28820     +     %em_checkmacro(name=EM_PROPERTY_MAXDEPTH,   value=2, global=Y);
+28821     +     %em_checkmacro(name=EM_PROPERTY_REUSEVAR,   value=1, global=Y);
+28822     +     %em_checkmacro(name=EM_PROPERTY_EXHAUSTIVE,   value=5000, global=Y);
+28823     +     %em_checkmacro(name=EM_PROPERTY_PERFORMANCE,   value=DISK, global=Y);
+28824     +
+28825     +     %em_checkmacro(name=EM_PROPERTY_ASSESSMEASURE, value=PROFIT, global=Y);
+28826     +     %em_checkmacro(name=EM_PROPERTY_MEASURE, value=PROFIT, global=Y);
+28827     +     %em_checkmacro(name=EM_PROPERTY_NSURRS, value=0, global=Y);
+28828     +     %em_checkmacro(name=EM_PROPERTY_VARSELECTION, value=Y, global=Y);
+28829     +
+28830     +     %em_checkmacro(name=EM_PROPERTY_OBSIMPORTANCE, value=N, global=Y);
+28831     +     %em_checkmacro(name=EM_PROPERTY_NUMSINGLEIMP, value=5, global=Y);
+28832     +     %em_checkmacro(name=EM_PROPERTY_NUMPAIRIMP, value=0, global=Y);
+28833     +
+28834     +%mend SetProperties;
+28835     +
+28836     +
+NOTE: %INCLUDE (level 1) ending.
+NOTE: Fileref TEMP has been deassigned.
+28837      
+28838      *------------------------------------------------------------*;
+28839      * End UPDATE: Boost;
+28840      *------------------------------------------------------------*;
+
+28841      %em_delMacro;
+
+*------------------------------------------------------------* 
+* 
+* Boost : End Update 
+* datetime : 11OCT2015:15:09:17 
+* 
+*------------------------------------------------------------* 
+Traverser: WaitingNode "REG" 
+Traverser: WaitingNode "VARSEL" 
+Traverser: WaitingNode "NEURAL" 
+Traverser: WaitingNode "CNTRL2" 
+Traverser: WaitingNode "MDLCOMP" 
+Traverser: WaitingNode "SCORE" 
+Traverser: WaitingNode "EMCODE" 
+traverser_readyNode_note 
+traverser_readyNode_note 
+*------------------------------------------------------------* 
+* 
+* Tree : Beginning Update 
+* datetime : 11OCT2015:15:09:18 
+* 
+*------------------------------------------------------------* 
+PERFORMANCE  DETAILS
+29252      data EM_TARGETDECINFO;
+29253      length TARGET $32 DECDATA DECMETA $43;
+29254      TARGET="TARGET_B";
+29255      DECDATA="EMWS1.Ids_TARGET_B_DD";
+29256      DECMETA="EMWS1.Ids_TARGET_B_DM";
+29257      output;
+29258      run;
+
+NOTE: The data set WORK.EM_TARGETDECINFO has 1 observations and 3 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+29259      %let emexceptionString =;
+29260      %let EMEXCEPTIONSTRING=;
+29261      *------------------------------------------------------------*;
+29262      * UPDATE: Tree;
+29263      *------------------------------------------------------------*;
+29264      %let EM_ACTION = UPDATE;
+29265      %let syscc = 0;
+29266      %macro main;
+29267      
+29268        %if %upcase(&EM_ACTION) = CREATE %then %do;
+29269          filename temp catalog 'sashelp.emmodl.tree_create.source';
+29270          %include temp;
+29271          filename temp;
+29272      
+29273          %em_tree_create;
+29274        %end;
+29275      
+29276         %else
+29277         %if %upcase(&EM_ACTION) = TRAIN %then %do;
+29278      
+29279             filename temp catalog 'sashelp.emmodl.tree_train.source';
+29280             %include temp;
+29281             filename temp;
+29282             %em_tree_train;
+29283         %end;
+29284      
+29285        %else
+29286        %if %upcase(&EM_ACTION) = SCORE %then %do;
+29287          filename temp catalog 'sashelp.emmodl.tree_score.source';
+29288          %include temp;
+29289          filename temp;
+29290      
+29291          %em_tree_score;
+29292      
+29293        %end;
+29294      
+29295        %else
+29296        %if %upcase(&EM_ACTION) = REPORT %then %do;
+29297      
+29298             filename temp catalog 'sashelp.emmodl.tree_report.source';
+29299             %include temp;
+29300             filename temp;
+29301      
+29302             %em_tree_report;
+29303         %end;
+29304      
+29305        %else
+29306        %if %upcase(&EM_ACTION) = OPENINT %then %do;
+29307      
+29308             filename temp catalog 'sashelp.emmodl.tree_actions.source';
+29309             %include temp;
+29310             filename temp;
+29311             %EM_TREE_OPENTREEVIEWER;
+29312      
+29313         %end;
+29314      
+29315        %else
+29316        %if %upcase(&EM_ACTION) = CLOSEINT %then %do;
+29317      
+29318             filename temp catalog 'sashelp.emmodl.tree_actions.source';
+29319             %include temp;
+29320             filename temp;
+29321             %EM_TREE_CLOSETREEVIEWER;
+29322      
+29323         %end;
+29324      
+29325      
+29326         %doendm:
+29327      %mend main;
+29328      
+29329      %main;
+29330      
+29331      *------------------------------------------------------------*;
+29332      * End UPDATE: Tree;
+29333      *------------------------------------------------------------*;
+
+29334      %em_delMacro;
+
+*------------------------------------------------------------* 
+* 
+* Tree : End Update 
+* datetime : 11OCT2015:15:09:19 
+* 
+*------------------------------------------------------------* 
+Traverser: WaitingNode "REG" 
+Traverser: WaitingNode "VARSEL" 
+Traverser: WaitingNode "NEURAL" 
+Traverser: WaitingNode "CNTRL2" 
+Traverser: WaitingNode "MDLCOMP" 
+Traverser: WaitingNode "SCORE" 
+Traverser: WaitingNode "EMCODE" 
+traverser_readyNode_note 
+*------------------------------------------------------------* 
+* 
+* Trans : Beginning Update 
+* datetime : 11OCT2015:15:09:19 
+* 
+*------------------------------------------------------------* 
+*------------------------------------------------------------* 
+* 
+* Trans : End Update 
+* datetime : 11OCT2015:15:09:19 
+* 
+*------------------------------------------------------------* 
+Traverser: WaitingNode "NEURAL" 
+Traverser: WaitingNode "CNTRL2" 
+Traverser: WaitingNode "MDLCOMP" 
+Traverser: WaitingNode "SCORE" 
+Traverser: WaitingNode "EMCODE" 
+traverser_readyNode_note 
+traverser_readyNode_note 
+*------------------------------------------------------------* 
+* 
+* Varsel : Beginning Update 
+* datetime : 11OCT2015:15:09:20 
+* 
+*------------------------------------------------------------* 
+*------------------------------------------------------------* 
+* 
+* Varsel : End Update 
+* datetime : 11OCT2015:15:09:20 
+* 
+*------------------------------------------------------------* 
+Traverser: WaitingNode "CNTRL2" 
+Traverser: WaitingNode "MDLCOMP" 
+Traverser: WaitingNode "SCORE" 
+Traverser: WaitingNode "EMCODE" 
+traverser_readyNode_note 
+traverser_readyNode_note 
+*------------------------------------------------------------* 
+* 
+* Reg : Beginning Update 
+* datetime : 11OCT2015:15:09:21 
+* 
+*------------------------------------------------------------* 
+*------------------------------------------------------------* 
+* 
+* Reg : End Update 
+* datetime : 11OCT2015:15:09:21 
+* 
+*------------------------------------------------------------* 
+Traverser: WaitingNode "CNTRL2" 
+Traverser: WaitingNode "MDLCOMP" 
+Traverser: WaitingNode "SCORE" 
+Traverser: WaitingNode "EMCODE" 
+traverser_readyNode_note 
+*------------------------------------------------------------* 
+* 
+* Neural : Beginning Update 
+* datetime : 11OCT2015:15:09:21 
+* 
+*------------------------------------------------------------* 
+*------------------------------------------------------------* 
+* 
+* Neural : End Update 
+* datetime : 11OCT2015:15:09:21 
+* 
+*------------------------------------------------------------* 
+Traverser: WaitingNode "MDLCOMP" 
+Traverser: WaitingNode "SCORE" 
+Traverser: WaitingNode "EMCODE" 
+traverser_readyNode_note 
+Traverser: WaitingNode "SCORE" 
+Traverser: WaitingNode "EMCODE" 
+traverser_readyNode_note 
+*------------------------------------------------------------* 
+* 
+* MdlComp : Beginning Update 
+* datetime : 11OCT2015:15:09:22 
+* 
+*------------------------------------------------------------* 
+*------------------------------------------------------------* 
+* 
+* MdlComp : End Update 
+* datetime : 11OCT2015:15:09:23 
+* 
+*------------------------------------------------------------* 
+Traverser: WaitingNode "EMCODE" 
+traverser_readyNode_note 
+*------------------------------------------------------------* 
+* 
+* Score : Beginning Update 
+* datetime : 11OCT2015:15:09:23 
+* 
+*------------------------------------------------------------* 
+*------------------------------------------------------------* 
+* 
+* Score : End Update 
+* datetime : 11OCT2015:15:09:23 
+* 
+*------------------------------------------------------------* 
+traverser_readyNode_note 
+*------------------------------------------------------------* 
+* 
+* EMCODE : Beginning Update 
+* datetime : 11OCT2015:15:09:24 
+* 
+*------------------------------------------------------------* 
+*------------------------------------------------------------* 
+* 
+* EMCODE : End Update 
+* datetime : 11OCT2015:15:09:24 
+* 
+*------------------------------------------------------------* 
+Traverser: Run Completed 
+29517      proc printto;
+29518      run;
+

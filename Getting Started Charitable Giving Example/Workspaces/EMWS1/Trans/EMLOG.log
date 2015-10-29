@@ -1,0 +1,3154 @@
+*------------------------------------------------------------*
+User:                sakerb01
+Date:                October 11, 2015
+Time:                14:43:06
+Site:                70080761
+Platform:            X64_7PRO
+Maintenance Release: 9.04.01M0P061913
+EM Version:          12.3
+* 
+MPRINT(EM_DIAGRAM):    data _null_;
+MPRINT(EM_DIAGRAM):   call symput('NLDATE', strip(put(date(), NLDATE.)));
+MPRINT(EM_DIAGRAM):   call symput('NLTIME', strip(put(datetime(), NLTIME.)));
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):   data _null_;
+MPRINT(EM_DIAGRAM):   nldate= sasmsg("sashelp.dmine", "log_date_note", 'N', "October 11, 2015" );
+MPRINT(EM_DIAGRAM):   nltime= sasmsg("sashelp.dmine", "log_time_note", 'N', "14:42:55" );
+MPRINT(EM_DIAGRAM):   put "*------------------------------------------------------------*";
+MPRINT(EM_DIAGRAM):   put "* Training Log";
+MPRINT(EM_DIAGRAM):   put nldate;
+MPRINT(EM_DIAGRAM):   put nltime;
+MPRINT(EM_DIAGRAM):   put "*------------------------------------------------------------*";
+MPRINT(EM_DIAGRAM):   run;
+*------------------------------------------------------------*
+* Training Log
+Date:                October 11, 2015
+Time:                14:42:55
+*------------------------------------------------------------*
+MPRINT(EM_DIAGRAM):    filename O3NVUYMB "C:\Users\sakerb01\Desktop\SAS EM 12.3 Tutorials _ Projects\Getting Started Charitable Giving Example\Workspaces\EMWS1\Trans\EMTRAIN.out" encoding="UTF-8" NOBOM;
+MPRINT(EM_DIAGRAM):   proc printto print=O3NVUYMB new;
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):    filename _LOG "C:\Users\sakerb01\Desktop\SAS EM 12.3 Tutorials _ Projects\Getting Started Charitable Giving Example\Workspaces\EMWS1\Trans\EMLOG.log" encoding="UTF-8" NOBOM;
+MPRINT(EM_DIAGRAM):    data _null_;
+MPRINT(EM_DIAGRAM):   call symput('NLDATE', strip(put(date(), NLDATE.)));
+MPRINT(EM_DIAGRAM):   call symput('NLTIME', strip(put(datetime(), NLTIME.)));
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):   data _null_;
+MPRINT(EM_DIAGRAM):   nldate= sasmsg("sashelp.dmine", "log_date_note", 'N', "October 11, 2015" );
+MPRINT(EM_DIAGRAM):   nltime= sasmsg("sashelp.dmine", "log_time_note", 'N', "14:42:55" );
+MPRINT(EM_DIAGRAM):   file _LOG;
+MPRINT(EM_DIAGRAM):   put "*------------------------------------------------------------*";
+MPRINT(EM_DIAGRAM):   put "User:                sakerb01";
+MPRINT(EM_DIAGRAM):   put nldate;
+MPRINT(EM_DIAGRAM):   put nltime;
+MPRINT(EM_DIAGRAM):   put "Site:                70080761";
+MPRINT(EM_DIAGRAM):   put "Platform:            X64_7PRO";
+MPRINT(EM_DIAGRAM):   put "Maintenance Release: 9.04.01M0P061913";
+MPRINT(EM_DIAGRAM):   put "EM Version:          12.3";
+MPRINT(EM_DIAGRAM):   put "* ";
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):    filename _LOGIN "C:\Users\sakerb01\Desktop\SAS EM 12.3 Tutorials _ Projects\Getting Started Charitable Giving Example\Workspaces\EMWS1\Trans\EMTRAIN.log" encoding="UTF-8" NOBOM;
+MPRINT(EM_COPYFILE):   data _null_;
+MPRINT(EM_COPYFILE):   length line $20000;
+MPRINT(EM_COPYFILE):   file _LOG MOD lrecl=20000;
+MPRINT(EM_COPYFILE):   fid=fopen("_LOGIN",'i',20000,'v');
+MPRINT(EM_COPYFILE):   if fid > 0 then do;
+MPRINT(EM_COPYFILE):   do while(^fread(fid));
+MPRINT(EM_COPYFILE):   rlen = frlen(fid);
+MPRINT(EM_COPYFILE):   rc= fget(fid,line,20000);
+MPRINT(EM_COPYFILE):   start = length(line)-length(left(line))+1;
+MPRINT(EM_COPYFILE):   line=strip(line);
+MPRINT(EM_COPYFILE):   put @start line;
+MPRINT(EM_COPYFILE):   end;
+MPRINT(EM_COPYFILE):   if fid > 0 then rc=fclose(fid);
+MPRINT(EM_COPYFILE):   end;
+MPRINT(EM_COPYFILE):   run;
+MPRINT(EM_DIAGRAM):  ;
+MPRINT(EM_DIAGRAM):   filename _LOGIN;
+MPRINT(EM_DIAGRAM):    data _null_;
+MPRINT(EM_DIAGRAM):   file _LOG mod;
+MPRINT(EM_DIAGRAM):   put _page_;
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):   filename _LOGIN "C:\Users\sakerb01\Desktop\SAS EM 12.3 Tutorials _ Projects\Getting Started Charitable Giving Example\Workspaces\EMWS1\Trans\EMSCORE.log" encoding="UTF-8" NOBOM;
+MPRINT(EM_DIAGRAM):  ;
+MPRINT(EM_DIAGRAM):   data _null_;
+MPRINT(EM_DIAGRAM):   file _LOG mod;
+MPRINT(EM_DIAGRAM):   put _page_;
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):    filename _LOGIN "C:\Users\sakerb01\Desktop\SAS EM 12.3 Tutorials _ Projects\Getting Started Charitable Giving Example\Workspaces\EMWS1\Trans\EMREPORT.log" encoding="UTF-8" NOBOM;
+MPRINT(EM_DIAGRAM):  ;
+MPRINT(EM_DIAGRAM):   filename _LOGIN;
+MPRINT(EM_DIAGRAM):    filename _LOG;
+MPRINT(EM_DIAGRAM):    filename _OUT "C:\Users\sakerb01\Desktop\SAS EM 12.3 Tutorials _ Projects\Getting Started Charitable Giving Example\Workspaces\EMWS1\Trans\EMOUTPUT.out" encoding="UTF-8" NOBOM;
+MPRINT(EM_DIAGRAM):    data _null_;
+MPRINT(EM_DIAGRAM):   call symput('NLDATE', strip(put(date(), NLDATE.)));
+MPRINT(EM_DIAGRAM):   call symput('NLTIME', strip(put(datetime(), NLTIME.)));
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):   data _null_;
+MPRINT(EM_DIAGRAM):   nldate= sasmsg("sashelp.dmine", "log_date_note", 'N', "October 11, 2015" );
+MPRINT(EM_DIAGRAM):   nltime= sasmsg("sashelp.dmine", "log_time_note", 'N', "14:42:55" );
+MPRINT(EM_DIAGRAM):   file _OUT;
+MPRINT(EM_DIAGRAM):   put "*------------------------------------------------------------*";
+MPRINT(EM_DIAGRAM):   put "User:                sakerb01";
+MPRINT(EM_DIAGRAM):   put nldate;
+MPRINT(EM_DIAGRAM):   put nltime;
+MPRINT(EM_DIAGRAM):   put "*------------------------------------------------------------*";
+MPRINT(EM_DIAGRAM):   put "* Training Output";
+MPRINT(EM_DIAGRAM):   put "*------------------------------------------------------------*";
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):    filename _OUTIN "C:\Users\sakerb01\Desktop\SAS EM 12.3 Tutorials _ Projects\Getting Started Charitable Giving Example\Workspaces\EMWS1\Trans\EMTRAIN.out" encoding="UTF-8" NOBOM;
+MPRINT(EM_DIAGRAM):   ;
+MPRINT(EM_COPYFILE):   data _null_;
+MPRINT(EM_COPYFILE):   length line $20000;
+MPRINT(EM_COPYFILE):   file _OUT MOD lrecl=20000;
+MPRINT(EM_COPYFILE):   fid=fopen("_OUTIN",'i',20000,'v');
+MPRINT(EM_COPYFILE):   if fid > 0 then do;
+MPRINT(EM_COPYFILE):   do while(^fread(fid));
+MPRINT(EM_COPYFILE):   rlen = frlen(fid);
+MPRINT(EM_COPYFILE):   rc= fget(fid,line,20000);
+MPRINT(EM_COPYFILE):   start = length(line)-length(left(line))+1;
+MPRINT(EM_COPYFILE):   line=strip(line);
+MPRINT(EM_COPYFILE):   put @start line;
+MPRINT(EM_COPYFILE):   end;
+MPRINT(EM_COPYFILE):   if fid > 0 then rc=fclose(fid);
+MPRINT(EM_COPYFILE):   end;
+MPRINT(EM_COPYFILE):   run;
+MPRINT(EM_DIAGRAM):  ;
+MPRINT(EM_DIAGRAM):   filename _OUTIN;
+MPRINT(EM_DIAGRAM):    data _null_;
+MPRINT(EM_DIAGRAM):   file _OUT mod;
+MPRINT(EM_DIAGRAM):   put _page_;
+MPRINT(EM_DIAGRAM):   put // "*------------------------------------------------------------*";
+MPRINT(EM_DIAGRAM):   put "* Score Output";
+MPRINT(EM_DIAGRAM):   put "*------------------------------------------------------------*";
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):    filename _OUTIN "C:\Users\sakerb01\Desktop\SAS EM 12.3 Tutorials _ Projects\Getting Started Charitable Giving Example\Workspaces\EMWS1\Trans\EMSCORE.out" encoding="UTF-8" NOBOM;
+MPRINT(EM_DIAGRAM):  ;
+MPRINT(EM_DIAGRAM):   filename _OUTIN;
+MPRINT(EM_DIAGRAM):    data _null_;
+MPRINT(EM_DIAGRAM):   file _OUT mod;
+MPRINT(EM_DIAGRAM):   put _page_;
+MPRINT(EM_DIAGRAM):   put // "*------------------------------------------------------------*";
+MPRINT(EM_DIAGRAM):   put "* Report Output";
+MPRINT(EM_DIAGRAM):   put "*------------------------------------------------------------*";
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):    filename _OUTIN "C:\Users\sakerb01\Desktop\SAS EM 12.3 Tutorials _ Projects\Getting Started Charitable Giving Example\Workspaces\EMWS1\Trans\EMREPORT.out" encoding="UTF-8" NOBOM;
+MPRINT(EM_DIAGRAM):  ;
+MPRINT(EM_DIAGRAM):   filename _OUTIN;
+MPRINT(EM_DIAGRAM):    filename _OUT;
+MPRINT(EM_DIAGRAM):    filename _emtool_ 'C:\Users\sakerb01\Desktop\SAS EM 12.3 Tutorials _ Projects\Getting Started Charitable Giving Example\Workspaces\EMWS1\Trans\EMRUNSTATUS.xml' encoding="UTF-8" NOBOM;
+MPRINT(EM_DIAGRAM):    filename _emtool_ 'C:\Users\sakerb01\Desktop\SAS EM 12.3 Tutorials _ Projects\Getting Started Charitable Giving Example\Workspaces\EMWS1\Trans\EMRUNSTATUS.xml' encoding="UTF-8" NOBOM;
+21124      proc freq data=EMWS1.Trans_VariableSet noprint;
+MPRINT(EM_DIAGRAM):    proc freq data=EMWS1.Trans_VariableSet noprint;
+21125      table ROLE*LEVEL/out=WORK.TransMETA;
+MPRINT(EM_DIAGRAM):   table ROLE*LEVEL/out=WORK.TransMETA;
+21126      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: There were 51 observations read from the data set EMWS1.TRANS_VARIABLESET.
+NOTE: The data set WORK.TRANSMETA has 5 observations and 4 variables.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.04 seconds
+ 
+ 
+21127      proc print data=WORK.TransMETA label noobs;
+MPRINT(EM_DIAGRAM):   proc print data=WORK.TransMETA label noobs;
+21128      var ROLE LEVEL COUNT;
+MPRINT(EM_DIAGRAM):   var ROLE LEVEL COUNT;
+21129      label ROLE = "%sysfunc(sasmsg(sashelp.dmine, meta_role_vlabel, NOQUOTE))" LEVEL = "%sysfunc(sasmsg(sashelp.dmine, meta_level_vlabel, NOQUOTE))" COUNT = "%sysfunc(sasmsg(sashelp.dmine, rpt_count_vlabel, NOQUOTE))";
+MPRINT(EM_DIAGRAM):   label ROLE = "Role" LEVEL = "Measurement Level" COUNT = "Frequency Count";
+21130      title9 ' ';
+MPRINT(EM_DIAGRAM):   title9 ' ';
+21131      title10 "%sysfunc(sasmsg(sashelp.dmine, rpt_varSummary_title  , NOQUOTE))";
+MPRINT(EM_DIAGRAM):   title10 "Variable Summary";
+MPRINT(EM_DIAGRAM):   run;
+21132      run;
+ 
+NOTE: There were 5 observations read from the data set WORK.TRANSMETA.
+NOTE: The PROCEDURE PRINT printed page 1.
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+ 
+ 
+21133      title10;
+MPRINT(EM_DIAGRAM):   title10;
+21134      data WORK.M0EH6SG4;
+MPRINT(EM_DIAGRAM):    data WORK.M0EH6SG4;
+21135      set WORK.M0EH6SG4;
+MPRINT(EM_DIAGRAM):   set WORK.M0EH6SG4;
+21136      if (METHOD='NONE' and ROLE ne 'FREQ') or (role = 'REJECTED' and METHOD = 'DEFAULT') then delete;
+MPRINT(EM_DIAGRAM):   if (METHOD='NONE' and ROLE ne 'FREQ') or (role = 'REJECTED' and METHOD = 'DEFAULT') then delete;
+21137      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: There were 51 observations read from the data set WORK.M0EH6SG4.
+NOTE: The data set WORK.M0EH6SG4 has 48 observations and 22 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.01 seconds
+ 
+ 
+MPRINT(EM_DIAGRAM):   reset noprint;
+MPRINT(EM_DIAGRAM):   select count(*) into :_tmpnobs from EMWS1.Impt_TRAIN;
+NOTE: Variable _WARN_ is uninitialized.
+NOTE: There were 10654 observations read from the data set EMWS1.PART_TRAIN.
+NOTE: View EMWS1.IMPT_TRAIN.VIEW used (Total process time):
+      real time           0.18 seconds
+      cpu time            0.18 seconds
+ 
+NOTE: There were 10654 observations read from the data set EMWS1.REPL_TRAIN.
+MPRINT(EM_DIAGRAM):   quit;
+21202      *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):     *------------------------------------------------------------*;
+21203      * Trans: Computing Summary Statistics;
+MPRINT(EM_DIAGRAM):   * Trans: Computing Summary Statistics;
+21204      *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21205      data WORK.M27SAV_V;
+MPRINT(EM_DIAGRAM):   data WORK.M27SAV_V;
+21206      set WORK.M27SAV_V;
+MPRINT(EM_DIAGRAM):   set WORK.M27SAV_V;
+21207      if (role = 'REJECTED') then role = 'INPUT';
+MPRINT(EM_DIAGRAM):   if (role = 'REJECTED') then role = 'INPUT';
+21208      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: There were 48 observations read from the data set WORK.M27SAV_V.
+NOTE: The data set WORK.M27SAV_V has 48 observations and 22 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+ 
+ 
+21209      *------------------------------------------------------------* ;
+MPRINT(EM_DIAGRAM):    *------------------------------------------------------------* ;
+21210      * EM: DMDBClass Macro ;
+MPRINT(EM_DIAGRAM):   * EM: DMDBClass Macro ;
+21211      *------------------------------------------------------------* ;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------* ;
+21212      %macro DMDBClass;
+21213          CARD_PROM_12(ASC) CLUSTER_CODE(ASC) FREQUENCY_STATUS_97NK(ASC) HOME_OWNER(ASC)
+21214         IMP_INCOME_GROUP(ASC) IMP_REP_SES(ASC) IMP_REP_URBANICITY(ASC)
+21215         IMP_WEALTH_RATING(ASC) IN_HOUSE(ASC) OVERLAY_SOURCE(ASC) PEP_STAR(ASC)
+21216         PUBLISHED_PHONE(ASC) RECENCY_STATUS_96NK(ASC) RECENT_CARD_RESPONSE_COUNT(ASC)
+21217         RECENT_RESPONSE_COUNT(ASC) REP_DONOR_GENDER(ASC) TARGET_B(DESC)
+21218      %mend DMDBClass;
+21219      *------------------------------------------------------------* ;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------* ;
+21220      * EM: DMDBVar Macro ;
+MPRINT(EM_DIAGRAM):   * EM: DMDBVar Macro ;
+21221      *------------------------------------------------------------* ;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------* ;
+21222      %macro DMDBVar;
+21223          FILE_AVG_GIFT FILE_CARD_GIFT IMP_DONOR_AGE IMP_MONTHS_SINCE_LAST_PROM_RESP
+21224         LAST_GIFT_AMT LIFETIME_AVG_GIFT_AMT LIFETIME_CARD_PROM LIFETIME_GIFT_AMOUNT
+21225         LIFETIME_GIFT_COUNT LIFETIME_GIFT_RANGE LIFETIME_MAX_GIFT_AMT
+21226         LIFETIME_MIN_GIFT_AMT LIFETIME_PROM MEDIAN_HOME_VALUE MEDIAN_HOUSEHOLD_INCOME
+21227         MONTHS_SINCE_FIRST_GIFT MONTHS_SINCE_LAST_GIFT MONTHS_SINCE_ORIGIN MOR_HIT_RATE
+21228         NUMBER_PROM_12 PCT_ATTRIBUTE1 PCT_ATTRIBUTE2 PCT_ATTRIBUTE3 PCT_ATTRIBUTE4
+21229         PCT_OWNER_OCCUPIED PER_CAPITA_INCOME RECENT_AVG_CARD_GIFT_AMT
+21230         RECENT_AVG_GIFT_AMT RECENT_CARD_RESPONSE_PROP RECENT_RESPONSE_PROP
+21231         RECENT_STAR_STATUS
+21232      %mend DMDBVar;
+21233      *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21234      * EM: Create DMDB;
+MPRINT(EM_DIAGRAM):   * EM: Create DMDB;
+21235      *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21236      proc dmdb batch data=EMWS1.Impt_TRAIN
+21237      dmdbcat=WORK.EM_DMDB
+21238      classout=WORK.Transclassout
+21239      maxlevel = 513
+21240      ;
+MPRINT(EM_DIAGRAM):   proc dmdb batch data=EMWS1.Impt_TRAIN dmdbcat=WORK.EM_DMDB classout=WORK.Transclassout maxlevel = 513 ;
+MPRINT(EM_DIAGRAM):   class
+21241      class %DMDBClass;
+MPRINT(DMDBCLASS):   CARD_PROM_12(ASC) CLUSTER_CODE(ASC) FREQUENCY_STATUS_97NK(ASC) HOME_OWNER(ASC) IMP_INCOME_GROUP(ASC) IMP_REP_SES(ASC) IMP_REP_URBANICITY(ASC) IMP_WEALTH_RATING(ASC) IN_HOUSE(ASC) OVERLAY_SOURCE(ASC) PEP_STAR(ASC) PUBLISHED_PHONE(ASC)
+RECENCY_STATUS_96NK(ASC) RECENT_CARD_RESPONSE_COUNT(ASC) RECENT_RESPONSE_COUNT(ASC) REP_DONOR_GENDER(ASC) TARGET_B(DESC)
+MPRINT(EM_DIAGRAM):  ;
+MPRINT(EM_DIAGRAM):   var
+21242      var %DMDBVar;
+MPRINT(DMDBVAR):   FILE_AVG_GIFT FILE_CARD_GIFT IMP_DONOR_AGE IMP_MONTHS_SINCE_LAST_PROM_RESP LAST_GIFT_AMT LIFETIME_AVG_GIFT_AMT LIFETIME_CARD_PROM LIFETIME_GIFT_AMOUNT LIFETIME_GIFT_COUNT LIFETIME_GIFT_RANGE LIFETIME_MAX_GIFT_AMT LIFETIME_MIN_GIFT_AMT
+LIFETIME_PROM MEDIAN_HOME_VALUE MEDIAN_HOUSEHOLD_INCOME MONTHS_SINCE_FIRST_GIFT MONTHS_SINCE_LAST_GIFT MONTHS_SINCE_ORIGIN MOR_HIT_RATE NUMBER_PROM_12 PCT_ATTRIBUTE1 PCT_ATTRIBUTE2 PCT_ATTRIBUTE3 PCT_ATTRIBUTE4 PCT_OWNER_OCCUPIED PER_CAPITA_INCOME
+RECENT_AVG_CARD_GIFT_AMT RECENT_AVG_GIFT_AMT RECENT_CARD_RESPONSE_PROP RECENT_RESPONSE_PROP RECENT_STAR_STATUS
+MPRINT(EM_DIAGRAM):  ;
+21243      target
+21244      TARGET_B
+21245      ;
+MPRINT(EM_DIAGRAM):   target TARGET_B ;
+21246      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: Variable _WARN_ is uninitialized.
+NOTE: Records processed = 10654   Memory used = 511K.
+NOTE: There were 10654 observations read from the data set EMWS1.PART_TRAIN.
+NOTE: View EMWS1.IMPT_TRAIN.VIEW used (Total process time):
+      real time           0.25 seconds
+      cpu time            0.23 seconds
+ 
+NOTE: There were 10654 observations read from the data set EMWS1.REPL_TRAIN.
+NOTE: There were 10654 observations read from the data set EMWS1.IMPT_TRAIN.
+NOTE: The data set WORK.TRANSCLASSOUT has 148 observations and 9 variables.
+NOTE: PROCEDURE DMDB used (Total process time):
+      real time           0.29 seconds
+      cpu time            0.28 seconds
+ 
+ 
+MPRINT(EM_DIAGRAM):   quit;
+MPRINT(EM_DIAGRAM):   *--- end code ---*;
+21247      quit;
+21248      *--- end code ---*;
+ 
+21249      data WORK.TransINTERVALMETA;
+MPRINT(EM_DIAGRAM):    data WORK.TransINTERVALMETA;
+21250      set WORK.M0EH6SG4;
+MPRINT(EM_DIAGRAM):   set WORK.M0EH6SG4;
+21251      if LEVEL ne 'INTERVAL' then delete;
+MPRINT(EM_DIAGRAM):   if LEVEL ne 'INTERVAL' then delete;
+21252      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: There were 48 observations read from the data set WORK.M0EH6SG4.
+NOTE: The data set WORK.TRANSINTERVALMETA has 31 observations and 22 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+ 
+ 
+21253      *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):    *------------------------------------------------------------*;
+21254      * Trans: Determining Variables to Scale;
+MPRINT(EM_DIAGRAM):   * Trans: Determining Variables to Scale;
+21255      *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21256      data WORK.M1DPHPQN;
+MPRINT(EM_DIAGRAM):   data WORK.M1DPHPQN;
+21257      set WORK.M1DPHPQN;
+MPRINT(EM_DIAGRAM):   set WORK.M1DPHPQN;
+21258      where (TYPE="N" and (METHOD in("MAX_NORM", "MAX_CORR", "EQUALIZE", "OP_MAX_NORM", "OP_EQUALIZE"))) or (ROLE eq "FREQ");
+MPRINT(EM_DIAGRAM):   where (TYPE="N" and (METHOD in("MAX_NORM", "MAX_CORR", "EQUALIZE", "OP_MAX_NORM", "OP_EQUALIZE"))) or (ROLE eq "FREQ");
+21259      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: There were 0 observations read from the data set WORK.M1DPHPQN.
+      WHERE ((TYPE='N') and METHOD in ('EQUALIZE', 'MAX_CORR', 'MAX_NORM', 'OP_EQUALIZE', 'OP_MAX_NORM')) or (ROLE='FREQ');
+NOTE: The data set WORK.M1DPHPQN has 0 observations and 22 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+ 
+ 
+21262      *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):      *------------------------------------------------------------*;
+21263      * Trans: Computing optimal binning for relationship to target using target TARGET_B;
+MPRINT(EM_DIAGRAM):   * Trans: Computing optimal binning for relationship to target using target TARGET_B;
+21264      *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21265      data sortedBinMeta;
+MPRINT(EM_DIAGRAM):   data sortedBinMeta;
+21266      set WORK.METASET1ERG1PW;
+MPRINT(EM_DIAGRAM):   set WORK.METASET1ERG1PW;
+21267      where NAME ^in("TARGET_B", "");
+MPRINT(EM_DIAGRAM):   where NAME ^in("TARGET_B", "");
+21268      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: There were 7 observations read from the data set WORK.METASET1ERG1PW.
+      WHERE NAME not in (' ', 'TARGET_B');
+NOTE: The data set WORK.SORTEDBINMETA has 7 observations and 22 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+ 
+ 
+21269      proc sort data=sortedBinMeta;
+MPRINT(EM_DIAGRAM):   proc sort data=sortedBinMeta;
+21270      by level;
+MPRINT(EM_DIAGRAM):   by level;
+21271      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: There were 7 observations read from the data set WORK.SORTEDBINMETA.
+NOTE: The data set WORK.SORTEDBINMETA has 7 observations and 22 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+ 
+ 
+21272      *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):    *------------------------------------------------------------*;
+21273      * WARNING: No variable found for optimal binning for relationship to target using target TARGET_B;
+MPRINT(EM_DIAGRAM):   * WARNING: No variable found for optimal binning for relationship to target using target TARGET_B;
+21274      *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+ 
+21275      %em_varMacro(name=EMOPTBINVAR, metadata=sortedBinMeta, key=NAME);
+MPRINT(EM_DIAGRAM):
+MPRINT(EM_VARMACRO):   filename macFile catalog 'work.emutil.macro.source';
+MPRINT(EM_VARMACRO):   data _null_;
+MPRINT(EM_VARMACRO):   length _STRING_ $80;
+MPRINT(EM_VARMACRO):   retain _STRING_;
+MPRINT(EM_VARMACRO):   set sortedBinMeta end=eof;
+MPRINT(EM_VARMACRO):   file macFile;
+MPRINT(EM_VARMACRO):   if _N_=1 then do;
+MPRINT(EM_VARMACRO):   string = "%"!!"macro EMOPTBINVAR;";
+MPRINT(EM_VARMACRO):   put string;
+MPRINT(EM_VARMACRO):   end;
+MPRINT(EM_VARMACRO):   if (length(_STRING_) + length(trim(NAME))+ 1 < 80) then do;
+MPRINT(EM_VARMACRO):   _STRING_ = trim(_STRING_)!!' '!!trim(NAME);
+MPRINT(EM_VARMACRO):   if eof then do;
+MPRINT(EM_VARMACRO):   put _STRING_;
+MPRINT(EM_VARMACRO):   string = "%"!!"mend EMOPTBINVAR;";
+MPRINT(EM_VARMACRO):   put string;
+MPRINT(EM_VARMACRO):   end;
+MPRINT(EM_VARMACRO):   end;
+MPRINT(EM_VARMACRO):   else do;
+MPRINT(EM_VARMACRO):   put _STRING_;
+MPRINT(EM_VARMACRO):   _string_ = TRIM(NAME);
+MPRINT(EM_VARMACRO):   if eof then do;
+MPRINT(EM_VARMACRO):   put _STRING_;
+MPRINT(EM_VARMACRO):   string = "%"!!"mend EMOPTBINVAR;";
+MPRINT(EM_VARMACRO):   put string;
+MPRINT(EM_VARMACRO):   end;
+MPRINT(EM_VARMACRO):   end;
+MPRINT(EM_VARMACRO):   if eof then do;
+MPRINT(EM_VARMACRO):   string = strip(put(_N_, best.));
+MPRINT(EM_VARMACRO):   call symput('_METAOBS', string);
+MPRINT(EM_VARMACRO):   end;
+MPRINT(EM_VARMACRO):   run;
+ 
+NOTE: The file MACFILE is:
+      Catalog Name=WORK.EMUTIL.MACRO.SOURCE,
+      Catalog Page Size=4096,
+      Number of Catalog Pages=4,
+      Created=Sun, Oct 11, 2015 02:42:58 PM,
+      Last Modified=Sun, Oct 11, 2015 02:42:58 PM,
+      Filename=C:\Users\sakerb01\AppData\Local\Temp\SAS Temporary Files\_TD3492_COB-IT-M22_\Prc2\emutil.sas7bcat,
+      Release Created=9.0401M0,Host Created=X64_7PRO
+ 
+NOTE: 5 records were written to the file MACFILE.
+      The minimum record length was 18.
+      The maximum record length was 62.
+NOTE: There were 7 observations read from the data set WORK.SORTEDBINMETA.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+ 
+ 
+NOTE: %INCLUDE (level 1) file MACFILE is file WORK.EMUTIL.MACRO.SOURCE.
+21276     +%macro EMOPTBINVAR;
+21277     +LIFETIME_CARD_PROM LIFETIME_GIFT_COUNT MEDIAN_HOME_VALUE
+21278     +MEDIAN_HOUSEHOLD_INCOME PER_CAPITA_INCOME RECENT_RESPONSE_PROP
+21279     +RECENT_STAR_STATUS
+21280     +%mend EMOPTBINVAR;
+NOTE: %INCLUDE (level 1) ending.
+MPRINT(EM_VARMACRO):   filename macFile;
+NOTE: Fileref MACFILE has been deassigned.
+MPRINT(EM_DIAGRAM):  ;
+21281      data WORK.EM_TRANSOPTBIN / view=WORK.EM_TRANSOPTBIN;
+MPRINT(EM_DIAGRAM):   data WORK.EM_TRANSOPTBIN / view=WORK.EM_TRANSOPTBIN;
+21282      set
+21282    ! EMWS1.Impt_TRAIN(keep=%EMOPTBINVAR TARGET_B );
+MPRINT(EM_DIAGRAM):   set EMWS1.Impt_TRAIN(keep
+MPRINT(EM_DIAGRAM):  =LIFETIME_CARD_PROM LIFETIME_GIFT_COUNT MEDIAN_HOME_VALUE MEDIAN_HOUSEHOLD_INCOME PER_CAPITA_INCOME RECENT_RESPONSE_PROP RECENT_STAR_STATUS TARGET_B );
+21283      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: DATA STEP view saved on file WORK.EM_TRANSOPTBIN.
+NOTE: A stored DATA STEP view cannot run under a different operating system.
+NOTE: View EMWS1.IMPT_TRAIN.VIEW used (Total process time):
+      real time           0.14 seconds
+      cpu time            0.14 seconds
+ 
+NOTE: DATA statement used (Total process time):
+      real time           0.15 seconds
+      cpu time            0.15 seconds
+ 
+ 
+21284      data _null_;
+MPRINT(EM_DIAGRAM):   data _null_;
+21285      length varString $100;
+MPRINT(EM_DIAGRAM):   length varString $100;
+21286      retain varstring '';
+MPRINT(EM_DIAGRAM):   retain varstring '';
+21287      set sortedBinMeta end=eof;
+MPRINT(EM_DIAGRAM):   set sortedBinMeta end=eof;
+21288      by level;
+MPRINT(EM_DIAGRAM):   by level;
+21289      if _n_=1 then do;
+MPRINT(EM_DIAGRAM):   if _n_=1 then do;
+21290      call execute("proc arbor data=EMWS1.Impt_TRAIN ");
+MPRINT(EM_DIAGRAM):   call execute("proc arbor data=EMWS1.Impt_TRAIN ");
+21291      call execute("   maxdepth = 1 Leafsize=5");
+MPRINT(EM_DIAGRAM):   call execute("   maxdepth = 1 Leafsize=5");
+21292      call execute("   maxbranch = 4");
+MPRINT(EM_DIAGRAM):   call execute("   maxbranch = 4");
+21293      call execute("Missing=USEINSEARCH ");
+MPRINT(EM_DIAGRAM):   call execute("Missing=USEINSEARCH ");
+21294      call execute("   norulelimit maxrules=7 maxsurrs=0;");
+MPRINT(EM_DIAGRAM):   call execute("   norulelimit maxrules=7 maxsurrs=0;");
+21295      end;
+MPRINT(EM_DIAGRAM):   end;
+21296      if first.level then do;
+MPRINT(EM_DIAGRAM):   if first.level then do;
+21297      call execute("input ");
+MPRINT(EM_DIAGRAM):   call execute("input ");
+21298      end;
+MPRINT(EM_DIAGRAM):   end;
+21299      if length(trim(varString)) + length(trim(name)) +1 < 80 then varString = trim(varString)!!' '!!trim(name);
+MPRINT(EM_DIAGRAM):   if length(trim(varString)) + length(trim(name)) +1 < 80 then varString = trim(varString)!!' '!!trim(name);
+21300      else do;
+MPRINT(EM_DIAGRAM):   else do;
+21301      call execute(varString);
+MPRINT(EM_DIAGRAM):   call execute(varString);
+21302      varString = name;
+MPRINT(EM_DIAGRAM):   varString = name;
+21303      end;
+MPRINT(EM_DIAGRAM):   end;
+21304      if eof then do;
+MPRINT(EM_DIAGRAM):   if eof then do;
+21305      call execute(varString);
+MPRINT(EM_DIAGRAM):   call execute(varString);
+21306      call execute("/ level="!!level!!";");
+MPRINT(EM_DIAGRAM):   call execute("/ level="!!level!!";");
+21307      call execute("target TARGET_B / level=BINARY;");
+MPRINT(EM_DIAGRAM):   call execute("target TARGET_B / level=BINARY;");
+21308      call execute(" Performance Disk NodeSize=10000;");
+MPRINT(EM_DIAGRAM):   call execute(" Performance Disk NodeSize=10000;");
+21309      call execute("assess validata=EMWS1.Impt_VALIDATE;");
+MPRINT(EM_DIAGRAM):   call execute("assess validata=EMWS1.Impt_VALIDATE;");
+21310      call execute(" subtree best;");
+MPRINT(EM_DIAGRAM):   call execute(" subtree best;");
+21311      call execute(" save RULES=WORK.OPTBIN_RULES;");
+MPRINT(EM_DIAGRAM):   call execute(" save RULES=WORK.OPTBIN_RULES;");
+21312      call execute("run;");
+MPRINT(EM_DIAGRAM):   call execute("run;");
+21313      end;
+MPRINT(EM_DIAGRAM):   end;
+21314      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+MPRINT(EM_DIAGRAM):   norulelimit maxrules=7 maxsurrs=0;
+MPRINT(EM_DIAGRAM):   / level=INTERVAL ;
+MPRINT(EM_DIAGRAM):   target TARGET_B / level=BINARY;
+MPRINT(EM_DIAGRAM):   Performance Disk NodeSize=10000;
+MPRINT(EM_DIAGRAM):   assess validata=EMWS1.Impt_VALIDATE;
+MPRINT(EM_DIAGRAM):   subtree best;
+MPRINT(EM_DIAGRAM):   save RULES=WORK.OPTBIN_RULES;
+MPRINT(EM_DIAGRAM):   run;
+NOTE: There were 7 observations read from the data set WORK.SORTEDBINMETA.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+ 
+ 
+NOTE: CALL EXECUTE generated line.
+1         + proc arbor data=EMWS1.Impt_TRAIN
+2         +    maxdepth = 1 Leafsize=5
+3         +    maxbranch = 4
+4         + Missing=USEINSEARCH
+5         +    norulelimit maxrules=7 maxsurrs=0;
+6         + input
+7         +   LIFETIME_CARD_PROM LIFETIME_GIFT_COUNT MEDIAN_HOME_VALUE
+8         + MEDIAN_HOUSEHOLD_INCOME PER_CAPITA_INCOME RECENT_RESPONSE_PROP
+9         + RECENT_STAR_STATUS
+NOTE: View EMWS1.IMPT_VALIDATE.VIEW used (Total process time):
+      real time           0.59 seconds
+      cpu time            0.53 seconds
+ 
+10        + / level=INTERVAL  ;
+11        + target TARGET_B / level=BINARY;
+12        +  Performance Disk NodeSize=10000;
+13        + assess validata=EMWS1.Impt_VALIDATE;
+NOTE: Variable _WARN_ is uninitialized.
+NOTE: 1326642 kilobytes of physical memory.
+NOTE: Will use 10654 out of 10654 training cases.
+NOTE: Using memory pool with 112487424 bytes.
+NOTE: Passed training data 2 times.
+NOTE: Training used 2090120 bytes of work memory.
+NOTE: Variable _WARN_ is uninitialized.
+NOTE: There were 8718 observations read from the data set EMWS1.PART_VALIDATE.
+NOTE: There were 8718 observations read from the data set EMWS1.REPL_VALIDATE.
+NOTE: The subtree sequence contains 2 subtrees. The largest has 3 nodes and 2 leaves.
+NOTE: Using subtree with 1 nodes and 1 leaves.
+14        +  subtree best;
+NOTE: Using subtree with 1 nodes and 1 leaves.
+15        +  save RULES=WORK.OPTBIN_RULES;
+NOTE: The data set WORK.OPTBIN_RULES has 39 observations and 6 variables.
+16        + run;
+ 
+ 
+NOTE: There were 10654 observations read from the data set EMWS1.PART_TRAIN.
+NOTE: View EMWS1.IMPT_TRAIN.VIEW used (Total process time):
+      real time           0.76 seconds
+      cpu time            0.67 seconds
+ 
+NOTE: There were 10654 observations read from the data set EMWS1.REPL_TRAIN.
+NOTE: There were 10654 observations read from the data set EMWS1.IMPT_TRAIN.
+NOTE: PROCEDURE ARBOR used (Total process time):
+      real time           0.79 seconds
+      cpu time            0.70 seconds
+ 
+ 
+21315      data WORK.OPTBIN_RULES;
+MPRINT(EM_DIAGRAM):   data WORK.OPTBIN_RULES;
+21316      set WORK.OPTBIN_RULES;
+MPRINT(EM_DIAGRAM):   set WORK.OPTBIN_RULES;
+21317      length NAME $32;
+MPRINT(EM_DIAGRAM):   length NAME $32;
+21318      retain NAME '';
+MPRINT(EM_DIAGRAM):   retain NAME '';
+21319      by RANK;
+MPRINT(EM_DIAGRAM):   by RANK;
+21320      if first.RANK then NAME= CHARACTER_VALUE;
+MPRINT(EM_DIAGRAM):   if first.RANK then NAME= CHARACTER_VALUE;
+21321      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: There were 39 observations read from the data set WORK.OPTBIN_RULES.
+NOTE: The data set WORK.OPTBIN_RULES has 39 observations and 7 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+ 
+ 
+21322      proc sort data=WORK.OPTBIN_RULES;
+MPRINT(EM_DIAGRAM):    proc sort data=WORK.OPTBIN_RULES;
+21323      where STAT in('INTERVAL', 'MISSING');
+MPRINT(EM_DIAGRAM):   where STAT in('INTERVAL', 'MISSING');
+21324      by NAME NUMERIC_VALUE;
+MPRINT(EM_DIAGRAM):   by NAME NUMERIC_VALUE;
+21325      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: There were 18 observations read from the data set WORK.OPTBIN_RULES.
+      WHERE STAT in ('INTERVAL', 'MISSING');
+NOTE: The data set WORK.OPTBIN_RULES has 18 observations and 7 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+ 
+ 
+NOTE: View EMWS1.IMPT_TRAIN.VIEW used (Total process time):
+      real time           2.01 seconds
+      cpu time            1.65 seconds
+ 
+NOTE: This SAS session is using a registry in WORK.  All changes will be lost at the end of this session.
+*------------------------------------------------------------*
+*  Trans: Creating EMWS1.Trans_RESULT
+*------------------------------------------------------------*
+MPRINT(EM_DIAGRAM):    data EMWS1.Trans_RESULT;
+MPRINT(EM_DIAGRAM):   length NAME NEWVAR $32 LEVEL $10 POWER 8 FORMULA $70 LABEL $44 TERM $200;
+MPRINT(EM_DIAGRAM):   NAME = "FILE_AVG_GIFT";
+MPRINT(EM_DIAGRAM):   NEWVAR = "LG10_FILE_AVG_GIFT";
+MPRINT(EM_DIAGRAM):   POWER = .;
+MPRINT(EM_DIAGRAM):   FORMULA = "log10(FILE_AVG_GIFT  + 1)";
+MPRINT(EM_DIAGRAM):   LABEL = 'Transformed FILE_AVG_GIFT';
+MPRINT(EM_DIAGRAM):   LEVEL = "INTERVAL";
+MPRINT(EM_DIAGRAM):   TYPE = "N";
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   NAME = "LAST_GIFT_AMT";
+MPRINT(EM_DIAGRAM):   NEWVAR = "LG10_LAST_GIFT_AMT";
+MPRINT(EM_DIAGRAM):   POWER = .;
+MPRINT(EM_DIAGRAM):   FORMULA = "log10(LAST_GIFT_AMT  + 1)";
+MPRINT(EM_DIAGRAM):   LABEL = 'Transformed LAST_GIFT_AMT';
+MPRINT(EM_DIAGRAM):   LEVEL = "INTERVAL";
+MPRINT(EM_DIAGRAM):   TYPE = "N";
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   NAME = "LIFETIME_AVG_GIFT_AMT";
+MPRINT(EM_DIAGRAM):   NEWVAR = "LG10_LIFETIME_AVG_GIFT_AMT";
+MPRINT(EM_DIAGRAM):   POWER = .;
+MPRINT(EM_DIAGRAM):   FORMULA = "log10(LIFETIME_AVG_GIFT_AMT  + 1)";
+MPRINT(EM_DIAGRAM):   LABEL = 'Transformed LIFETIME_AVG_GIFT_AMT';
+MPRINT(EM_DIAGRAM):   LEVEL = "INTERVAL";
+MPRINT(EM_DIAGRAM):   TYPE = "N";
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   NAME = "LIFETIME_GIFT_AMOUNT";
+MPRINT(EM_DIAGRAM):   NEWVAR = "LG10_LIFETIME_GIFT_AMOUNT";
+MPRINT(EM_DIAGRAM):   POWER = .;
+MPRINT(EM_DIAGRAM):   FORMULA = "log10(LIFETIME_GIFT_AMOUNT  + 1)";
+MPRINT(EM_DIAGRAM):   LABEL = 'Transformed LIFETIME_GIFT_AMOUNT';
+MPRINT(EM_DIAGRAM):   LEVEL = "INTERVAL";
+MPRINT(EM_DIAGRAM):   TYPE = "N";
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   NAME = "LIFETIME_CARD_PROM";
+MPRINT(EM_DIAGRAM):   NEWVAR = "OPT_LIFETIME_CARD_PROM";
+MPRINT(EM_DIAGRAM):   POWER = .;
+MPRINT(EM_DIAGRAM):   FORMULA = "Optimal Binning(4)";
+MPRINT(EM_DIAGRAM):   LABEL = 'Transformed LIFETIME_CARD_PROM';
+MPRINT(EM_DIAGRAM):   LEVEL = "NOMINAL";
+MPRINT(EM_DIAGRAM):   TYPE = "C";
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   NAME = "LIFETIME_GIFT_COUNT";
+MPRINT(EM_DIAGRAM):   NEWVAR = "OPT_LIFETIME_GIFT_COUNT";
+MPRINT(EM_DIAGRAM):   POWER = .;
+MPRINT(EM_DIAGRAM):   FORMULA = "Optimal Binning(4)";
+MPRINT(EM_DIAGRAM):   LABEL = 'Transformed LIFETIME_GIFT_COUNT';
+MPRINT(EM_DIAGRAM):   LEVEL = "NOMINAL";
+MPRINT(EM_DIAGRAM):   TYPE = "C";
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   NAME = "MEDIAN_HOME_VALUE";
+MPRINT(EM_DIAGRAM):   NEWVAR = "OPT_MEDIAN_HOME_VALUE";
+MPRINT(EM_DIAGRAM):   POWER = .;
+MPRINT(EM_DIAGRAM):   FORMULA = "Optimal Binning(4)";
+MPRINT(EM_DIAGRAM):   LABEL = 'Transformed MEDIAN_HOME_VALUE';
+MPRINT(EM_DIAGRAM):   LEVEL = "NOMINAL";
+MPRINT(EM_DIAGRAM):   TYPE = "C";
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   NAME = "MEDIAN_HOUSEHOLD_INCOME";
+MPRINT(EM_DIAGRAM):   NEWVAR = "OPT_MEDIAN_HOUSEHOLD_INCOME";
+MPRINT(EM_DIAGRAM):   POWER = .;
+MPRINT(EM_DIAGRAM):   FORMULA = "Optimal Binning(4)";
+MPRINT(EM_DIAGRAM):   LABEL = 'Transformed MEDIAN_HOUSEHOLD_INCOME';
+MPRINT(EM_DIAGRAM):   LEVEL = "NOMINAL";
+MPRINT(EM_DIAGRAM):   TYPE = "C";
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   NAME = "PER_CAPITA_INCOME";
+MPRINT(EM_DIAGRAM):   NEWVAR = "OPT_PER_CAPITA_INCOME";
+MPRINT(EM_DIAGRAM):   POWER = .;
+MPRINT(EM_DIAGRAM):   FORMULA = "Optimal Binning(4)";
+MPRINT(EM_DIAGRAM):   LABEL = 'Transformed PER_CAPITA_INCOME';
+MPRINT(EM_DIAGRAM):   LEVEL = "NOMINAL";
+MPRINT(EM_DIAGRAM):   TYPE = "C";
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   NAME = "RECENT_RESPONSE_PROP";
+MPRINT(EM_DIAGRAM):   NEWVAR = "OPT_RECENT_RESPONSE_PROP";
+MPRINT(EM_DIAGRAM):   POWER = .;
+MPRINT(EM_DIAGRAM):   FORMULA = "Optimal Binning(4)";
+MPRINT(EM_DIAGRAM):   LABEL = 'Transformed RECENT_RESPONSE_PROP';
+MPRINT(EM_DIAGRAM):   LEVEL = "NOMINAL";
+MPRINT(EM_DIAGRAM):   TYPE = "C";
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   NAME = "RECENT_STAR_STATUS";
+MPRINT(EM_DIAGRAM):   NEWVAR = "OPT_RECENT_STAR_STATUS";
+MPRINT(EM_DIAGRAM):   POWER = .;
+MPRINT(EM_DIAGRAM):   FORMULA = "Optimal Binning(4)";
+MPRINT(EM_DIAGRAM):   LABEL = 'Transformed RECENT_STAR_STATUS';
+MPRINT(EM_DIAGRAM):   LEVEL = "NOMINAL";
+MPRINT(EM_DIAGRAM):   TYPE = "C";
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):   proc sort data=EMWS1.Trans_RESULT NOTHREADS;
+MPRINT(EM_DIAGRAM):   by NAME;
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):   proc sort data=WORK.M0EH6SG4 out=WORK._TRANSRESLT(RENAME=(LEVEL=INPUTLEVEL TYPE=INPUTTYPE) KEEP=NAME ROLE LEVEL TYPE) NOTHREADS;
+MPRINT(EM_DIAGRAM):   by NAME;
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):   data EMWS1.Trans_RESULT(RENAME=(NAME=INPUTNAME NEWVAR=NAME));
+MPRINT(EM_DIAGRAM):   merge EMWS1.Trans_RESULT(in=a) WORK._TRANSRESLT;
+MPRINT(EM_DIAGRAM):   by NAME;
+MPRINT(EM_DIAGRAM):   if a then output;
+MPRINT(EM_DIAGRAM):   run;
+WARNING: Multiple lengths were specified for the BY variable NAME by input data sets. This might cause unexpected results.
+MPRINT(EM_DIAGRAM):   proc datasets library=EMWS1 nolist;
+MPRINT(EM_DIAGRAM):   modify Trans_RESULT;
+MPRINT(EM_DIAGRAM):   label INPUTNAME = "Input Name" NAME = "Output Name" POWER = "Power" FORMULA = "Formula" ROLE = "rpt_role_vlabel" INPUTLEVEL = "Input Level" LEVEL = "Output Level" INPUTTYPE = "Input Type" TYPE = "Output Type";
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: PROCEDURE DATASETS used (Total process time):
+      real time           0.21 seconds
+      cpu time            0.20 seconds
+ 
+ 
+21434      data EMWS1.Trans_RESULT;
+MPRINT(EM_DIAGRAM):   data EMWS1.Trans_RESULT;
+21435      length NAME $32 FORMULA $70 POWER 8 ROLE $32 LEVEL $10 INPUTNAME $32 INPUTTYPE $1 LABEL $44;
+MPRINT(EM_DIAGRAM):   length NAME $32 FORMULA $70 POWER 8 ROLE $32 LEVEL $10 INPUTNAME $32 INPUTTYPE $1 LABEL $44;
+21436      label INPUTNAME ='Input Name' NAME='Name' POWER='Power' FORMULA='Formula' ROLE='Role' INPUTLEVEL='Input Level' LEVEL='Level' INPUTTYPE='Input Type' TYPE='Type';
+MPRINT(EM_DIAGRAM):   label INPUTNAME = 'Input Name' NAME= 'Name' POWER= 'Power' FORMULA= 'Formula' ROLE= 'Role' INPUTLEVEL= 'Input Level' LEVEL= 'Level' INPUTTYPE= 'Input Type' TYPE= 'Type';
+21437      set EMWS1.Trans_RESULT;
+MPRINT(EM_DIAGRAM):   set EMWS1.Trans_RESULT;
+21438      if INPUTNAME = '' then INPUTNAME = "Mixture of variables";
+MPRINT(EM_DIAGRAM):   if INPUTNAME = '' then INPUTNAME = "Mixture of variables";
+21439      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: There were 11 observations read from the data set EMWS1.TRANS_RESULT.
+NOTE: The data set EMWS1.TRANS_RESULT has 11 observations and 11 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+ 
+ 
+21440      data WORK.M2ZCPNVK;
+MPRINT(EM_DIAGRAM):    data WORK.M2ZCPNVK;
+21441      set WORK.M2ZCPNVK;
+MPRINT(EM_DIAGRAM):   set WORK.M2ZCPNVK;
+21442      if ROLE='REJECTED' then ROLE='INPUT';
+MPRINT(EM_DIAGRAM):   if ROLE='REJECTED' then ROLE='INPUT';
+21443      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: There were 11 observations read from the data set WORK.M2ZCPNVK.
+NOTE: The data set WORK.M2ZCPNVK has 11 observations and 11 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+ 
+ 
+*------------------------------------------------------------*
+*  Trans: Computing summary statistics for transformed variables
+*------------------------------------------------------------*
+MPRINT(EM_DIAGRAM):    data WORK.Trans_TRANSFORM / view=WORK.Trans_TRANSFORM;
+MPRINT(EM_DIAGRAM):   set EMWS1.Impt_TRAIN;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * TRANSFORM: FILE_AVG_GIFT , log10(FILE_AVG_GIFT + 1);
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   label LG10_FILE_AVG_GIFT = 'Transformed FILE_AVG_GIFT';
+MPRINT(EM_DIAGRAM):   if FILE_AVG_GIFT eq . then LG10_FILE_AVG_GIFT = .;
+MPRINT(EM_DIAGRAM):   else do;
+MPRINT(EM_DIAGRAM):   if FILE_AVG_GIFT + 1 > 0 then LG10_FILE_AVG_GIFT = log10(FILE_AVG_GIFT + 1);
+MPRINT(EM_DIAGRAM):   else LG10_FILE_AVG_GIFT = .;
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * TRANSFORM: LAST_GIFT_AMT , log10(LAST_GIFT_AMT + 1);
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   label LG10_LAST_GIFT_AMT = 'Transformed LAST_GIFT_AMT';
+MPRINT(EM_DIAGRAM):   if LAST_GIFT_AMT eq . then LG10_LAST_GIFT_AMT = .;
+MPRINT(EM_DIAGRAM):   else do;
+MPRINT(EM_DIAGRAM):   if LAST_GIFT_AMT + 1 > 0 then LG10_LAST_GIFT_AMT = log10(LAST_GIFT_AMT + 1);
+MPRINT(EM_DIAGRAM):   else LG10_LAST_GIFT_AMT = .;
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * TRANSFORM: LIFETIME_AVG_GIFT_AMT , log10(LIFETIME_AVG_GIFT_AMT + 1);
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   label LG10_LIFETIME_AVG_GIFT_AMT = 'Transformed LIFETIME_AVG_GIFT_AMT';
+MPRINT(EM_DIAGRAM):   if LIFETIME_AVG_GIFT_AMT eq . then LG10_LIFETIME_AVG_GIFT_AMT = .;
+MPRINT(EM_DIAGRAM):   else do;
+MPRINT(EM_DIAGRAM):   if LIFETIME_AVG_GIFT_AMT + 1 > 0 then LG10_LIFETIME_AVG_GIFT_AMT = log10(LIFETIME_AVG_GIFT_AMT + 1);
+MPRINT(EM_DIAGRAM):   else LG10_LIFETIME_AVG_GIFT_AMT = .;
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * TRANSFORM: LIFETIME_GIFT_AMOUNT , log10(LIFETIME_GIFT_AMOUNT + 1);
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   label LG10_LIFETIME_GIFT_AMOUNT = 'Transformed LIFETIME_GIFT_AMOUNT';
+MPRINT(EM_DIAGRAM):   if LIFETIME_GIFT_AMOUNT eq . then LG10_LIFETIME_GIFT_AMOUNT = .;
+MPRINT(EM_DIAGRAM):   else do;
+MPRINT(EM_DIAGRAM):   if LIFETIME_GIFT_AMOUNT + 1 > 0 then LG10_LIFETIME_GIFT_AMOUNT = log10(LIFETIME_GIFT_AMOUNT + 1);
+MPRINT(EM_DIAGRAM):   else LG10_LIFETIME_GIFT_AMOUNT = .;
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * TRANSFORM: LIFETIME_CARD_PROM , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   label OPT_LIFETIME_CARD_PROM = 'Transformed LIFETIME_CARD_PROM';
+MPRINT(EM_DIAGRAM):   length OPT_LIFETIME_CARD_PROM $36;
+MPRINT(EM_DIAGRAM):   if (LIFETIME_CARD_PROM eq .) then OPT_LIFETIME_CARD_PROM="03:12.5-39.5, MISSING";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_CARD_PROM < 7.5) then OPT_LIFETIME_CARD_PROM = "01:low-7.5";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_CARD_PROM >= 7.5 and LIFETIME_CARD_PROM < 12.5) then OPT_LIFETIME_CARD_PROM = "02:7.5-12.5";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_CARD_PROM >= 12.5 and LIFETIME_CARD_PROM < 39.5) then OPT_LIFETIME_CARD_PROM = "03:12.5-39.5, MISSING";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_CARD_PROM >= 39.5) then OPT_LIFETIME_CARD_PROM = "04:39.5-high";
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * TRANSFORM: LIFETIME_GIFT_COUNT , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   label OPT_LIFETIME_GIFT_COUNT = 'Transformed LIFETIME_GIFT_COUNT';
+MPRINT(EM_DIAGRAM):   length OPT_LIFETIME_GIFT_COUNT $36;
+MPRINT(EM_DIAGRAM):   if (LIFETIME_GIFT_COUNT eq .) then OPT_LIFETIME_GIFT_COUNT="02:4.5-13.5, MISSING";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_GIFT_COUNT < 4.5) then OPT_LIFETIME_GIFT_COUNT = "01:low-4.5";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_GIFT_COUNT >= 4.5 and LIFETIME_GIFT_COUNT < 13.5) then OPT_LIFETIME_GIFT_COUNT = "02:4.5-13.5, MISSING";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_GIFT_COUNT >= 13.5) then OPT_LIFETIME_GIFT_COUNT = "03:13.5-high";
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * TRANSFORM: MEDIAN_HOME_VALUE , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   label OPT_MEDIAN_HOME_VALUE = 'Transformed MEDIAN_HOME_VALUE';
+MPRINT(EM_DIAGRAM):   length OPT_MEDIAN_HOME_VALUE $36;
+MPRINT(EM_DIAGRAM):   if (MEDIAN_HOME_VALUE eq .) then OPT_MEDIAN_HOME_VALUE="02:676.5-high, MISSING";
+MPRINT(EM_DIAGRAM):   else if (MEDIAN_HOME_VALUE < 676.5) then OPT_MEDIAN_HOME_VALUE = "01:low-676.5";
+MPRINT(EM_DIAGRAM):   else if (MEDIAN_HOME_VALUE >= 676.5) then OPT_MEDIAN_HOME_VALUE = "02:676.5-high, MISSING";
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * TRANSFORM: MEDIAN_HOUSEHOLD_INCOME , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   label OPT_MEDIAN_HOUSEHOLD_INCOME = 'Transformed MEDIAN_HOUSEHOLD_INCOME';
+MPRINT(EM_DIAGRAM):   length OPT_MEDIAN_HOUSEHOLD_INCOME $36;
+MPRINT(EM_DIAGRAM):   if (MEDIAN_HOUSEHOLD_INCOME eq .) then OPT_MEDIAN_HOUSEHOLD_INCOME="01:low-624.5, MISSING";
+MPRINT(EM_DIAGRAM):   else if (MEDIAN_HOUSEHOLD_INCOME < 624.5) then OPT_MEDIAN_HOUSEHOLD_INCOME = "01:low-624.5, MISSING";
+MPRINT(EM_DIAGRAM):   else if (MEDIAN_HOUSEHOLD_INCOME >= 624.5) then OPT_MEDIAN_HOUSEHOLD_INCOME = "02:624.5-high";
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * TRANSFORM: PER_CAPITA_INCOME , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   label OPT_PER_CAPITA_INCOME = 'Transformed PER_CAPITA_INCOME';
+MPRINT(EM_DIAGRAM):   length OPT_PER_CAPITA_INCOME $36;
+MPRINT(EM_DIAGRAM):   if (PER_CAPITA_INCOME eq .) then OPT_PER_CAPITA_INCOME="01:low-14976, MISSING";
+MPRINT(EM_DIAGRAM):   else if (PER_CAPITA_INCOME < 14976) then OPT_PER_CAPITA_INCOME = "01:low-14976, MISSING";
+MPRINT(EM_DIAGRAM):   else if (PER_CAPITA_INCOME >= 14976) then OPT_PER_CAPITA_INCOME = "02:14976-high";
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * TRANSFORM: RECENT_RESPONSE_PROP , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   label OPT_RECENT_RESPONSE_PROP = 'Transformed RECENT_RESPONSE_PROP';
+MPRINT(EM_DIAGRAM):   length OPT_RECENT_RESPONSE_PROP $36;
+MPRINT(EM_DIAGRAM):   if (RECENT_RESPONSE_PROP eq .) then OPT_RECENT_RESPONSE_PROP="01:low-0.2125, MISSING";
+MPRINT(EM_DIAGRAM):   else if (RECENT_RESPONSE_PROP < 0.2125) then OPT_RECENT_RESPONSE_PROP = "01:low-0.2125, MISSING";
+MPRINT(EM_DIAGRAM):   else if (RECENT_RESPONSE_PROP >= 0.2125) then OPT_RECENT_RESPONSE_PROP = "02:0.2125-high";
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * TRANSFORM: RECENT_STAR_STATUS , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   label OPT_RECENT_STAR_STATUS = 'Transformed RECENT_STAR_STATUS';
+MPRINT(EM_DIAGRAM):   length OPT_RECENT_STAR_STATUS $36;
+MPRINT(EM_DIAGRAM):   if (RECENT_STAR_STATUS eq .) then OPT_RECENT_STAR_STATUS="01:low-0.5, MISSING";
+MPRINT(EM_DIAGRAM):   else if (RECENT_STAR_STATUS < 0.5) then OPT_RECENT_STAR_STATUS = "01:low-0.5, MISSING";
+MPRINT(EM_DIAGRAM):   else if (RECENT_STAR_STATUS >= 0.5 and RECENT_STAR_STATUS < 1.5) then OPT_RECENT_STAR_STATUS = "02:0.5-1.5";
+MPRINT(EM_DIAGRAM):   else if (RECENT_STAR_STATUS >= 1.5) then OPT_RECENT_STAR_STATUS = "03:1.5-high";
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):    *------------------------------------------------------------* ;
+MPRINT(EM_DIAGRAM):   * EM: DMDBClass Macro ;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------* ;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------* ;
+MPRINT(EM_DIAGRAM):   * EM: DMDBVar Macro ;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------* ;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * EM: Create DMDB;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   proc dmdb batch data=WORK.Trans_TRANSFORM dmdbcat=WORK.EM_DMDB maxlevel = 513 ;
+MPRINT(EM_DIAGRAM):   class
+MPRINT(DMDBCLASS):   OPT_LIFETIME_CARD_PROM(ASC) OPT_LIFETIME_GIFT_COUNT(ASC) OPT_MEDIAN_HOME_VALUE(ASC) OPT_MEDIAN_HOUSEHOLD_INCOME(ASC) OPT_PER_CAPITA_INCOME(ASC) OPT_RECENT_RESPONSE_PROP(ASC) OPT_RECENT_STAR_STATUS(ASC)
+MPRINT(EM_DIAGRAM):  ;
+MPRINT(EM_DIAGRAM):   var
+MPRINT(DMDBVAR):   LG10_FILE_AVG_GIFT LG10_LAST_GIFT_AMT LG10_LIFETIME_AVG_GIFT_AMT LG10_LIFETIME_GIFT_AMOUNT
+MPRINT(EM_DIAGRAM):  ;
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):   quit;
+MPRINT(EM_DIAGRAM):   *--- end code ---*;
+MPRINT(EM_DIAGRAM):    data WORK.Trans_TEMP;
+MPRINT(EM_DIAGRAM):   length SOURCE $6 NAME $32;
+MPRINT(EM_DIAGRAM):   label SOURCE = "Source" NAME = "Variable Name" NLEVEL = "Number of Levels" NMISS = "Missing" MIN = "Minimum" MAX = "Maximum" MEAN = "Mean" STD = "Standard Deviation" SKEWNESS = "Skewness" KURTOSIS = "Kurtosis";
+MPRINT(EM_DIAGRAM):   SOURCE = "OUTPUT";
+MPRINT(EM_DIAGRAM):   NAME = "LG10_FILE_AVG_GIFT";
+MPRINT(EM_DIAGRAM):   NMISS = 0;
+MPRINT(EM_DIAGRAM):   NLEVEL = .;
+MPRINT(EM_DIAGRAM):   MIN = 0.3729120029701;
+MPRINT(EM_DIAGRAM):   MAX = 2.65417654187796;
+MPRINT(EM_DIAGRAM):   MEAN = 1.09104799563574;
+MPRINT(EM_DIAGRAM):   STD = 0.20392902497076;
+MPRINT(EM_DIAGRAM):   SKEWNESS = 0.35682889474453;
+MPRINT(EM_DIAGRAM):   KURTOSIS = 1.19093903761601;
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   SOURCE = "OUTPUT";
+MPRINT(EM_DIAGRAM):   NAME = "LG10_LAST_GIFT_AMT";
+MPRINT(EM_DIAGRAM):   NMISS = 0;
+MPRINT(EM_DIAGRAM):   NLEVEL = .;
+MPRINT(EM_DIAGRAM):   MIN = 0;
+MPRINT(EM_DIAGRAM):   MAX = 2.65417654187796;
+MPRINT(EM_DIAGRAM):   MEAN = 1.18372575440467;
+MPRINT(EM_DIAGRAM):   STD = 0.23441815647149;
+MPRINT(EM_DIAGRAM):   SKEWNESS = -0.44886792822555;
+MPRINT(EM_DIAGRAM):   KURTOSIS = 2.87891241715013;
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   SOURCE = "OUTPUT";
+MPRINT(EM_DIAGRAM):   NAME = "LG10_LIFETIME_AVG_GIFT_AMT";
+MPRINT(EM_DIAGRAM):   NMISS = 0;
+MPRINT(EM_DIAGRAM):   NLEVEL = .;
+MPRINT(EM_DIAGRAM):   MIN = 0.3729120029701;
+MPRINT(EM_DIAGRAM):   MAX = 2.65417654187796;
+MPRINT(EM_DIAGRAM):   MEAN = 1.09104799563574;
+MPRINT(EM_DIAGRAM):   STD = 0.20392902497076;
+MPRINT(EM_DIAGRAM):   SKEWNESS = 0.35682889474453;
+MPRINT(EM_DIAGRAM):   KURTOSIS = 1.19093903761601;
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   SOURCE = "OUTPUT";
+MPRINT(EM_DIAGRAM):   NAME = "LG10_LIFETIME_GIFT_AMOUNT";
+MPRINT(EM_DIAGRAM):   NMISS = 0;
+MPRINT(EM_DIAGRAM):   NLEVEL = .;
+MPRINT(EM_DIAGRAM):   MIN = 1.20411998265592;
+MPRINT(EM_DIAGRAM):   MAX = 3.21031851982623;
+MPRINT(EM_DIAGRAM):   MEAN = 1.88405489958803;
+MPRINT(EM_DIAGRAM):   STD = 0.34563680864008;
+MPRINT(EM_DIAGRAM):   SKEWNESS = 0.04971023307411;
+MPRINT(EM_DIAGRAM):   KURTOSIS = -0.40150709860298;
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   SOURCE = "OUTPUT";
+MPRINT(EM_DIAGRAM):   NAME = "OPT_LIFETIME_CARD_PROM";
+MPRINT(EM_DIAGRAM):   NMISS = 0;
+MPRINT(EM_DIAGRAM):   NLEVEL = 4 - (nmiss>0);
+MPRINT(EM_DIAGRAM):   MIN = .;
+MPRINT(EM_DIAGRAM):   MAX = .;
+MPRINT(EM_DIAGRAM):   MEAN = .;
+MPRINT(EM_DIAGRAM):   STD = .;
+MPRINT(EM_DIAGRAM):   SKEWNESS = .;
+MPRINT(EM_DIAGRAM):   KURTOSIS = .;
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   SOURCE = "OUTPUT";
+MPRINT(EM_DIAGRAM):   NAME = "OPT_LIFETIME_GIFT_COUNT";
+MPRINT(EM_DIAGRAM):   NMISS = 0;
+MPRINT(EM_DIAGRAM):   NLEVEL = 3 - (nmiss>0);
+MPRINT(EM_DIAGRAM):   MIN = .;
+MPRINT(EM_DIAGRAM):   MAX = .;
+MPRINT(EM_DIAGRAM):   MEAN = .;
+MPRINT(EM_DIAGRAM):   STD = .;
+MPRINT(EM_DIAGRAM):   SKEWNESS = .;
+MPRINT(EM_DIAGRAM):   KURTOSIS = .;
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   SOURCE = "OUTPUT";
+MPRINT(EM_DIAGRAM):   NAME = "OPT_MEDIAN_HOME_VALUE";
+MPRINT(EM_DIAGRAM):   NMISS = 0;
+MPRINT(EM_DIAGRAM):   NLEVEL = 2 - (nmiss>0);
+MPRINT(EM_DIAGRAM):   MIN = .;
+MPRINT(EM_DIAGRAM):   MAX = .;
+MPRINT(EM_DIAGRAM):   MEAN = .;
+MPRINT(EM_DIAGRAM):   STD = .;
+MPRINT(EM_DIAGRAM):   SKEWNESS = .;
+MPRINT(EM_DIAGRAM):   KURTOSIS = .;
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   SOURCE = "OUTPUT";
+MPRINT(EM_DIAGRAM):   NAME = "OPT_MEDIAN_HOUSEHOLD_INCOME";
+MPRINT(EM_DIAGRAM):   NMISS = 0;
+MPRINT(EM_DIAGRAM):   NLEVEL = 2 - (nmiss>0);
+MPRINT(EM_DIAGRAM):   MIN = .;
+MPRINT(EM_DIAGRAM):   MAX = .;
+MPRINT(EM_DIAGRAM):   MEAN = .;
+MPRINT(EM_DIAGRAM):   STD = .;
+MPRINT(EM_DIAGRAM):   SKEWNESS = .;
+MPRINT(EM_DIAGRAM):   KURTOSIS = .;
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   SOURCE = "OUTPUT";
+MPRINT(EM_DIAGRAM):   NAME = "OPT_PER_CAPITA_INCOME";
+MPRINT(EM_DIAGRAM):   NMISS = 0;
+MPRINT(EM_DIAGRAM):   NLEVEL = 2 - (nmiss>0);
+MPRINT(EM_DIAGRAM):   MIN = .;
+MPRINT(EM_DIAGRAM):   MAX = .;
+MPRINT(EM_DIAGRAM):   MEAN = .;
+MPRINT(EM_DIAGRAM):   STD = .;
+MPRINT(EM_DIAGRAM):   SKEWNESS = .;
+MPRINT(EM_DIAGRAM):   KURTOSIS = .;
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   SOURCE = "OUTPUT";
+MPRINT(EM_DIAGRAM):   NAME = "OPT_RECENT_RESPONSE_PROP";
+MPRINT(EM_DIAGRAM):   NMISS = 0;
+MPRINT(EM_DIAGRAM):   NLEVEL = 2 - (nmiss>0);
+MPRINT(EM_DIAGRAM):   MIN = .;
+MPRINT(EM_DIAGRAM):   MAX = .;
+MPRINT(EM_DIAGRAM):   MEAN = .;
+MPRINT(EM_DIAGRAM):   STD = .;
+MPRINT(EM_DIAGRAM):   SKEWNESS = .;
+MPRINT(EM_DIAGRAM):   KURTOSIS = .;
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   SOURCE = "OUTPUT";
+MPRINT(EM_DIAGRAM):   NAME = "OPT_RECENT_STAR_STATUS";
+MPRINT(EM_DIAGRAM):   NMISS = 0;
+MPRINT(EM_DIAGRAM):   NLEVEL = 3 - (nmiss>0);
+MPRINT(EM_DIAGRAM):   MIN = .;
+MPRINT(EM_DIAGRAM):   MAX = .;
+MPRINT(EM_DIAGRAM):   MEAN = .;
+MPRINT(EM_DIAGRAM):   STD = .;
+MPRINT(EM_DIAGRAM):   SKEWNESS = .;
+MPRINT(EM_DIAGRAM):   KURTOSIS = .;
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   run;
+21735      data WORK.TRANSFOR_28R7GFS_STATISTIC;
+MPRINT(EM_DIAGRAM):    data WORK.TRANSFOR_28R7GFS_STATISTIC;
+21736      set WORK.Trans_TEMP;
+MPRINT(EM_DIAGRAM):   set WORK.Trans_TEMP;
+21737      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: There were 11 observations read from the data set WORK.TRANS_TEMP.
+NOTE: The data set WORK.TRANSFOR_28R7GFS_STATISTIC has 11 observations and 10 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+ 
+ 
+21738      proc print data = EMWS1.Trans_RESULT(obs=500) noobs label;
+MPRINT(EM_DIAGRAM):    proc print data = EMWS1.Trans_RESULT(obs=500) noobs label;
+21739      title9 "%sysfunc(sasmsg(sashelp.dmine, rpt_computedtransformations_title, NOQUOTE))";
+MPRINT(EM_DIAGRAM):   title9 "Computed Transformations";
+21740      title10 "%sysfunc(sasmsg(sashelp.dmine, rpt_maxObsPrinted_title, NOQUOTE))";
+MPRINT(EM_DIAGRAM):   title10 "(maximum 500 observations printed)";
+MPRINT(EM_DIAGRAM):   var INPUTNAME ROLE INPUTLEVEL NAME LEVEL FORMULA;
+MPRINT(EM_DIAGRAM):   run;
+21741      var INPUTNAME ROLE INPUTLEVEL NAME LEVEL FORMULA;
+21742      run;
+ 
+NOTE: There were 11 observations read from the data set EMWS1.TRANS_RESULT.
+NOTE: The PROCEDURE PRINT printed page 2.
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+ 
+ 
+21743      title9;
+MPRINT(EM_DIAGRAM):   title9;
+21744      title10;
+MPRINT(EM_DIAGRAM):   title10;
+MPRINT(EM_DIAGRAM):    proc printto;
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):    data _null_;
+MPRINT(EM_DIAGRAM):   call symput('NLDATE', strip(put(date(), NLDATE.)));
+MPRINT(EM_DIAGRAM):   call symput('NLTIME', strip(put(datetime(), NLTIME.)));
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):   data _null_;
+MPRINT(EM_DIAGRAM):   nldate= sasmsg("sashelp.dmine", "log_date_note", 'N', "October 11, 2015" );
+MPRINT(EM_DIAGRAM):   nltime= sasmsg("sashelp.dmine", "log_time_note", 'N', "14:43:01" );
+MPRINT(EM_DIAGRAM):   put "*------------------------------------------------------------*";
+MPRINT(EM_DIAGRAM):   put "* Score Log";
+MPRINT(EM_DIAGRAM):   put nldate;
+MPRINT(EM_DIAGRAM):   put nltime;
+MPRINT(EM_DIAGRAM):   put "*------------------------------------------------------------*";
+MPRINT(EM_DIAGRAM):   run;
+*------------------------------------------------------------*
+* Score Log
+Date:                October 11, 2015
+Time:                14:43:01
+*------------------------------------------------------------*
+MPRINT(EM_DIAGRAM):    filename O1VG6ND4 "C:\Users\sakerb01\Desktop\SAS EM 12.3 Tutorials _ Projects\Getting Started Charitable Giving Example\Workspaces\EMWS1\Trans\EMSCORE.out" encoding="UTF-8" NOBOM;
+MPRINT(EM_DIAGRAM):   proc printto print=O1VG6ND4 new;
+MPRINT(EM_DIAGRAM):   run;
+21846      proc sort data=EMWS1.Trans_RESULT out=WORK.TransRESULT NOTHREADS;
+MPRINT(EM_DIAGRAM):    proc sort data=EMWS1.Trans_RESULT out=WORK.TransRESULT NOTHREADS;
+21847      by INPUTNAME;
+MPRINT(EM_DIAGRAM):   by INPUTNAME;
+21848      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: There were 11 observations read from the data set EMWS1.TRANS_RESULT.
+NOTE: The data set WORK.TRANSRESULT has 11 observations and 11 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+ 
+ 
+21849      proc sort data=EMWS1.Trans_VariableSet(KEEP= NAME FAMILY REPORT rename=(NAME=INPUTNAME)) out=WORK.TransVARSET NOTHREADS;
+MPRINT(EM_DIAGRAM):   proc sort data=EMWS1.Trans_VariableSet(KEEP= NAME FAMILY REPORT rename=(NAME=INPUTNAME)) out=WORK.TransVARSET NOTHREADS;
+21850      by INPUTNAME;
+MPRINT(EM_DIAGRAM):   by INPUTNAME;
+21851      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: There were 51 observations read from the data set EMWS1.TRANS_VARIABLESET.
+NOTE: The data set WORK.TRANSVARSET has 51 observations and 3 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+ 
+ 
+21852      data WORK.TransRESULT;
+MPRINT(EM_DIAGRAM):   data WORK.TransRESULT;
+21853      merge WORK.TransRESULT WORK.TransVARSET;
+MPRINT(EM_DIAGRAM):   merge WORK.TransRESULT WORK.TransVARSET;
+21854      by INPUTNAME;
+MPRINT(EM_DIAGRAM):   by INPUTNAME;
+21855      if NAME ne '' then output;
+MPRINT(EM_DIAGRAM):   if NAME ne '' then output;
+21856      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+WARNING: Multiple lengths were specified for the BY variable INPUTNAME by input data sets. This might cause unexpected results.
+NOTE: There were 11 observations read from the data set WORK.TRANSRESULT.
+NOTE: There were 51 observations read from the data set WORK.TRANSVARSET.
+NOTE: The data set WORK.TRANSRESULT has 11 observations and 13 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+ 
+ 
+21857      filename _code "C:\Users\sakerb01\Desktop\SAS EM 12.3 Tutorials _ Projects\Getting Started Charitable Giving Example\Workspaces\EMWS1\Trans\TRAINDELTACODE.sas";
+MPRINT(EM_DIAGRAM):   filename _code "C:\Users\sakerb01\Desktop\SAS EM 12.3 Tutorials _ Projects\Getting Started Charitable Giving Example\Workspaces\EMWS1\Trans\TRAINDELTACODE.sas";
+21858      data _null_;
+MPRINT(EM_DIAGRAM):   data _null_;
+21859      set WORK.TransRESULT;
+MPRINT(EM_DIAGRAM):   set WORK.TransRESULT;
+21860      length String $200;
+MPRINT(EM_DIAGRAM):   length String $200;
+21861      file _code;
+MPRINT(EM_DIAGRAM):   file _code;
+21862      String = 'if NAME="'!!strip(name)!!'" then do;';
+MPRINT(EM_DIAGRAM):   String = 'if NAME="'!!strip(name)!!'" then do;';
+21863      put / String;
+MPRINT(EM_DIAGRAM):   put / String;
+21864      if family ne '' then do;
+MPRINT(EM_DIAGRAM):   if family ne '' then do;
+21865      String = '   FAMILY ="'!!strip(family)!!'";';
+MPRINT(EM_DIAGRAM):   String = '   FAMILY ="'!!strip(family)!!'";';
+21866      put String;
+MPRINT(EM_DIAGRAM):   put String;
+21867      end;
+MPRINT(EM_DIAGRAM):   end;
+21868      select(formula);
+MPRINT(EM_DIAGRAM):   select(formula);
+21869      when('Interaction') put '   FAMILY  ="INTERACTION";';
+MPRINT(EM_DIAGRAM):   when('Interaction') put '   FAMILY  ="INTERACTION";';
+21870      when('') put '   COMMENT = "' method 'transformation of ' INPUTVAR '";';
+MPRINT(EM_DIAGRAM):   when('') put '   COMMENT = "' method 'transformation of ' INPUTVAR '";';
+21871      otherwise put '   COMMENT = "' formula '";';
+MPRINT(EM_DIAGRAM):   otherwise put '   COMMENT = "' formula '";';
+21872      end;
+MPRINT(EM_DIAGRAM):   end;
+21873      String = '   ROLE ="'!!strip(role)!!'";';
+MPRINT(EM_DIAGRAM):   String = '   ROLE ="'!!strip(role)!!'";';
+21874      put String;
+MPRINT(EM_DIAGRAM):   put String;
+21875      if REPORT="" then REPORT = "N";
+MPRINT(EM_DIAGRAM):   if REPORT="" then REPORT = "N";
+21876      String = '   REPORT ="'!!strip(report)!!'";';
+MPRINT(EM_DIAGRAM):   String = '   REPORT ="'!!strip(report)!!'";';
+21877      put String;
+MPRINT(EM_DIAGRAM):   put String;
+21878      String = '   LEVEL  ="'!!strip(level)!!'";';
+MPRINT(EM_DIAGRAM):   String = '   LEVEL  ="'!!strip(level)!!'";';
+21879      put String;
+MPRINT(EM_DIAGRAM):   put String;
+21880      put 'end;';
+MPRINT(EM_DIAGRAM):   put 'end;';
+21881      if formula ne 'Interaction' and INPUTNAME ne '' then do;
+MPRINT(EM_DIAGRAM):   if formula ne 'Interaction' and INPUTNAME ne '' then do;
+21882      String = 'if NAME="'!!strip(INPUTNAME)!!'" then delete;';
+MPRINT(EM_DIAGRAM):   String = 'if NAME="'!!strip(INPUTNAME)!!'" then delete;';
+21883      put String;
+MPRINT(EM_DIAGRAM):   put String;
+21884      end;
+MPRINT(EM_DIAGRAM):   end;
+21885      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: Variable method is uninitialized.
+NOTE: Variable INPUTVAR is uninitialized.
+NOTE: The file _CODE is:
+      Filename=C:\Users\sakerb01\Desktop\SAS EM 12.3 Tutorials _ Projects\Getting Started Charitable Giving Example\Workspaces\EMWS1\Trans\TRAINDELTACODE.sas,
+      RECFM=V,LRECL=32767,File Size (bytes)=0,
+      Last Modified=11Oct2015:14:43:01,
+      Create Time=11Oct2015:14:43:01
+ 
+NOTE: 88 records were written to the file _CODE.
+      The minimum record length was 0.
+      The maximum record length was 50.
+NOTE: There were 11 observations read from the data set WORK.TRANSRESULT.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+ 
+ 
+21886      filename _code;
+MPRINT(EM_DIAGRAM):   filename _code;
+NOTE: Fileref _CODE has been deassigned.
+21887      proc print data = EMWS1.Trans_FORMULA(obs=500) noobs label;
+MPRINT(EM_DIAGRAM):    proc print data = EMWS1.Trans_FORMULA(obs=500) noobs label;
+21888      title9 "%sysfunc(sasmsg(sashelp.dmine, rpt_formulatransformations_title, NOQUOTE))";
+MPRINT(EM_DIAGRAM):   title9 "Formula Transformations";
+21889      title10 "%sysfunc(sasmsg(sashelp.dmine, rpt_maxObsPrinted_title, NOQUOTE))";
+MPRINT(EM_DIAGRAM):   title10 "(maximum 500 observations printed)";
+MPRINT(EM_DIAGRAM):   var Name ROLE LEVEL FORMULA;
+MPRINT(EM_DIAGRAM):   run;
+21890      var Name ROLE LEVEL FORMULA;
+21891      run;
+ 
+NOTE: No observations in data set EMWS1.TRANS_FORMULA.
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+ 
+ 
+21892      title9;
+MPRINT(EM_DIAGRAM):   title9;
+21893      title10;
+MPRINT(EM_DIAGRAM):   title10;
+21894      filename emflow "C:\Users\sakerb01\Desktop\SAS EM 12.3 Tutorials _ Projects\Getting Started Charitable Giving Example\Workspaces\EMWS1\Trans\EMFLOWSCORE.sas";
+MPRINT(EM_DIAGRAM):    filename emflow "C:\Users\sakerb01\Desktop\SAS EM 12.3 Tutorials _ Projects\Getting Started Charitable Giving Example\Workspaces\EMWS1\Trans\EMFLOWSCORE.sas";
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * Trans: Scoring DATA data;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21895      *------------------------------------------------------------*;
+21896      * Trans: Scoring DATA data;
+21897      *------------------------------------------------------------*;
+21898      data EMWS1.Trans_TRAIN
+21899      / view=EMWS1.Trans_TRAIN
+21900      ;
+MPRINT(EM_DIAGRAM):   data EMWS1.Trans_TRAIN / view=EMWS1.Trans_TRAIN ;
+21901      set EMWS1.Impt_TRAIN
+21902      ;
+MPRINT(EM_DIAGRAM):   set EMWS1.Impt_TRAIN ;
+21903      %inc emflow;
+NOTE: %INCLUDE (level 1) file EMFLOW is file C:\Users\sakerb01\Desktop\SAS EM 12.3 Tutorials _ Projects\Getting Started Charitable Giving Example\Workspaces\EMWS1\Trans\EMFLOWSCORE.sas.
+21904     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21905     +* Computed Code;
+MPRINT(EM_DIAGRAM):   * Computed Code;
+21906     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21907     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21908     +* TRANSFORM: FILE_AVG_GIFT , log10(FILE_AVG_GIFT + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: FILE_AVG_GIFT , log10(FILE_AVG_GIFT + 1);
+21909     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21910     +label LG10_FILE_AVG_GIFT = 'Transformed FILE_AVG_GIFT';
+MPRINT(EM_DIAGRAM):   label LG10_FILE_AVG_GIFT = 'Transformed FILE_AVG_GIFT';
+21911     +if FILE_AVG_GIFT eq . then LG10_FILE_AVG_GIFT = .;
+MPRINT(EM_DIAGRAM):   if FILE_AVG_GIFT eq . then LG10_FILE_AVG_GIFT = .;
+21912     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+21913     +if FILE_AVG_GIFT + 1 > 0 then LG10_FILE_AVG_GIFT = log10(FILE_AVG_GIFT + 1);
+MPRINT(EM_DIAGRAM):   if FILE_AVG_GIFT + 1 > 0 then LG10_FILE_AVG_GIFT = log10(FILE_AVG_GIFT + 1);
+21914     +else LG10_FILE_AVG_GIFT = .;
+MPRINT(EM_DIAGRAM):   else LG10_FILE_AVG_GIFT = .;
+21915     +end;
+MPRINT(EM_DIAGRAM):   end;
+21916     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21917     +* TRANSFORM: LAST_GIFT_AMT , log10(LAST_GIFT_AMT + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: LAST_GIFT_AMT , log10(LAST_GIFT_AMT + 1);
+21918     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21919     +label LG10_LAST_GIFT_AMT = 'Transformed LAST_GIFT_AMT';
+MPRINT(EM_DIAGRAM):   label LG10_LAST_GIFT_AMT = 'Transformed LAST_GIFT_AMT';
+21920     +if LAST_GIFT_AMT eq . then LG10_LAST_GIFT_AMT = .;
+MPRINT(EM_DIAGRAM):   if LAST_GIFT_AMT eq . then LG10_LAST_GIFT_AMT = .;
+21921     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+21922     +if LAST_GIFT_AMT + 1 > 0 then LG10_LAST_GIFT_AMT = log10(LAST_GIFT_AMT + 1);
+MPRINT(EM_DIAGRAM):   if LAST_GIFT_AMT + 1 > 0 then LG10_LAST_GIFT_AMT = log10(LAST_GIFT_AMT + 1);
+21923     +else LG10_LAST_GIFT_AMT = .;
+MPRINT(EM_DIAGRAM):   else LG10_LAST_GIFT_AMT = .;
+21924     +end;
+MPRINT(EM_DIAGRAM):   end;
+21925     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21926     +* TRANSFORM: LIFETIME_AVG_GIFT_AMT , log10(LIFETIME_AVG_GIFT_AMT + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: LIFETIME_AVG_GIFT_AMT , log10(LIFETIME_AVG_GIFT_AMT + 1);
+21927     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21928     +label LG10_LIFETIME_AVG_GIFT_AMT = 'Transformed LIFETIME_AVG_GIFT_AMT';
+MPRINT(EM_DIAGRAM):   label LG10_LIFETIME_AVG_GIFT_AMT = 'Transformed LIFETIME_AVG_GIFT_AMT';
+21929     +if LIFETIME_AVG_GIFT_AMT eq . then LG10_LIFETIME_AVG_GIFT_AMT = .;
+MPRINT(EM_DIAGRAM):   if LIFETIME_AVG_GIFT_AMT eq . then LG10_LIFETIME_AVG_GIFT_AMT = .;
+21930     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+21931     +if LIFETIME_AVG_GIFT_AMT + 1 > 0 then LG10_LIFETIME_AVG_GIFT_AMT = log10(LIFETIME_AVG_GIFT_AMT + 1);
+MPRINT(EM_DIAGRAM):   if LIFETIME_AVG_GIFT_AMT + 1 > 0 then LG10_LIFETIME_AVG_GIFT_AMT = log10(LIFETIME_AVG_GIFT_AMT + 1);
+21932     +else LG10_LIFETIME_AVG_GIFT_AMT = .;
+MPRINT(EM_DIAGRAM):   else LG10_LIFETIME_AVG_GIFT_AMT = .;
+21933     +end;
+MPRINT(EM_DIAGRAM):   end;
+21934     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21935     +* TRANSFORM: LIFETIME_GIFT_AMOUNT , log10(LIFETIME_GIFT_AMOUNT + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: LIFETIME_GIFT_AMOUNT , log10(LIFETIME_GIFT_AMOUNT + 1);
+21936     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21937     +label LG10_LIFETIME_GIFT_AMOUNT = 'Transformed LIFETIME_GIFT_AMOUNT';
+MPRINT(EM_DIAGRAM):   label LG10_LIFETIME_GIFT_AMOUNT = 'Transformed LIFETIME_GIFT_AMOUNT';
+21938     +if LIFETIME_GIFT_AMOUNT eq . then LG10_LIFETIME_GIFT_AMOUNT = .;
+MPRINT(EM_DIAGRAM):   if LIFETIME_GIFT_AMOUNT eq . then LG10_LIFETIME_GIFT_AMOUNT = .;
+21939     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+21940     +if LIFETIME_GIFT_AMOUNT + 1 > 0 then LG10_LIFETIME_GIFT_AMOUNT = log10(LIFETIME_GIFT_AMOUNT + 1);
+MPRINT(EM_DIAGRAM):   if LIFETIME_GIFT_AMOUNT + 1 > 0 then LG10_LIFETIME_GIFT_AMOUNT = log10(LIFETIME_GIFT_AMOUNT + 1);
+21941     +else LG10_LIFETIME_GIFT_AMOUNT = .;
+MPRINT(EM_DIAGRAM):   else LG10_LIFETIME_GIFT_AMOUNT = .;
+21942     +end;
+MPRINT(EM_DIAGRAM):   end;
+21943     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21944     +* TRANSFORM: LIFETIME_CARD_PROM , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: LIFETIME_CARD_PROM , Optimal Binning(4);
+21945     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21946     +label OPT_LIFETIME_CARD_PROM = 'Transformed LIFETIME_CARD_PROM';
+MPRINT(EM_DIAGRAM):   label OPT_LIFETIME_CARD_PROM = 'Transformed LIFETIME_CARD_PROM';
+21947     +length OPT_LIFETIME_CARD_PROM $36;
+MPRINT(EM_DIAGRAM):   length OPT_LIFETIME_CARD_PROM $36;
+21948     +if (LIFETIME_CARD_PROM eq .) then OPT_LIFETIME_CARD_PROM="03:12.5-39.5, MISSING";
+MPRINT(EM_DIAGRAM):   if (LIFETIME_CARD_PROM eq .) then OPT_LIFETIME_CARD_PROM="03:12.5-39.5, MISSING";
+21949     +else
+21950     +if (LIFETIME_CARD_PROM < 7.5) then
+21951     +OPT_LIFETIME_CARD_PROM = "01:low-7.5";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_CARD_PROM < 7.5) then OPT_LIFETIME_CARD_PROM = "01:low-7.5";
+21952     +else
+21953     +if (LIFETIME_CARD_PROM >= 7.5 and LIFETIME_CARD_PROM < 12.5) then
+21954     +OPT_LIFETIME_CARD_PROM = "02:7.5-12.5";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_CARD_PROM >= 7.5 and LIFETIME_CARD_PROM < 12.5) then OPT_LIFETIME_CARD_PROM = "02:7.5-12.5";
+21955     +else
+21956     +if (LIFETIME_CARD_PROM >= 12.5 and LIFETIME_CARD_PROM < 39.5) then
+21957     +OPT_LIFETIME_CARD_PROM = "03:12.5-39.5, MISSING";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_CARD_PROM >= 12.5 and LIFETIME_CARD_PROM < 39.5) then OPT_LIFETIME_CARD_PROM = "03:12.5-39.5, MISSING";
+21958     +else
+21959     +if (LIFETIME_CARD_PROM >= 39.5) then
+21960     +OPT_LIFETIME_CARD_PROM = "04:39.5-high";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_CARD_PROM >= 39.5) then OPT_LIFETIME_CARD_PROM = "04:39.5-high";
+21961     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21962     +* TRANSFORM: LIFETIME_GIFT_COUNT , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: LIFETIME_GIFT_COUNT , Optimal Binning(4);
+21963     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21964     +label OPT_LIFETIME_GIFT_COUNT = 'Transformed LIFETIME_GIFT_COUNT';
+MPRINT(EM_DIAGRAM):   label OPT_LIFETIME_GIFT_COUNT = 'Transformed LIFETIME_GIFT_COUNT';
+21965     +length OPT_LIFETIME_GIFT_COUNT $36;
+MPRINT(EM_DIAGRAM):   length OPT_LIFETIME_GIFT_COUNT $36;
+21966     +if (LIFETIME_GIFT_COUNT eq .) then OPT_LIFETIME_GIFT_COUNT="02:4.5-13.5, MISSING";
+MPRINT(EM_DIAGRAM):   if (LIFETIME_GIFT_COUNT eq .) then OPT_LIFETIME_GIFT_COUNT="02:4.5-13.5, MISSING";
+21967     +else
+21968     +if (LIFETIME_GIFT_COUNT < 4.5) then
+21969     +OPT_LIFETIME_GIFT_COUNT = "01:low-4.5";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_GIFT_COUNT < 4.5) then OPT_LIFETIME_GIFT_COUNT = "01:low-4.5";
+21970     +else
+21971     +if (LIFETIME_GIFT_COUNT >= 4.5 and LIFETIME_GIFT_COUNT < 13.5) then
+21972     +OPT_LIFETIME_GIFT_COUNT = "02:4.5-13.5, MISSING";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_GIFT_COUNT >= 4.5 and LIFETIME_GIFT_COUNT < 13.5) then OPT_LIFETIME_GIFT_COUNT = "02:4.5-13.5, MISSING";
+21973     +else
+21974     +if (LIFETIME_GIFT_COUNT >= 13.5) then
+21975     +OPT_LIFETIME_GIFT_COUNT = "03:13.5-high";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_GIFT_COUNT >= 13.5) then OPT_LIFETIME_GIFT_COUNT = "03:13.5-high";
+21976     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21977     +* TRANSFORM: MEDIAN_HOME_VALUE , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: MEDIAN_HOME_VALUE , Optimal Binning(4);
+21978     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21979     +label OPT_MEDIAN_HOME_VALUE = 'Transformed MEDIAN_HOME_VALUE';
+MPRINT(EM_DIAGRAM):   label OPT_MEDIAN_HOME_VALUE = 'Transformed MEDIAN_HOME_VALUE';
+21980     +length OPT_MEDIAN_HOME_VALUE $36;
+MPRINT(EM_DIAGRAM):   length OPT_MEDIAN_HOME_VALUE $36;
+21981     +if (MEDIAN_HOME_VALUE eq .) then OPT_MEDIAN_HOME_VALUE="02:676.5-high, MISSING";
+MPRINT(EM_DIAGRAM):   if (MEDIAN_HOME_VALUE eq .) then OPT_MEDIAN_HOME_VALUE="02:676.5-high, MISSING";
+21982     +else
+21983     +if (MEDIAN_HOME_VALUE < 676.5) then
+21984     +OPT_MEDIAN_HOME_VALUE = "01:low-676.5";
+MPRINT(EM_DIAGRAM):   else if (MEDIAN_HOME_VALUE < 676.5) then OPT_MEDIAN_HOME_VALUE = "01:low-676.5";
+21985     +else
+21986     +if (MEDIAN_HOME_VALUE >= 676.5) then
+21987     +OPT_MEDIAN_HOME_VALUE = "02:676.5-high, MISSING";
+MPRINT(EM_DIAGRAM):   else if (MEDIAN_HOME_VALUE >= 676.5) then OPT_MEDIAN_HOME_VALUE = "02:676.5-high, MISSING";
+21988     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21989     +* TRANSFORM: MEDIAN_HOUSEHOLD_INCOME , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: MEDIAN_HOUSEHOLD_INCOME , Optimal Binning(4);
+21990     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21991     +label OPT_MEDIAN_HOUSEHOLD_INCOME = 'Transformed MEDIAN_HOUSEHOLD_INCOME';
+MPRINT(EM_DIAGRAM):   label OPT_MEDIAN_HOUSEHOLD_INCOME = 'Transformed MEDIAN_HOUSEHOLD_INCOME';
+21992     +length OPT_MEDIAN_HOUSEHOLD_INCOME $36;
+MPRINT(EM_DIAGRAM):   length OPT_MEDIAN_HOUSEHOLD_INCOME $36;
+21993     +if (MEDIAN_HOUSEHOLD_INCOME eq .) then OPT_MEDIAN_HOUSEHOLD_INCOME="01:low-624.5, MISSING";
+MPRINT(EM_DIAGRAM):   if (MEDIAN_HOUSEHOLD_INCOME eq .) then OPT_MEDIAN_HOUSEHOLD_INCOME="01:low-624.5, MISSING";
+21994     +else
+21995     +if (MEDIAN_HOUSEHOLD_INCOME < 624.5) then
+21996     +OPT_MEDIAN_HOUSEHOLD_INCOME = "01:low-624.5, MISSING";
+MPRINT(EM_DIAGRAM):   else if (MEDIAN_HOUSEHOLD_INCOME < 624.5) then OPT_MEDIAN_HOUSEHOLD_INCOME = "01:low-624.5, MISSING";
+21997     +else
+21998     +if (MEDIAN_HOUSEHOLD_INCOME >= 624.5) then
+21999     +OPT_MEDIAN_HOUSEHOLD_INCOME = "02:624.5-high";
+MPRINT(EM_DIAGRAM):   else if (MEDIAN_HOUSEHOLD_INCOME >= 624.5) then OPT_MEDIAN_HOUSEHOLD_INCOME = "02:624.5-high";
+22000     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22001     +* TRANSFORM: PER_CAPITA_INCOME , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: PER_CAPITA_INCOME , Optimal Binning(4);
+22002     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22003     +label OPT_PER_CAPITA_INCOME = 'Transformed PER_CAPITA_INCOME';
+MPRINT(EM_DIAGRAM):   label OPT_PER_CAPITA_INCOME = 'Transformed PER_CAPITA_INCOME';
+22004     +length OPT_PER_CAPITA_INCOME $36;
+MPRINT(EM_DIAGRAM):   length OPT_PER_CAPITA_INCOME $36;
+22005     +if (PER_CAPITA_INCOME eq .) then OPT_PER_CAPITA_INCOME="01:low-14976, MISSING";
+MPRINT(EM_DIAGRAM):   if (PER_CAPITA_INCOME eq .) then OPT_PER_CAPITA_INCOME="01:low-14976, MISSING";
+22006     +else
+22007     +if (PER_CAPITA_INCOME < 14976) then
+22008     +OPT_PER_CAPITA_INCOME = "01:low-14976, MISSING";
+MPRINT(EM_DIAGRAM):   else if (PER_CAPITA_INCOME < 14976) then OPT_PER_CAPITA_INCOME = "01:low-14976, MISSING";
+22009     +else
+22010     +if (PER_CAPITA_INCOME >= 14976) then
+22011     +OPT_PER_CAPITA_INCOME = "02:14976-high";
+MPRINT(EM_DIAGRAM):   else if (PER_CAPITA_INCOME >= 14976) then OPT_PER_CAPITA_INCOME = "02:14976-high";
+22012     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22013     +* TRANSFORM: RECENT_RESPONSE_PROP , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: RECENT_RESPONSE_PROP , Optimal Binning(4);
+22014     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22015     +label OPT_RECENT_RESPONSE_PROP = 'Transformed RECENT_RESPONSE_PROP';
+MPRINT(EM_DIAGRAM):   label OPT_RECENT_RESPONSE_PROP = 'Transformed RECENT_RESPONSE_PROP';
+22016     +length OPT_RECENT_RESPONSE_PROP $36;
+MPRINT(EM_DIAGRAM):   length OPT_RECENT_RESPONSE_PROP $36;
+22017     +if (RECENT_RESPONSE_PROP eq .) then OPT_RECENT_RESPONSE_PROP="01:low-0.2125, MISSING";
+MPRINT(EM_DIAGRAM):   if (RECENT_RESPONSE_PROP eq .) then OPT_RECENT_RESPONSE_PROP="01:low-0.2125, MISSING";
+22018     +else
+22019     +if (RECENT_RESPONSE_PROP < 0.2125) then
+22020     +OPT_RECENT_RESPONSE_PROP = "01:low-0.2125, MISSING";
+MPRINT(EM_DIAGRAM):   else if (RECENT_RESPONSE_PROP < 0.2125) then OPT_RECENT_RESPONSE_PROP = "01:low-0.2125, MISSING";
+22021     +else
+22022     +if (RECENT_RESPONSE_PROP >= 0.2125) then
+22023     +OPT_RECENT_RESPONSE_PROP = "02:0.2125-high";
+MPRINT(EM_DIAGRAM):   else if (RECENT_RESPONSE_PROP >= 0.2125) then OPT_RECENT_RESPONSE_PROP = "02:0.2125-high";
+22024     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22025     +* TRANSFORM: RECENT_STAR_STATUS , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: RECENT_STAR_STATUS , Optimal Binning(4);
+22026     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22027     +label OPT_RECENT_STAR_STATUS = 'Transformed RECENT_STAR_STATUS';
+MPRINT(EM_DIAGRAM):   label OPT_RECENT_STAR_STATUS = 'Transformed RECENT_STAR_STATUS';
+22028     +length OPT_RECENT_STAR_STATUS $36;
+MPRINT(EM_DIAGRAM):   length OPT_RECENT_STAR_STATUS $36;
+22029     +if (RECENT_STAR_STATUS eq .) then OPT_RECENT_STAR_STATUS="01:low-0.5, MISSING";
+MPRINT(EM_DIAGRAM):   if (RECENT_STAR_STATUS eq .) then OPT_RECENT_STAR_STATUS="01:low-0.5, MISSING";
+22030     +else
+22031     +if (RECENT_STAR_STATUS < 0.5) then
+22032     +OPT_RECENT_STAR_STATUS = "01:low-0.5, MISSING";
+MPRINT(EM_DIAGRAM):   else if (RECENT_STAR_STATUS < 0.5) then OPT_RECENT_STAR_STATUS = "01:low-0.5, MISSING";
+22033     +else
+22034     +if (RECENT_STAR_STATUS >= 0.5 and RECENT_STAR_STATUS < 1.5) then
+22035     +OPT_RECENT_STAR_STATUS = "02:0.5-1.5";
+MPRINT(EM_DIAGRAM):   else if (RECENT_STAR_STATUS >= 0.5 and RECENT_STAR_STATUS < 1.5) then OPT_RECENT_STAR_STATUS = "02:0.5-1.5";
+22036     +else
+22037     +if (RECENT_STAR_STATUS >= 1.5) then
+22038     +OPT_RECENT_STAR_STATUS = "03:1.5-high";
+MPRINT(EM_DIAGRAM):   else if (RECENT_STAR_STATUS >= 1.5) then OPT_RECENT_STAR_STATUS = "03:1.5-high";
+NOTE: %INCLUDE (level 1) ending.
+MPRINT(EM_DIAGRAM):   run;
+22039      run;
+ 
+NOTE: DATA STEP view saved on file EMWS1.TRANS_TRAIN.
+NOTE: A stored DATA STEP view cannot run under a different operating system.
+NOTE: View EMWS1.IMPT_TRAIN.VIEW used (Total process time):
+      real time           0.14 seconds
+      cpu time            0.12 seconds
+ 
+NOTE: DATA statement used (Total process time):
+      real time           0.18 seconds
+      cpu time            0.15 seconds
+ 
+ 
+MPRINT(EM_DIAGRAM):   quit;
+22040      quit;
+22041      filename emflow;
+MPRINT(EM_DIAGRAM):   filename emflow;
+NOTE: Fileref EMFLOW has been deassigned.
+22042      filename emflow "C:\Users\sakerb01\Desktop\SAS EM 12.3 Tutorials _ Projects\Getting Started Charitable Giving Example\Workspaces\EMWS1\Trans\EMFLOWSCORE.sas";
+MPRINT(EM_DIAGRAM):    filename emflow "C:\Users\sakerb01\Desktop\SAS EM 12.3 Tutorials _ Projects\Getting Started Charitable Giving Example\Workspaces\EMWS1\Trans\EMFLOWSCORE.sas";
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * Trans: Scoring VALIDATE data;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22043      *------------------------------------------------------------*;
+22044      * Trans: Scoring VALIDATE data;
+22045      *------------------------------------------------------------*;
+22046      data EMWS1.Trans_VALIDATE
+22047      / view=EMWS1.Trans_VALIDATE
+22048      ;
+MPRINT(EM_DIAGRAM):   data EMWS1.Trans_VALIDATE / view=EMWS1.Trans_VALIDATE ;
+22049      set EMWS1.Impt_VALIDATE
+22050      ;
+MPRINT(EM_DIAGRAM):   set EMWS1.Impt_VALIDATE ;
+22051      %inc emflow;
+NOTE: %INCLUDE (level 1) file EMFLOW is file C:\Users\sakerb01\Desktop\SAS EM 12.3 Tutorials _ Projects\Getting Started Charitable Giving Example\Workspaces\EMWS1\Trans\EMFLOWSCORE.sas.
+22052     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22053     +* Computed Code;
+MPRINT(EM_DIAGRAM):   * Computed Code;
+22054     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22055     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22056     +* TRANSFORM: FILE_AVG_GIFT , log10(FILE_AVG_GIFT + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: FILE_AVG_GIFT , log10(FILE_AVG_GIFT + 1);
+22057     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22058     +label LG10_FILE_AVG_GIFT = 'Transformed FILE_AVG_GIFT';
+MPRINT(EM_DIAGRAM):   label LG10_FILE_AVG_GIFT = 'Transformed FILE_AVG_GIFT';
+22059     +if FILE_AVG_GIFT eq . then LG10_FILE_AVG_GIFT = .;
+MPRINT(EM_DIAGRAM):   if FILE_AVG_GIFT eq . then LG10_FILE_AVG_GIFT = .;
+22060     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+22061     +if FILE_AVG_GIFT + 1 > 0 then LG10_FILE_AVG_GIFT = log10(FILE_AVG_GIFT + 1);
+MPRINT(EM_DIAGRAM):   if FILE_AVG_GIFT + 1 > 0 then LG10_FILE_AVG_GIFT = log10(FILE_AVG_GIFT + 1);
+22062     +else LG10_FILE_AVG_GIFT = .;
+MPRINT(EM_DIAGRAM):   else LG10_FILE_AVG_GIFT = .;
+22063     +end;
+MPRINT(EM_DIAGRAM):   end;
+22064     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22065     +* TRANSFORM: LAST_GIFT_AMT , log10(LAST_GIFT_AMT + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: LAST_GIFT_AMT , log10(LAST_GIFT_AMT + 1);
+22066     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22067     +label LG10_LAST_GIFT_AMT = 'Transformed LAST_GIFT_AMT';
+MPRINT(EM_DIAGRAM):   label LG10_LAST_GIFT_AMT = 'Transformed LAST_GIFT_AMT';
+22068     +if LAST_GIFT_AMT eq . then LG10_LAST_GIFT_AMT = .;
+MPRINT(EM_DIAGRAM):   if LAST_GIFT_AMT eq . then LG10_LAST_GIFT_AMT = .;
+22069     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+22070     +if LAST_GIFT_AMT + 1 > 0 then LG10_LAST_GIFT_AMT = log10(LAST_GIFT_AMT + 1);
+MPRINT(EM_DIAGRAM):   if LAST_GIFT_AMT + 1 > 0 then LG10_LAST_GIFT_AMT = log10(LAST_GIFT_AMT + 1);
+22071     +else LG10_LAST_GIFT_AMT = .;
+MPRINT(EM_DIAGRAM):   else LG10_LAST_GIFT_AMT = .;
+22072     +end;
+MPRINT(EM_DIAGRAM):   end;
+22073     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22074     +* TRANSFORM: LIFETIME_AVG_GIFT_AMT , log10(LIFETIME_AVG_GIFT_AMT + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: LIFETIME_AVG_GIFT_AMT , log10(LIFETIME_AVG_GIFT_AMT + 1);
+22075     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22076     +label LG10_LIFETIME_AVG_GIFT_AMT = 'Transformed LIFETIME_AVG_GIFT_AMT';
+MPRINT(EM_DIAGRAM):   label LG10_LIFETIME_AVG_GIFT_AMT = 'Transformed LIFETIME_AVG_GIFT_AMT';
+22077     +if LIFETIME_AVG_GIFT_AMT eq . then LG10_LIFETIME_AVG_GIFT_AMT = .;
+MPRINT(EM_DIAGRAM):   if LIFETIME_AVG_GIFT_AMT eq . then LG10_LIFETIME_AVG_GIFT_AMT = .;
+22078     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+22079     +if LIFETIME_AVG_GIFT_AMT + 1 > 0 then LG10_LIFETIME_AVG_GIFT_AMT = log10(LIFETIME_AVG_GIFT_AMT + 1);
+MPRINT(EM_DIAGRAM):   if LIFETIME_AVG_GIFT_AMT + 1 > 0 then LG10_LIFETIME_AVG_GIFT_AMT = log10(LIFETIME_AVG_GIFT_AMT + 1);
+22080     +else LG10_LIFETIME_AVG_GIFT_AMT = .;
+MPRINT(EM_DIAGRAM):   else LG10_LIFETIME_AVG_GIFT_AMT = .;
+22081     +end;
+MPRINT(EM_DIAGRAM):   end;
+22082     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22083     +* TRANSFORM: LIFETIME_GIFT_AMOUNT , log10(LIFETIME_GIFT_AMOUNT + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: LIFETIME_GIFT_AMOUNT , log10(LIFETIME_GIFT_AMOUNT + 1);
+22084     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22085     +label LG10_LIFETIME_GIFT_AMOUNT = 'Transformed LIFETIME_GIFT_AMOUNT';
+MPRINT(EM_DIAGRAM):   label LG10_LIFETIME_GIFT_AMOUNT = 'Transformed LIFETIME_GIFT_AMOUNT';
+22086     +if LIFETIME_GIFT_AMOUNT eq . then LG10_LIFETIME_GIFT_AMOUNT = .;
+MPRINT(EM_DIAGRAM):   if LIFETIME_GIFT_AMOUNT eq . then LG10_LIFETIME_GIFT_AMOUNT = .;
+22087     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+22088     +if LIFETIME_GIFT_AMOUNT + 1 > 0 then LG10_LIFETIME_GIFT_AMOUNT = log10(LIFETIME_GIFT_AMOUNT + 1);
+MPRINT(EM_DIAGRAM):   if LIFETIME_GIFT_AMOUNT + 1 > 0 then LG10_LIFETIME_GIFT_AMOUNT = log10(LIFETIME_GIFT_AMOUNT + 1);
+22089     +else LG10_LIFETIME_GIFT_AMOUNT = .;
+MPRINT(EM_DIAGRAM):   else LG10_LIFETIME_GIFT_AMOUNT = .;
+22090     +end;
+MPRINT(EM_DIAGRAM):   end;
+22091     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22092     +* TRANSFORM: LIFETIME_CARD_PROM , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: LIFETIME_CARD_PROM , Optimal Binning(4);
+22093     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22094     +label OPT_LIFETIME_CARD_PROM = 'Transformed LIFETIME_CARD_PROM';
+MPRINT(EM_DIAGRAM):   label OPT_LIFETIME_CARD_PROM = 'Transformed LIFETIME_CARD_PROM';
+22095     +length OPT_LIFETIME_CARD_PROM $36;
+MPRINT(EM_DIAGRAM):   length OPT_LIFETIME_CARD_PROM $36;
+22096     +if (LIFETIME_CARD_PROM eq .) then OPT_LIFETIME_CARD_PROM="03:12.5-39.5, MISSING";
+MPRINT(EM_DIAGRAM):   if (LIFETIME_CARD_PROM eq .) then OPT_LIFETIME_CARD_PROM="03:12.5-39.5, MISSING";
+22097     +else
+22098     +if (LIFETIME_CARD_PROM < 7.5) then
+22099     +OPT_LIFETIME_CARD_PROM = "01:low-7.5";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_CARD_PROM < 7.5) then OPT_LIFETIME_CARD_PROM = "01:low-7.5";
+22100     +else
+22101     +if (LIFETIME_CARD_PROM >= 7.5 and LIFETIME_CARD_PROM < 12.5) then
+22102     +OPT_LIFETIME_CARD_PROM = "02:7.5-12.5";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_CARD_PROM >= 7.5 and LIFETIME_CARD_PROM < 12.5) then OPT_LIFETIME_CARD_PROM = "02:7.5-12.5";
+22103     +else
+22104     +if (LIFETIME_CARD_PROM >= 12.5 and LIFETIME_CARD_PROM < 39.5) then
+22105     +OPT_LIFETIME_CARD_PROM = "03:12.5-39.5, MISSING";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_CARD_PROM >= 12.5 and LIFETIME_CARD_PROM < 39.5) then OPT_LIFETIME_CARD_PROM = "03:12.5-39.5, MISSING";
+22106     +else
+22107     +if (LIFETIME_CARD_PROM >= 39.5) then
+22108     +OPT_LIFETIME_CARD_PROM = "04:39.5-high";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_CARD_PROM >= 39.5) then OPT_LIFETIME_CARD_PROM = "04:39.5-high";
+22109     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22110     +* TRANSFORM: LIFETIME_GIFT_COUNT , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: LIFETIME_GIFT_COUNT , Optimal Binning(4);
+22111     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22112     +label OPT_LIFETIME_GIFT_COUNT = 'Transformed LIFETIME_GIFT_COUNT';
+MPRINT(EM_DIAGRAM):   label OPT_LIFETIME_GIFT_COUNT = 'Transformed LIFETIME_GIFT_COUNT';
+22113     +length OPT_LIFETIME_GIFT_COUNT $36;
+MPRINT(EM_DIAGRAM):   length OPT_LIFETIME_GIFT_COUNT $36;
+22114     +if (LIFETIME_GIFT_COUNT eq .) then OPT_LIFETIME_GIFT_COUNT="02:4.5-13.5, MISSING";
+MPRINT(EM_DIAGRAM):   if (LIFETIME_GIFT_COUNT eq .) then OPT_LIFETIME_GIFT_COUNT="02:4.5-13.5, MISSING";
+22115     +else
+22116     +if (LIFETIME_GIFT_COUNT < 4.5) then
+22117     +OPT_LIFETIME_GIFT_COUNT = "01:low-4.5";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_GIFT_COUNT < 4.5) then OPT_LIFETIME_GIFT_COUNT = "01:low-4.5";
+22118     +else
+22119     +if (LIFETIME_GIFT_COUNT >= 4.5 and LIFETIME_GIFT_COUNT < 13.5) then
+22120     +OPT_LIFETIME_GIFT_COUNT = "02:4.5-13.5, MISSING";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_GIFT_COUNT >= 4.5 and LIFETIME_GIFT_COUNT < 13.5) then OPT_LIFETIME_GIFT_COUNT = "02:4.5-13.5, MISSING";
+22121     +else
+22122     +if (LIFETIME_GIFT_COUNT >= 13.5) then
+22123     +OPT_LIFETIME_GIFT_COUNT = "03:13.5-high";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_GIFT_COUNT >= 13.5) then OPT_LIFETIME_GIFT_COUNT = "03:13.5-high";
+22124     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22125     +* TRANSFORM: MEDIAN_HOME_VALUE , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: MEDIAN_HOME_VALUE , Optimal Binning(4);
+22126     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22127     +label OPT_MEDIAN_HOME_VALUE = 'Transformed MEDIAN_HOME_VALUE';
+MPRINT(EM_DIAGRAM):   label OPT_MEDIAN_HOME_VALUE = 'Transformed MEDIAN_HOME_VALUE';
+22128     +length OPT_MEDIAN_HOME_VALUE $36;
+MPRINT(EM_DIAGRAM):   length OPT_MEDIAN_HOME_VALUE $36;
+22129     +if (MEDIAN_HOME_VALUE eq .) then OPT_MEDIAN_HOME_VALUE="02:676.5-high, MISSING";
+MPRINT(EM_DIAGRAM):   if (MEDIAN_HOME_VALUE eq .) then OPT_MEDIAN_HOME_VALUE="02:676.5-high, MISSING";
+22130     +else
+22131     +if (MEDIAN_HOME_VALUE < 676.5) then
+22132     +OPT_MEDIAN_HOME_VALUE = "01:low-676.5";
+MPRINT(EM_DIAGRAM):   else if (MEDIAN_HOME_VALUE < 676.5) then OPT_MEDIAN_HOME_VALUE = "01:low-676.5";
+22133     +else
+22134     +if (MEDIAN_HOME_VALUE >= 676.5) then
+22135     +OPT_MEDIAN_HOME_VALUE = "02:676.5-high, MISSING";
+MPRINT(EM_DIAGRAM):   else if (MEDIAN_HOME_VALUE >= 676.5) then OPT_MEDIAN_HOME_VALUE = "02:676.5-high, MISSING";
+22136     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22137     +* TRANSFORM: MEDIAN_HOUSEHOLD_INCOME , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: MEDIAN_HOUSEHOLD_INCOME , Optimal Binning(4);
+22138     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22139     +label OPT_MEDIAN_HOUSEHOLD_INCOME = 'Transformed MEDIAN_HOUSEHOLD_INCOME';
+MPRINT(EM_DIAGRAM):   label OPT_MEDIAN_HOUSEHOLD_INCOME = 'Transformed MEDIAN_HOUSEHOLD_INCOME';
+22140     +length OPT_MEDIAN_HOUSEHOLD_INCOME $36;
+MPRINT(EM_DIAGRAM):   length OPT_MEDIAN_HOUSEHOLD_INCOME $36;
+22141     +if (MEDIAN_HOUSEHOLD_INCOME eq .) then OPT_MEDIAN_HOUSEHOLD_INCOME="01:low-624.5, MISSING";
+MPRINT(EM_DIAGRAM):   if (MEDIAN_HOUSEHOLD_INCOME eq .) then OPT_MEDIAN_HOUSEHOLD_INCOME="01:low-624.5, MISSING";
+22142     +else
+22143     +if (MEDIAN_HOUSEHOLD_INCOME < 624.5) then
+22144     +OPT_MEDIAN_HOUSEHOLD_INCOME = "01:low-624.5, MISSING";
+MPRINT(EM_DIAGRAM):   else if (MEDIAN_HOUSEHOLD_INCOME < 624.5) then OPT_MEDIAN_HOUSEHOLD_INCOME = "01:low-624.5, MISSING";
+22145     +else
+22146     +if (MEDIAN_HOUSEHOLD_INCOME >= 624.5) then
+22147     +OPT_MEDIAN_HOUSEHOLD_INCOME = "02:624.5-high";
+MPRINT(EM_DIAGRAM):   else if (MEDIAN_HOUSEHOLD_INCOME >= 624.5) then OPT_MEDIAN_HOUSEHOLD_INCOME = "02:624.5-high";
+22148     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22149     +* TRANSFORM: PER_CAPITA_INCOME , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: PER_CAPITA_INCOME , Optimal Binning(4);
+22150     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22151     +label OPT_PER_CAPITA_INCOME = 'Transformed PER_CAPITA_INCOME';
+MPRINT(EM_DIAGRAM):   label OPT_PER_CAPITA_INCOME = 'Transformed PER_CAPITA_INCOME';
+22152     +length OPT_PER_CAPITA_INCOME $36;
+MPRINT(EM_DIAGRAM):   length OPT_PER_CAPITA_INCOME $36;
+22153     +if (PER_CAPITA_INCOME eq .) then OPT_PER_CAPITA_INCOME="01:low-14976, MISSING";
+MPRINT(EM_DIAGRAM):   if (PER_CAPITA_INCOME eq .) then OPT_PER_CAPITA_INCOME="01:low-14976, MISSING";
+22154     +else
+22155     +if (PER_CAPITA_INCOME < 14976) then
+22156     +OPT_PER_CAPITA_INCOME = "01:low-14976, MISSING";
+MPRINT(EM_DIAGRAM):   else if (PER_CAPITA_INCOME < 14976) then OPT_PER_CAPITA_INCOME = "01:low-14976, MISSING";
+22157     +else
+22158     +if (PER_CAPITA_INCOME >= 14976) then
+22159     +OPT_PER_CAPITA_INCOME = "02:14976-high";
+MPRINT(EM_DIAGRAM):   else if (PER_CAPITA_INCOME >= 14976) then OPT_PER_CAPITA_INCOME = "02:14976-high";
+22160     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22161     +* TRANSFORM: RECENT_RESPONSE_PROP , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: RECENT_RESPONSE_PROP , Optimal Binning(4);
+22162     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22163     +label OPT_RECENT_RESPONSE_PROP = 'Transformed RECENT_RESPONSE_PROP';
+MPRINT(EM_DIAGRAM):   label OPT_RECENT_RESPONSE_PROP = 'Transformed RECENT_RESPONSE_PROP';
+22164     +length OPT_RECENT_RESPONSE_PROP $36;
+MPRINT(EM_DIAGRAM):   length OPT_RECENT_RESPONSE_PROP $36;
+22165     +if (RECENT_RESPONSE_PROP eq .) then OPT_RECENT_RESPONSE_PROP="01:low-0.2125, MISSING";
+MPRINT(EM_DIAGRAM):   if (RECENT_RESPONSE_PROP eq .) then OPT_RECENT_RESPONSE_PROP="01:low-0.2125, MISSING";
+22166     +else
+22167     +if (RECENT_RESPONSE_PROP < 0.2125) then
+22168     +OPT_RECENT_RESPONSE_PROP = "01:low-0.2125, MISSING";
+MPRINT(EM_DIAGRAM):   else if (RECENT_RESPONSE_PROP < 0.2125) then OPT_RECENT_RESPONSE_PROP = "01:low-0.2125, MISSING";
+22169     +else
+22170     +if (RECENT_RESPONSE_PROP >= 0.2125) then
+22171     +OPT_RECENT_RESPONSE_PROP = "02:0.2125-high";
+MPRINT(EM_DIAGRAM):   else if (RECENT_RESPONSE_PROP >= 0.2125) then OPT_RECENT_RESPONSE_PROP = "02:0.2125-high";
+22172     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22173     +* TRANSFORM: RECENT_STAR_STATUS , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: RECENT_STAR_STATUS , Optimal Binning(4);
+22174     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22175     +label OPT_RECENT_STAR_STATUS = 'Transformed RECENT_STAR_STATUS';
+MPRINT(EM_DIAGRAM):   label OPT_RECENT_STAR_STATUS = 'Transformed RECENT_STAR_STATUS';
+22176     +length OPT_RECENT_STAR_STATUS $36;
+MPRINT(EM_DIAGRAM):   length OPT_RECENT_STAR_STATUS $36;
+22177     +if (RECENT_STAR_STATUS eq .) then OPT_RECENT_STAR_STATUS="01:low-0.5, MISSING";
+MPRINT(EM_DIAGRAM):   if (RECENT_STAR_STATUS eq .) then OPT_RECENT_STAR_STATUS="01:low-0.5, MISSING";
+22178     +else
+22179     +if (RECENT_STAR_STATUS < 0.5) then
+22180     +OPT_RECENT_STAR_STATUS = "01:low-0.5, MISSING";
+MPRINT(EM_DIAGRAM):   else if (RECENT_STAR_STATUS < 0.5) then OPT_RECENT_STAR_STATUS = "01:low-0.5, MISSING";
+22181     +else
+22182     +if (RECENT_STAR_STATUS >= 0.5 and RECENT_STAR_STATUS < 1.5) then
+22183     +OPT_RECENT_STAR_STATUS = "02:0.5-1.5";
+MPRINT(EM_DIAGRAM):   else if (RECENT_STAR_STATUS >= 0.5 and RECENT_STAR_STATUS < 1.5) then OPT_RECENT_STAR_STATUS = "02:0.5-1.5";
+22184     +else
+22185     +if (RECENT_STAR_STATUS >= 1.5) then
+22186     +OPT_RECENT_STAR_STATUS = "03:1.5-high";
+MPRINT(EM_DIAGRAM):   else if (RECENT_STAR_STATUS >= 1.5) then OPT_RECENT_STAR_STATUS = "03:1.5-high";
+NOTE: %INCLUDE (level 1) ending.
+MPRINT(EM_DIAGRAM):   run;
+22187      run;
+ 
+NOTE: DATA STEP view saved on file EMWS1.TRANS_VALIDATE.
+NOTE: A stored DATA STEP view cannot run under a different operating system.
+NOTE: View EMWS1.IMPT_VALIDATE.VIEW used (Total process time):
+      real time           0.17 seconds
+      cpu time            0.14 seconds
+ 
+NOTE: DATA statement used (Total process time):
+      real time           0.20 seconds
+      cpu time            0.17 seconds
+ 
+ 
+MPRINT(EM_DIAGRAM):   quit;
+22188      quit;
+22189      filename emflow;
+MPRINT(EM_DIAGRAM):   filename emflow;
+NOTE: Fileref EMFLOW has been deassigned.
+22190      *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):    *------------------------------------------------------------*;
+22191      * Trans: Computing metadata for TRAIN data;
+MPRINT(EM_DIAGRAM):   * Trans: Computing metadata for TRAIN data;
+22192      *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+ 
+NOTE: View EMWS1.TRANS_TRAIN.VIEW used (Total process time):
+      real time           0.20 seconds
+      cpu time            0.20 seconds
+ 
+MPRINT(EM_DIAGRAM):    *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * &nodeid: Computing Metadata for TRAIN data;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   filename _delta "C:\Users\sakerb01\Desktop\SAS EM 12.3 Tutorials _ Projects\Getting Started Charitable Giving Example\Workspaces\EMWS1\Trans\CDELTA_TRAIN.sas";
+MPRINT(EMADVISECOLUMNS):   proc display c=sashelp.emmeta.advisecolumns.scl;
+MPRINT(EMADVISECOLUMNS):   run;
+MPRINT(EMADVISECOLUMNS):    options validvarname=any;
+MPRINT(EMADVISECOLUMNS):   proc contents data=EMWS1.Trans_TRAIN out=_tempAdvisor noprint;
+MPRINT(EMADVISECOLUMNS):   run;
+MPRINT(EMADVISECOLUMNS):   options validvarname=V7;
+MPRINT(EMADVISECOLUMNS):    data _null_;
+MPRINT(EMADVISECOLUMNS):   dsid = open('EMWS1.Trans_TRAIN');
+MPRINT(EMADVISECOLUMNS):   call symput('_dsidTable', strip(put(dsid, best.)));
+MPRINT(EMADVISECOLUMNS):   if dsid then do;
+MPRINT(EMADVISECOLUMNS):   call symput('_engineTable', attrc(dsid, 'ENGINE'));
+MPRINT(EMADVISECOLUMNS):   dsid = close(dsid);
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   run;
+MPRINT(EMADVISECOLUMNS):    proc contents data=EMWS1.Trans_TRAIN out=WORK.M2BQM8VW noprint;
+MPRINT(EMADVISECOLUMNS):   run;
+MPRINT(EMADVISECOLUMNS):    data WORK.M2BQM8VW;
+MPRINT(EMADVISECOLUMNS):   length NAME $ 64 TYPE $ 1 LABEL $ 200 FORMAT $ 20 INFORMAT $20 INDEX $ 1 INDEXTYPE $ 9;
+MPRINT(EMADVISECOLUMNS):   label NAME =;
+MPRINT(EMADVISECOLUMNS):   set WORK.M2BQM8VW(keep=name type length label format formatl formatd informat informl informd idxusage rename=(type=itype));
+MPRINT(EMADVISECOLUMNS):   if itype = 1 then type = 'N';
+MPRINT(EMADVISECOLUMNS):   else type = 'C';
+MPRINT(EMADVISECOLUMNS):   if formatl > 0 then do;
+MPRINT(EMADVISECOLUMNS):   if format ne ' ' then format = strip(format)!!strip(put(formatl, best12.))!!'.'!!strip(put(formatd, best12.));
+MPRINT(EMADVISECOLUMNS):   else format = strip(put(formatl, best12.))!!'.'!!strip(put(formatd, best12.));
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   else if format ne '' then format = strip(format)!!'.';
+MPRINT(EMADVISECOLUMNS):   if informl > 0 then do;
+MPRINT(EMADVISECOLUMNS):   if informat ne ' ' then informat = strip(informat)!!strip(put(informl, best12.))!!'.'!!strip(put(informd, best12.));
+MPRINT(EMADVISECOLUMNS):   else informat = strip(put(informl, best12.))!!'.'!!strip(put(informd, best12.));
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   else if informat ne '' then informat = strip(informat)!!'.';
+MPRINT(EMADVISECOLUMNS):   if idxusage = 'NONE' then index ="N";
+MPRINT(EMADVISECOLUMNS):   else index = "Y";
+MPRINT(EMADVISECOLUMNS):   indextype = idxusage;
+MPRINT(EMADVISECOLUMNS):   drop idxusage itype formatl formatd informl informd;
+MPRINT(EMADVISECOLUMNS):   run;
+MPRINT(EMADVISECOLUMNS):    data WORK.M2BQM8VW;
+MPRINT(EMADVISECOLUMNS):   length UNAME $64;
+MPRINT(EMADVISECOLUMNS):   set WORK.M2BQM8VW;
+MPRINT(EMADVISECOLUMNS):   UNAME = upcase(NAME);
+MPRINT(EMADVISECOLUMNS):   run;
+MPRINT(EMADVISECOLUMNS):    proc sort data=WORK.M30WA4H6 NOTHREADS;
+MPRINT(EMADVISECOLUMNS):   by UNAME;
+MPRINT(EMADVISECOLUMNS):   run;
+MPRINT(EMADVISECOLUMNS):    data WORK.M30WA4H6;
+MPRINT(EMADVISECOLUMNS):   drop UNAME;
+MPRINT(EMADVISECOLUMNS):   set WORK.M30WA4H6;
+MPRINT(EMADVISECOLUMNS):   run;
+MPRINT(EMADVISECOLUMNS):    data WORK.M0NJSYA4(keep=NAME ATTR);
+MPRINT(EMADVISECOLUMNS):   length ATTR $ 20;
+MPRINT(EMADVISECOLUMNS):   set WORK.M30WA4H6;
+MPRINT(EMADVISECOLUMNS):   if level ne "INTERVAL" then do;
+MPRINT(EMADVISECOLUMNS):   if order = ' ' then do;
+MPRINT(EMADVISECOLUMNS):   attr = 'ORDER';
+MPRINT(EMADVISECOLUMNS):   output;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   if format ne ' ' and formattype = ' ' then do;
+MPRINT(EMADVISECOLUMNS):   attr = 'FORMATTYPE';
+MPRINT(EMADVISECOLUMNS):   output;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   if role = ' ' then do;
+MPRINT(EMADVISECOLUMNS):   attr = 'ROLE';
+MPRINT(EMADVISECOLUMNS):   output;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   if level = ' ' then do;
+MPRINT(EMADVISECOLUMNS):   attr = 'LEVEL';
+MPRINT(EMADVISECOLUMNS):   output;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   if type = ' ' then do;
+MPRINT(EMADVISECOLUMNS):   attr = 'TYPE';
+MPRINT(EMADVISECOLUMNS):   output;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   if index = ' ' then do;
+MPRINT(EMADVISECOLUMNS):   attr = 'INDEX';
+MPRINT(EMADVISECOLUMNS):   output;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   if report = ' ' then do;
+MPRINT(EMADVISECOLUMNS):   attr = 'REPORT';
+MPRINT(EMADVISECOLUMNS):   output;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   run;
+MPRINT(EMADVISECOLUMNS):   proc sort NOTHREADS;
+MPRINT(EMADVISECOLUMNS):   by attr;
+MPRINT(EMADVISECOLUMNS):   run;
+MPRINT(EMADVISECOLUMNS):    data WORK.M30WA4H6;
+MPRINT(EMADVISECOLUMNS):   length NAME $64 ROLE $ 32 LEVEL $ 10 ORDER $ 8 CREATOR $32 FORMATTYPE $ 10 FAMILY $ 10 LOWERLIMIT 8 UPPERLIMIT 8 REPORT $1 DISTRIBUTION $ 20 COMMENT $64;
+MPRINT(EMADVISECOLUMNS):   length levelAssigned 8 roleAssigned 8 PRICE 8;
+MPRINT(EMADVISECOLUMNS):   set WORK.M30WA4H6;
+MPRINT(EMADVISECOLUMNS):   if formattype = ' ' then do;
+MPRINT(EMADVISECOLUMNS):   if format ne ' ' then do;
+MPRINT(EMADVISECOLUMNS):   if type = 'N' then do;
+MPRINT(EMADVISECOLUMNS):   pos = indexc(format,'.1234567890');
+MPRINT(EMADVISECOLUMNS):   if pos > 1 then tempfmt = substr(format,1, pos-1);
+MPRINT(EMADVISECOLUMNS):   else tempfmt = ' ';
+MPRINT(EMADVISECOLUMNS):   flen = length(tempfmt);
+MPRINT(EMADVISECOLUMNS):   select;
+MPRINT(EMADVISECOLUMNS):   when(tempfmt in ("DATE" "DAY" "DDMMYY" "DOWNAME" "JULDAY" "JULIAN" "MMDDYY" "MMDDYYD" "MMDDYYC" "MMDDYYN" "MMDDYYP" "MMDDYYS" "MONNAME" "MONTH" "MONYY" "NENGO" "QTR" "QTRR" "WEEKDATE" "WEEKDATX" "WEEKDAY" "WORDDATE" "WORDDATX"
+"YEAR" "YYMMDD" "YYMON" "YYMMDDC" "YYMMDDD" "YYMMDDN" "YYMMDDP" "YYMMDDS" "EURDFDE" "NJDATE" "NLDATE" "EURDFDD" "EURDFDWN" "EURDFMN" "EURDFMY" "EURDFWK" "EURDFWKX" "EURDFWDX" "EURDFDN" "EURDFDE" )) formattype = 'DATE';
+MPRINT(EMADVISECOLUMNS):   when(tempfmt in ("DATETIME" "EURDFDT" "TOD" )) formattype = "DATETIME";
+MPRINT(EMADVISECOLUMNS):   when(tempfmt in ("HHMM" "HOUR" "MMSS" "TIME" "TIMEAMPM" )) formattype = "TIME";
+MPRINT(EMADVISECOLUMNS):   when(tempfmt in ("COMMA" "COMMAX" "DOLLAR" "DOLLARX" "E" "FRACT" "NEGPAREN" "PERCENT")) formattype="QUANTITY";
+MPRINT(EMADVISECOLUMNS):   when(tempfmt in ("BINARY" "HEX" "IB" "OCTAL" "PD" "PIB" "PK" "RB" "SSN" "Z" "ZD")) formattype = "CODING";
+MPRINT(EMADVISECOLUMNS):   otherwise do;
+MPRINT(EMADVISECOLUMNS):   formattype = "USER";
+MPRINT(EMADVISECOLUMNS):   if substr(tempfmt, 1, 6)='NLDATE' then formattype = "DATE";
+MPRINT(EMADVISECOLUMNS):   else if substr(tempfmt, 1, 6)='NLDATM' then formattype = "DATETIME";
+MPRINT(EMADVISECOLUMNS):   else if substr(tempfmt, 1, 4)='NLTIM' then formattype = "TIME";
+MPRINT(EMADVISECOLUMNS):   else if flen >= 4 then do;
+MPRINT(EMADVISECOLUMNS):   str = substr(tempfmt,1,4);
+MPRINT(EMADVISECOLUMNS):   if str in ("MMYY" "YYMM" "YYQR") then formattype ="DATE";
+MPRINT(EMADVISECOLUMNS):   else if str = "S370" then formattype = "CODING";
+MPRINT(EMADVISECOLUMNS):   else if str = "BEST" then formattype = "NUM";
+MPRINT(EMADVISECOLUMNS):   drop str;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   else if flen >=3 and substr(tempfmt,1,3) = "YYQ" then formatType = "DATE";
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   drop flen tempfmt pos;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   else do;
+MPRINT(EMADVISECOLUMNS):   formatType = "CATEGORY";
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   if formatType = "NUM" then do;
+MPRINT(EMADVISECOLUMNS):   if index = "Y" then formatType = "DISCRETE";
+MPRINT(EMADVISECOLUMNS):   else formatType = "QUANTITY";
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   if level = ' ' then do;
+MPRINT(EMADVISECOLUMNS):   if formatType in ("CATEGORY", "CODING", "ID") or type = "C" then level = "NOMINAL";
+MPRINT(EMADVISECOLUMNS):   else level = "INTERVAL";
+MPRINT(EMADVISECOLUMNS):   levelAssigned = 1;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   else level = upcase(level);
+MPRINT(EMADVISECOLUMNS):   if role = ' ' then do;
+MPRINT(EMADVISECOLUMNS):   length name_prefix $8 _uname $64;
+MPRINT(EMADVISECOLUMNS):   drop name_prefix _uname _freqflag;
+MPRINT(EMADVISECOLUMNS):   retain _freqflag;
+MPRINT(EMADVISECOLUMNS):   if LENGTH> 80 then ROLE = 'TEXT';
+MPRINT(EMADVISECOLUMNS):   _uname = upcase(NAME);
+MPRINT(EMADVISECOLUMNS):   select(_uname);
+MPRINT(EMADVISECOLUMNS):   when('_WARN_') ROLE = 'ASSESS';
+MPRINT(EMADVISECOLUMNS):   when('EM_SEGMENT') do;
+MPRINT(EMADVISECOLUMNS):   ROLE = 'SEGMENT';
+MPRINT(EMADVISECOLUMNS):   LEVEL = 'NOMINAL';
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   when('_NODE_') do;
+MPRINT(EMADVISECOLUMNS):   ROLE = 'SEGMENT';
+MPRINT(EMADVISECOLUMNS):   LEVEL = 'NOMINAL';
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   when('EM_CLASSTARGET') ROLE = 'ASSESS';
+MPRINT(EMADVISECOLUMNS):   when('EM_VALUETARGET') ROLE = 'ASSESS';
+MPRINT(EMADVISECOLUMNS):   when('EM_PREDICTION') ROLE = 'PREDICT';
+MPRINT(EMADVISECOLUMNS):   when('EM_PROBABILITY') ROLE = 'PREDICT';
+MPRINT(EMADVISECOLUMNS):   when('EM_EVENTPROBABILITY') ROLE = 'PREDICT';
+MPRINT(EMADVISECOLUMNS):   when('EM_CLASSIFICATION') ROLE = 'CLASSIFICATION';
+MPRINT(EMADVISECOLUMNS):   when('EM_DECISION') ROLE = 'DECISION';
+MPRINT(EMADVISECOLUMNS):   when('EM_PROFIT') ROLE = 'ASSESS';
+MPRINT(EMADVISECOLUMNS):   when('EM_LOSS') ROLE = 'ASSESS';
+MPRINT(EMADVISECOLUMNS):   when('EM_ROI') ROLE = 'ASSESS';
+MPRINT(EMADVISECOLUMNS):   when('URI') ROLE = 'URL';
+MPRINT(EMADVISECOLUMNS):   when('FILTERED') ROLE = 'TEXTLOC';
+MPRINT(EMADVISECOLUMNS):   otherwise do;
+MPRINT(EMADVISECOLUMNS):   if upcase(NAME) =: 'ZIP' then do;
+MPRINT(EMADVISECOLUMNS):   ROLE = 'REJECTED';
+MPRINT(EMADVISECOLUMNS):   LEVEL = 'NOMINAL';
+MPRINT(EMADVISECOLUMNS):   COMMENT = 'Rejected by: Exceed the maximum class level of %s';
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   else if upcase(NAME) in('FREQ', 'FREQUENCY') then do;
+MPRINT(EMADVISECOLUMNS):   ROLE = 'FREQ';
+MPRINT(EMADVISECOLUMNS):   if TYPE = 'C' then ROLE = 'INPUT';
+MPRINT(EMADVISECOLUMNS):   else if _freqflag =1 then ROLE='REJECTED';
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   else do;
+MPRINT(EMADVISECOLUMNS):   name_prefix = scan(_uname, 1, '_');
+MPRINT(EMADVISECOLUMNS):   if scan(_uname, 2, '_') = '' then name_prefix='';
+MPRINT(EMADVISECOLUMNS):   if name_prefix in('F', 'I', 'U') then do;
+MPRINT(EMADVISECOLUMNS):   ROLE = 'CLASSIFICATION';
+MPRINT(EMADVISECOLUMNS):   LEVEL = 'NOMINAL';
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   else if name_prefix in('P', 'V') then ROLE = 'PREDICT';
+MPRINT(EMADVISECOLUMNS):   else if name_prefix in('R', 'RS', 'RT', 'RD', 'RDS', 'RDT', 'RA', 'RAS', 'RAT') then ROLE = 'RESIDUAL';
+MPRINT(EMADVISECOLUMNS):   else if name_prefix ='D' then do;
+MPRINT(EMADVISECOLUMNS):   ROLE = 'DECISION';
+MPRINT(EMADVISECOLUMNS):   LEVEL = 'NOMINAL';
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   else if name_prefix ='B' then do;
+MPRINT(EMADVISECOLUMNS):   ROLE = 'SEGMENT';
+MPRINT(EMADVISECOLUMNS):   LEVEL = 'NOMINAL';
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   else if name_prefix in('EP', 'BP', 'CP', 'EL', 'CL', 'BL', 'W', 'ROI', 'IC') then ROLE = 'ASSESS';
+MPRINT(EMADVISECOLUMNS):   else do;
+MPRINT(EMADVISECOLUMNS):   array _ROLE_ (19) $32 _TEMPORARY_ ('ASSESS','CLASSIFICATION','CENSOR', 'COST', 'CROSSID', 'DECISION', 'ID','INPUT', 'LABEL', 'MISSING','PREDICT','REFERRER','REJECTED', 'RESIDUAL','SEGMENT', 'SEQUENCE','TARGET', 'TEXT', 'TIMEID');
+MPRINT(EMADVISECOLUMNS):   drop _found_ i;
+MPRINT(EMADVISECOLUMNS):   _found_=0;
+MPRINT(EMADVISECOLUMNS):   do i=1 to 19 until(_found_=1);
+MPRINT(EMADVISECOLUMNS):   if index(_uname, trim(_ROLE_{i}))=1 then do;
+MPRINT(EMADVISECOLUMNS):   ROLE=_ROLE_{i};
+MPRINT(EMADVISECOLUMNS):   if ROLE = 'ID' then LEVEL = 'NOMINAL';
+MPRINT(EMADVISECOLUMNS):   else if ROLE = 'SEGMENT' then LEVEL = 'NOMINAL';
+MPRINT(EMADVISECOLUMNS):   else if ROLE = 'TIMEID' and TYPE='N' then LEVEL = 'INTERVAL';
+MPRINT(EMADVISECOLUMNS):   _found_=1;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   if length(_uname)>2 then do;
+MPRINT(EMADVISECOLUMNS):   if substr(reverse(trim(_uname)), 1, 3) = 'DI_' then do;
+MPRINT(EMADVISECOLUMNS):   ROLE = 'ID';
+MPRINT(EMADVISECOLUMNS):   LEVEL = 'NOMINAL';
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   if ROLE='FREQ' then _freqflag=1;
+MPRINT(EMADVISECOLUMNS):   else if ROLE = 'CLASSIFICATION' then LEVEL = 'NOMINAL';
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   if role = ' ' then do;
+MPRINT(EMADVISECOLUMNS):   if formattype in('DATE', 'DATETIME', 'TIME') then role = 'TIMEID';
+MPRINT(EMADVISECOLUMNS):   else role = 'INPUT';
+MPRINT(EMADVISECOLUMNS):   roleAssigned = 1;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   else role = upcase(role);
+MPRINT(EMADVISECOLUMNS):   if REPORT = '' then REPORT = 'N';
+MPRINT(EMADVISECOLUMNS):   run;
+MPRINT(EMADVISECOLUMNS):    data WORK.M30WA4H6;
+MPRINT(EMADVISECOLUMNS):   set WORK.M30WA4H6;
+MPRINT(EMADVISECOLUMNS):   label NAME = "Variable Name" TYPE = "Type" ROLE = "Role" LEVEL= "Measurement Level" ORDER= "Order" CREATOR= "Creator" FORMATTYPE= "Format Type" FAMILY= "Family" DISTRIBUTION= "Distribution" PRICE= "Price" LOWERLIMIT= "Lower
+limit" UPPERLIMIT= "Upper Limit" REPORT= "Report" COMMENT= "Comment" INDEX= "Index" INDEXTYPE= "IndexType" LABEL= "Label" LENGTH= "Length";
+MPRINT(EMADVISECOLUMNS):   drop levelAssigned roleAssigned;
+MPRINT(EMADVISECOLUMNS):   run;
+MPRINT(EMADVISECOLUMNS):
+MPRINT(EM_DIAGRAM):  ;
+MPRINT(EM_DIAGRAM):   proc sort data=WORK.COLUMNMETA;
+MPRINT(EM_DIAGRAM):   by NAME;
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * &nodeid: Merge incoming metadata;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   proc contents data=EMWS1.Impt_TRAIN noprint out=_temp2(keep=NAME);
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):   proc sort data=_temp2;
+MPRINT(EM_DIAGRAM):   by NAME;
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):   proc sort data=EMWS1.Impt_CMeta_TRAIN out=_temp;
+MPRINT(EM_DIAGRAM):   by NAME;
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):   data EMWS1.Trans_CMeta_TRAIN;
+MPRINT(EM_DIAGRAM):   merge WORK.COLUMNMETA(in=_a) _temp2(in=_b) _temp(drop=FORMAT INFORMAT LENGTH INDEX INDEXTYPE in=_c) end=_eof_;
+MPRINT(EM_DIAGRAM):   by NAME;
+MPRINT(EM_DIAGRAM):   if (^_a and _b) or (^_c and _a and _b) then delete;
+MPRINT(EM_DIAGRAM):   if ^_b then CREATOR = "Trans";
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * Trans: Apply Delta Code;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * Computed Code;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   if NAME="LG10_FILE_AVG_GIFT" then do;
+MPRINT(EM_DIAGRAM):   COMMENT = "log10(FILE_AVG_GIFT  + 1) ";
+MPRINT(EM_DIAGRAM):   ROLE ="INPUT";
+MPRINT(EM_DIAGRAM):   REPORT ="N";
+MPRINT(EM_DIAGRAM):   LEVEL ="INTERVAL";
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   if NAME="FILE_AVG_GIFT" then delete;
+MPRINT(EM_DIAGRAM):   if NAME="LG10_LAST_GIFT_AMT" then do;
+MPRINT(EM_DIAGRAM):   COMMENT = "log10(LAST_GIFT_AMT  + 1) ";
+MPRINT(EM_DIAGRAM):   ROLE ="INPUT";
+MPRINT(EM_DIAGRAM):   REPORT ="N";
+MPRINT(EM_DIAGRAM):   LEVEL ="INTERVAL";
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   if NAME="LAST_GIFT_AMT" then delete;
+MPRINT(EM_DIAGRAM):   if NAME="LG10_LIFETIME_AVG_GIFT_AMT" then do;
+MPRINT(EM_DIAGRAM):   COMMENT = "log10(LIFETIME_AVG_GIFT_AMT  + 1) ";
+MPRINT(EM_DIAGRAM):   ROLE ="INPUT";
+MPRINT(EM_DIAGRAM):   REPORT ="N";
+MPRINT(EM_DIAGRAM):   LEVEL ="INTERVAL";
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   if NAME="LIFETIME_AVG_GIFT_AMT" then delete;
+MPRINT(EM_DIAGRAM):   if NAME="OPT_LIFETIME_CARD_PROM" then do;
+MPRINT(EM_DIAGRAM):   COMMENT = "Optimal Binning(4) ";
+MPRINT(EM_DIAGRAM):   ROLE ="INPUT";
+MPRINT(EM_DIAGRAM):   REPORT ="N";
+MPRINT(EM_DIAGRAM):   LEVEL ="NOMINAL";
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   if NAME="LIFETIME_CARD_PROM" then delete;
+MPRINT(EM_DIAGRAM):   if NAME="LG10_LIFETIME_GIFT_AMOUNT" then do;
+MPRINT(EM_DIAGRAM):   COMMENT = "log10(LIFETIME_GIFT_AMOUNT  + 1) ";
+MPRINT(EM_DIAGRAM):   ROLE ="INPUT";
+MPRINT(EM_DIAGRAM):   REPORT ="N";
+MPRINT(EM_DIAGRAM):   LEVEL ="INTERVAL";
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   if NAME="LIFETIME_GIFT_AMOUNT" then delete;
+MPRINT(EM_DIAGRAM):   if NAME="OPT_LIFETIME_GIFT_COUNT" then do;
+MPRINT(EM_DIAGRAM):   COMMENT = "Optimal Binning(4) ";
+MPRINT(EM_DIAGRAM):   ROLE ="INPUT";
+MPRINT(EM_DIAGRAM):   REPORT ="N";
+MPRINT(EM_DIAGRAM):   LEVEL ="NOMINAL";
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   if NAME="LIFETIME_GIFT_COUNT" then delete;
+MPRINT(EM_DIAGRAM):   if NAME="OPT_MEDIAN_HOME_VALUE" then do;
+MPRINT(EM_DIAGRAM):   COMMENT = "Optimal Binning(4) ";
+MPRINT(EM_DIAGRAM):   ROLE ="INPUT";
+MPRINT(EM_DIAGRAM):   REPORT ="N";
+MPRINT(EM_DIAGRAM):   LEVEL ="NOMINAL";
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   if NAME="MEDIAN_HOME_VALUE" then delete;
+MPRINT(EM_DIAGRAM):   if NAME="OPT_MEDIAN_HOUSEHOLD_INCOME" then do;
+MPRINT(EM_DIAGRAM):   COMMENT = "Optimal Binning(4) ";
+MPRINT(EM_DIAGRAM):   ROLE ="INPUT";
+MPRINT(EM_DIAGRAM):   REPORT ="N";
+MPRINT(EM_DIAGRAM):   LEVEL ="NOMINAL";
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   if NAME="MEDIAN_HOUSEHOLD_INCOME" then delete;
+MPRINT(EM_DIAGRAM):   if NAME="OPT_PER_CAPITA_INCOME" then do;
+MPRINT(EM_DIAGRAM):   COMMENT = "Optimal Binning(4) ";
+MPRINT(EM_DIAGRAM):   ROLE ="INPUT";
+MPRINT(EM_DIAGRAM):   REPORT ="N";
+MPRINT(EM_DIAGRAM):   LEVEL ="NOMINAL";
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   if NAME="PER_CAPITA_INCOME" then delete;
+MPRINT(EM_DIAGRAM):   if NAME="OPT_RECENT_RESPONSE_PROP" then do;
+MPRINT(EM_DIAGRAM):   COMMENT = "Optimal Binning(4) ";
+MPRINT(EM_DIAGRAM):   ROLE ="INPUT";
+MPRINT(EM_DIAGRAM):   REPORT ="N";
+MPRINT(EM_DIAGRAM):   LEVEL ="NOMINAL";
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   if NAME="RECENT_RESPONSE_PROP" then delete;
+MPRINT(EM_DIAGRAM):   if NAME="OPT_RECENT_STAR_STATUS" then do;
+MPRINT(EM_DIAGRAM):   COMMENT = "Optimal Binning(4) ";
+MPRINT(EM_DIAGRAM):   ROLE ="INPUT";
+MPRINT(EM_DIAGRAM):   REPORT ="N";
+MPRINT(EM_DIAGRAM):   LEVEL ="NOMINAL";
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   if NAME="RECENT_STAR_STATUS" then delete;
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):   filename _delta;
+NOTE: View EMWS1.TRANS_TRAIN.VIEW used (Total process time):
+      real time           0.17 seconds
+      cpu time            0.17 seconds
+ 
+NOTE: View EMWS1.TRANS_VALIDATE.VIEW used (Total process time):
+      real time           0.15 seconds
+      cpu time            0.15 seconds
+ 
+MPRINT(EM_DIAGRAM):    proc printto;
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):    data _null_;
+MPRINT(EM_DIAGRAM):   call symput('NLDATE', strip(put(date(), NLDATE.)));
+MPRINT(EM_DIAGRAM):   call symput('NLTIME', strip(put(datetime(), NLTIME.)));
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):   data _null_;
+MPRINT(EM_DIAGRAM):   nldate= sasmsg("sashelp.dmine", "log_date_note", 'N', "October 11, 2015" );
+MPRINT(EM_DIAGRAM):   nltime= sasmsg("sashelp.dmine", "log_time_note", 'N', "14:43:03" );
+MPRINT(EM_DIAGRAM):   put "*------------------------------------------------------------*";
+MPRINT(EM_DIAGRAM):   put "* Report Log";
+MPRINT(EM_DIAGRAM):   put nldate;
+MPRINT(EM_DIAGRAM):   put nltime;
+MPRINT(EM_DIAGRAM):   put "*------------------------------------------------------------*";
+MPRINT(EM_DIAGRAM):   run;
+*------------------------------------------------------------*
+* Report Log
+Date:                October 11, 2015
+Time:                14:43:03
+*------------------------------------------------------------*
+MPRINT(EM_DIAGRAM):    filename O1CW2_85 "C:\Users\sakerb01\Desktop\SAS EM 12.3 Tutorials _ Projects\Getting Started Charitable Giving Example\Workspaces\EMWS1\Trans\EMREPORT.out" encoding="UTF-8" NOBOM;
+MPRINT(EM_DIAGRAM):   proc printto print=O1CW2_85 new;
+MPRINT(EM_DIAGRAM):   run;
+22605      *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):    *------------------------------------------------------------*;
+22606      * &msgString;
+MPRINT(EM_DIAGRAM):   * &msgString;
+22607      *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22608      filename _flowref "C:\Users\sakerb01\Desktop\SAS EM 12.3 Tutorials _ Projects\Getting Started Charitable Giving Example\Workspaces\EMWS1\Trans\EMFLOWSCORE.sas";
+MPRINT(EM_DIAGRAM):   filename _flowref "C:\Users\sakerb01\Desktop\SAS EM 12.3 Tutorials _ Projects\Getting Started Charitable Giving Example\Workspaces\EMWS1\Trans\EMFLOWSCORE.sas";
+22609      proc FCMP NOEXECUTE IMPUTEDDEPS OUTDEPS=WORK.TRANS_SCOREINPUTS;
+MPRINT(EM_DIAGRAM):   proc FCMP NOEXECUTE IMPUTEDDEPS OUTDEPS=WORK.TRANS_SCOREINPUTS;
+22610      %INCLUDE _flowref;
+NOTE: %INCLUDE (level 1) file _FLOWREF is file C:\Users\sakerb01\Desktop\SAS EM 12.3 Tutorials _ Projects\Getting Started Charitable Giving Example\Workspaces\EMWS1\Trans\EMFLOWSCORE.sas.
+22611     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22612     +* Computed Code;
+MPRINT(EM_DIAGRAM):   * Computed Code;
+22613     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22614     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22615     +* TRANSFORM: FILE_AVG_GIFT , log10(FILE_AVG_GIFT + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: FILE_AVG_GIFT , log10(FILE_AVG_GIFT + 1);
+22616     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22617     +label LG10_FILE_AVG_GIFT = 'Transformed FILE_AVG_GIFT';
+MPRINT(EM_DIAGRAM):   label LG10_FILE_AVG_GIFT = 'Transformed FILE_AVG_GIFT';
+22618     +if FILE_AVG_GIFT eq . then LG10_FILE_AVG_GIFT = .;
+MPRINT(EM_DIAGRAM):   if FILE_AVG_GIFT eq . then LG10_FILE_AVG_GIFT = .;
+22619     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+22620     +if FILE_AVG_GIFT + 1 > 0 then LG10_FILE_AVG_GIFT = log10(FILE_AVG_GIFT + 1);
+MPRINT(EM_DIAGRAM):   if FILE_AVG_GIFT + 1 > 0 then LG10_FILE_AVG_GIFT = log10(FILE_AVG_GIFT + 1);
+22621     +else LG10_FILE_AVG_GIFT = .;
+MPRINT(EM_DIAGRAM):   else LG10_FILE_AVG_GIFT = .;
+22622     +end;
+MPRINT(EM_DIAGRAM):   end;
+22623     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22624     +* TRANSFORM: LAST_GIFT_AMT , log10(LAST_GIFT_AMT + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: LAST_GIFT_AMT , log10(LAST_GIFT_AMT + 1);
+22625     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22626     +label LG10_LAST_GIFT_AMT = 'Transformed LAST_GIFT_AMT';
+MPRINT(EM_DIAGRAM):   label LG10_LAST_GIFT_AMT = 'Transformed LAST_GIFT_AMT';
+22627     +if LAST_GIFT_AMT eq . then LG10_LAST_GIFT_AMT = .;
+MPRINT(EM_DIAGRAM):   if LAST_GIFT_AMT eq . then LG10_LAST_GIFT_AMT = .;
+22628     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+22629     +if LAST_GIFT_AMT + 1 > 0 then LG10_LAST_GIFT_AMT = log10(LAST_GIFT_AMT + 1);
+MPRINT(EM_DIAGRAM):   if LAST_GIFT_AMT + 1 > 0 then LG10_LAST_GIFT_AMT = log10(LAST_GIFT_AMT + 1);
+22630     +else LG10_LAST_GIFT_AMT = .;
+MPRINT(EM_DIAGRAM):   else LG10_LAST_GIFT_AMT = .;
+22631     +end;
+MPRINT(EM_DIAGRAM):   end;
+22632     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22633     +* TRANSFORM: LIFETIME_AVG_GIFT_AMT , log10(LIFETIME_AVG_GIFT_AMT + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: LIFETIME_AVG_GIFT_AMT , log10(LIFETIME_AVG_GIFT_AMT + 1);
+22634     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22635     +label LG10_LIFETIME_AVG_GIFT_AMT = 'Transformed LIFETIME_AVG_GIFT_AMT';
+MPRINT(EM_DIAGRAM):   label LG10_LIFETIME_AVG_GIFT_AMT = 'Transformed LIFETIME_AVG_GIFT_AMT';
+22636     +if LIFETIME_AVG_GIFT_AMT eq . then LG10_LIFETIME_AVG_GIFT_AMT = .;
+MPRINT(EM_DIAGRAM):   if LIFETIME_AVG_GIFT_AMT eq . then LG10_LIFETIME_AVG_GIFT_AMT = .;
+22637     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+22638     +if LIFETIME_AVG_GIFT_AMT + 1 > 0 then LG10_LIFETIME_AVG_GIFT_AMT = log10(LIFETIME_AVG_GIFT_AMT + 1);
+MPRINT(EM_DIAGRAM):   if LIFETIME_AVG_GIFT_AMT + 1 > 0 then LG10_LIFETIME_AVG_GIFT_AMT = log10(LIFETIME_AVG_GIFT_AMT + 1);
+22639     +else LG10_LIFETIME_AVG_GIFT_AMT = .;
+MPRINT(EM_DIAGRAM):   else LG10_LIFETIME_AVG_GIFT_AMT = .;
+22640     +end;
+MPRINT(EM_DIAGRAM):   end;
+22641     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22642     +* TRANSFORM: LIFETIME_GIFT_AMOUNT , log10(LIFETIME_GIFT_AMOUNT + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: LIFETIME_GIFT_AMOUNT , log10(LIFETIME_GIFT_AMOUNT + 1);
+22643     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22644     +label LG10_LIFETIME_GIFT_AMOUNT = 'Transformed LIFETIME_GIFT_AMOUNT';
+MPRINT(EM_DIAGRAM):   label LG10_LIFETIME_GIFT_AMOUNT = 'Transformed LIFETIME_GIFT_AMOUNT';
+22645     +if LIFETIME_GIFT_AMOUNT eq . then LG10_LIFETIME_GIFT_AMOUNT = .;
+MPRINT(EM_DIAGRAM):   if LIFETIME_GIFT_AMOUNT eq . then LG10_LIFETIME_GIFT_AMOUNT = .;
+22646     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+22647     +if LIFETIME_GIFT_AMOUNT + 1 > 0 then LG10_LIFETIME_GIFT_AMOUNT = log10(LIFETIME_GIFT_AMOUNT + 1);
+MPRINT(EM_DIAGRAM):   if LIFETIME_GIFT_AMOUNT + 1 > 0 then LG10_LIFETIME_GIFT_AMOUNT = log10(LIFETIME_GIFT_AMOUNT + 1);
+22648     +else LG10_LIFETIME_GIFT_AMOUNT = .;
+MPRINT(EM_DIAGRAM):   else LG10_LIFETIME_GIFT_AMOUNT = .;
+22649     +end;
+MPRINT(EM_DIAGRAM):   end;
+22650     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22651     +* TRANSFORM: LIFETIME_CARD_PROM , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: LIFETIME_CARD_PROM , Optimal Binning(4);
+22652     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22653     +label OPT_LIFETIME_CARD_PROM = 'Transformed LIFETIME_CARD_PROM';
+MPRINT(EM_DIAGRAM):   label OPT_LIFETIME_CARD_PROM = 'Transformed LIFETIME_CARD_PROM';
+22654     +length OPT_LIFETIME_CARD_PROM $36;
+MPRINT(EM_DIAGRAM):   length OPT_LIFETIME_CARD_PROM $36;
+22655     +if (LIFETIME_CARD_PROM eq .) then OPT_LIFETIME_CARD_PROM="03:12.5-39.5, MISSING";
+MPRINT(EM_DIAGRAM):   if (LIFETIME_CARD_PROM eq .) then OPT_LIFETIME_CARD_PROM="03:12.5-39.5, MISSING";
+22656     +else
+22657     +if (LIFETIME_CARD_PROM < 7.5) then
+22658     +OPT_LIFETIME_CARD_PROM = "01:low-7.5";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_CARD_PROM < 7.5) then OPT_LIFETIME_CARD_PROM = "01:low-7.5";
+22659     +else
+22660     +if (LIFETIME_CARD_PROM >= 7.5 and LIFETIME_CARD_PROM < 12.5) then
+22661     +OPT_LIFETIME_CARD_PROM = "02:7.5-12.5";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_CARD_PROM >= 7.5 and LIFETIME_CARD_PROM < 12.5) then OPT_LIFETIME_CARD_PROM = "02:7.5-12.5";
+22662     +else
+22663     +if (LIFETIME_CARD_PROM >= 12.5 and LIFETIME_CARD_PROM < 39.5) then
+22664     +OPT_LIFETIME_CARD_PROM = "03:12.5-39.5, MISSING";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_CARD_PROM >= 12.5 and LIFETIME_CARD_PROM < 39.5) then OPT_LIFETIME_CARD_PROM = "03:12.5-39.5, MISSING";
+22665     +else
+22666     +if (LIFETIME_CARD_PROM >= 39.5) then
+22667     +OPT_LIFETIME_CARD_PROM = "04:39.5-high";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_CARD_PROM >= 39.5) then OPT_LIFETIME_CARD_PROM = "04:39.5-high";
+22668     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22669     +* TRANSFORM: LIFETIME_GIFT_COUNT , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: LIFETIME_GIFT_COUNT , Optimal Binning(4);
+22670     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22671     +label OPT_LIFETIME_GIFT_COUNT = 'Transformed LIFETIME_GIFT_COUNT';
+MPRINT(EM_DIAGRAM):   label OPT_LIFETIME_GIFT_COUNT = 'Transformed LIFETIME_GIFT_COUNT';
+22672     +length OPT_LIFETIME_GIFT_COUNT $36;
+MPRINT(EM_DIAGRAM):   length OPT_LIFETIME_GIFT_COUNT $36;
+22673     +if (LIFETIME_GIFT_COUNT eq .) then OPT_LIFETIME_GIFT_COUNT="02:4.5-13.5, MISSING";
+MPRINT(EM_DIAGRAM):   if (LIFETIME_GIFT_COUNT eq .) then OPT_LIFETIME_GIFT_COUNT="02:4.5-13.5, MISSING";
+22674     +else
+22675     +if (LIFETIME_GIFT_COUNT < 4.5) then
+22676     +OPT_LIFETIME_GIFT_COUNT = "01:low-4.5";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_GIFT_COUNT < 4.5) then OPT_LIFETIME_GIFT_COUNT = "01:low-4.5";
+22677     +else
+22678     +if (LIFETIME_GIFT_COUNT >= 4.5 and LIFETIME_GIFT_COUNT < 13.5) then
+22679     +OPT_LIFETIME_GIFT_COUNT = "02:4.5-13.5, MISSING";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_GIFT_COUNT >= 4.5 and LIFETIME_GIFT_COUNT < 13.5) then OPT_LIFETIME_GIFT_COUNT = "02:4.5-13.5, MISSING";
+22680     +else
+22681     +if (LIFETIME_GIFT_COUNT >= 13.5) then
+22682     +OPT_LIFETIME_GIFT_COUNT = "03:13.5-high";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_GIFT_COUNT >= 13.5) then OPT_LIFETIME_GIFT_COUNT = "03:13.5-high";
+22683     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22684     +* TRANSFORM: MEDIAN_HOME_VALUE , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: MEDIAN_HOME_VALUE , Optimal Binning(4);
+22685     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22686     +label OPT_MEDIAN_HOME_VALUE = 'Transformed MEDIAN_HOME_VALUE';
+MPRINT(EM_DIAGRAM):   label OPT_MEDIAN_HOME_VALUE = 'Transformed MEDIAN_HOME_VALUE';
+22687     +length OPT_MEDIAN_HOME_VALUE $36;
+MPRINT(EM_DIAGRAM):   length OPT_MEDIAN_HOME_VALUE $36;
+22688     +if (MEDIAN_HOME_VALUE eq .) then OPT_MEDIAN_HOME_VALUE="02:676.5-high, MISSING";
+MPRINT(EM_DIAGRAM):   if (MEDIAN_HOME_VALUE eq .) then OPT_MEDIAN_HOME_VALUE="02:676.5-high, MISSING";
+22689     +else
+22690     +if (MEDIAN_HOME_VALUE < 676.5) then
+22691     +OPT_MEDIAN_HOME_VALUE = "01:low-676.5";
+MPRINT(EM_DIAGRAM):   else if (MEDIAN_HOME_VALUE < 676.5) then OPT_MEDIAN_HOME_VALUE = "01:low-676.5";
+22692     +else
+22693     +if (MEDIAN_HOME_VALUE >= 676.5) then
+22694     +OPT_MEDIAN_HOME_VALUE = "02:676.5-high, MISSING";
+MPRINT(EM_DIAGRAM):   else if (MEDIAN_HOME_VALUE >= 676.5) then OPT_MEDIAN_HOME_VALUE = "02:676.5-high, MISSING";
+22695     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22696     +* TRANSFORM: MEDIAN_HOUSEHOLD_INCOME , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: MEDIAN_HOUSEHOLD_INCOME , Optimal Binning(4);
+22697     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22698     +label OPT_MEDIAN_HOUSEHOLD_INCOME = 'Transformed MEDIAN_HOUSEHOLD_INCOME';
+MPRINT(EM_DIAGRAM):   label OPT_MEDIAN_HOUSEHOLD_INCOME = 'Transformed MEDIAN_HOUSEHOLD_INCOME';
+22699     +length OPT_MEDIAN_HOUSEHOLD_INCOME $36;
+MPRINT(EM_DIAGRAM):   length OPT_MEDIAN_HOUSEHOLD_INCOME $36;
+22700     +if (MEDIAN_HOUSEHOLD_INCOME eq .) then OPT_MEDIAN_HOUSEHOLD_INCOME="01:low-624.5, MISSING";
+MPRINT(EM_DIAGRAM):   if (MEDIAN_HOUSEHOLD_INCOME eq .) then OPT_MEDIAN_HOUSEHOLD_INCOME="01:low-624.5, MISSING";
+22701     +else
+22702     +if (MEDIAN_HOUSEHOLD_INCOME < 624.5) then
+22703     +OPT_MEDIAN_HOUSEHOLD_INCOME = "01:low-624.5, MISSING";
+MPRINT(EM_DIAGRAM):   else if (MEDIAN_HOUSEHOLD_INCOME < 624.5) then OPT_MEDIAN_HOUSEHOLD_INCOME = "01:low-624.5, MISSING";
+22704     +else
+22705     +if (MEDIAN_HOUSEHOLD_INCOME >= 624.5) then
+22706     +OPT_MEDIAN_HOUSEHOLD_INCOME = "02:624.5-high";
+MPRINT(EM_DIAGRAM):   else if (MEDIAN_HOUSEHOLD_INCOME >= 624.5) then OPT_MEDIAN_HOUSEHOLD_INCOME = "02:624.5-high";
+22707     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22708     +* TRANSFORM: PER_CAPITA_INCOME , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: PER_CAPITA_INCOME , Optimal Binning(4);
+22709     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22710     +label OPT_PER_CAPITA_INCOME = 'Transformed PER_CAPITA_INCOME';
+MPRINT(EM_DIAGRAM):   label OPT_PER_CAPITA_INCOME = 'Transformed PER_CAPITA_INCOME';
+22711     +length OPT_PER_CAPITA_INCOME $36;
+MPRINT(EM_DIAGRAM):   length OPT_PER_CAPITA_INCOME $36;
+22712     +if (PER_CAPITA_INCOME eq .) then OPT_PER_CAPITA_INCOME="01:low-14976, MISSING";
+MPRINT(EM_DIAGRAM):   if (PER_CAPITA_INCOME eq .) then OPT_PER_CAPITA_INCOME="01:low-14976, MISSING";
+22713     +else
+22714     +if (PER_CAPITA_INCOME < 14976) then
+22715     +OPT_PER_CAPITA_INCOME = "01:low-14976, MISSING";
+MPRINT(EM_DIAGRAM):   else if (PER_CAPITA_INCOME < 14976) then OPT_PER_CAPITA_INCOME = "01:low-14976, MISSING";
+22716     +else
+22717     +if (PER_CAPITA_INCOME >= 14976) then
+22718     +OPT_PER_CAPITA_INCOME = "02:14976-high";
+MPRINT(EM_DIAGRAM):   else if (PER_CAPITA_INCOME >= 14976) then OPT_PER_CAPITA_INCOME = "02:14976-high";
+22719     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22720     +* TRANSFORM: RECENT_RESPONSE_PROP , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: RECENT_RESPONSE_PROP , Optimal Binning(4);
+22721     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22722     +label OPT_RECENT_RESPONSE_PROP = 'Transformed RECENT_RESPONSE_PROP';
+MPRINT(EM_DIAGRAM):   label OPT_RECENT_RESPONSE_PROP = 'Transformed RECENT_RESPONSE_PROP';
+22723     +length OPT_RECENT_RESPONSE_PROP $36;
+MPRINT(EM_DIAGRAM):   length OPT_RECENT_RESPONSE_PROP $36;
+22724     +if (RECENT_RESPONSE_PROP eq .) then OPT_RECENT_RESPONSE_PROP="01:low-0.2125, MISSING";
+MPRINT(EM_DIAGRAM):   if (RECENT_RESPONSE_PROP eq .) then OPT_RECENT_RESPONSE_PROP="01:low-0.2125, MISSING";
+22725     +else
+22726     +if (RECENT_RESPONSE_PROP < 0.2125) then
+22727     +OPT_RECENT_RESPONSE_PROP = "01:low-0.2125, MISSING";
+MPRINT(EM_DIAGRAM):   else if (RECENT_RESPONSE_PROP < 0.2125) then OPT_RECENT_RESPONSE_PROP = "01:low-0.2125, MISSING";
+22728     +else
+22729     +if (RECENT_RESPONSE_PROP >= 0.2125) then
+22730     +OPT_RECENT_RESPONSE_PROP = "02:0.2125-high";
+MPRINT(EM_DIAGRAM):   else if (RECENT_RESPONSE_PROP >= 0.2125) then OPT_RECENT_RESPONSE_PROP = "02:0.2125-high";
+22731     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22732     +* TRANSFORM: RECENT_STAR_STATUS , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: RECENT_STAR_STATUS , Optimal Binning(4);
+22733     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22734     +label OPT_RECENT_STAR_STATUS = 'Transformed RECENT_STAR_STATUS';
+MPRINT(EM_DIAGRAM):   label OPT_RECENT_STAR_STATUS = 'Transformed RECENT_STAR_STATUS';
+22735     +length OPT_RECENT_STAR_STATUS $36;
+MPRINT(EM_DIAGRAM):   length OPT_RECENT_STAR_STATUS $36;
+22736     +if (RECENT_STAR_STATUS eq .) then OPT_RECENT_STAR_STATUS="01:low-0.5, MISSING";
+MPRINT(EM_DIAGRAM):   if (RECENT_STAR_STATUS eq .) then OPT_RECENT_STAR_STATUS="01:low-0.5, MISSING";
+22737     +else
+22738     +if (RECENT_STAR_STATUS < 0.5) then
+22739     +OPT_RECENT_STAR_STATUS = "01:low-0.5, MISSING";
+MPRINT(EM_DIAGRAM):   else if (RECENT_STAR_STATUS < 0.5) then OPT_RECENT_STAR_STATUS = "01:low-0.5, MISSING";
+22740     +else
+22741     +if (RECENT_STAR_STATUS >= 0.5 and RECENT_STAR_STATUS < 1.5) then
+22742     +OPT_RECENT_STAR_STATUS = "02:0.5-1.5";
+MPRINT(EM_DIAGRAM):   else if (RECENT_STAR_STATUS >= 0.5 and RECENT_STAR_STATUS < 1.5) then OPT_RECENT_STAR_STATUS = "02:0.5-1.5";
+22743     +else
+22744     +if (RECENT_STAR_STATUS >= 1.5) then
+22745     +OPT_RECENT_STAR_STATUS = "03:1.5-high";
+MPRINT(EM_DIAGRAM):   else if (RECENT_STAR_STATUS >= 1.5) then OPT_RECENT_STAR_STATUS = "03:1.5-high";
+NOTE: %INCLUDE (level 1) ending.
+MPRINT(EM_DIAGRAM):   run;
+22746      run;
+ 
+NOTE: Dependency structure written to data set WORK.TRANS_SCOREINPUTS.
+NOTE: PROCEDURE FCMP used (Total process time):
+      real time           0.28 seconds
+      cpu time            0.09 seconds
+ 
+ 
+MPRINT(EM_DIAGRAM):   quit;
+22747      quit;
+22748      data WORK.TRANS_SCOREINPUTS;
+MPRINT(EM_DIAGRAM):   data WORK.TRANS_SCOREINPUTS;
+22749      set WORK.TRANS_SCOREINPUTS(keep=RHS rename=(RHS=NAME));
+MPRINT(EM_DIAGRAM):   set WORK.TRANS_SCOREINPUTS(keep=RHS rename=(RHS=NAME));
+22750      length UNAME $32;
+MPRINT(EM_DIAGRAM):   length UNAME $32;
+22751      UNAME = upcase(NAME);
+MPRINT(EM_DIAGRAM):   UNAME = upcase(NAME);
+22752      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: There were 11 observations read from the data set WORK.TRANS_SCOREINPUTS.
+NOTE: The data set WORK.TRANS_SCOREINPUTS has 11 observations and 2 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+ 
+ 
+22753      proc sort data=WORK.TRANS_SCOREINPUTS NODUPKEY;
+MPRINT(EM_DIAGRAM):   proc sort data=WORK.TRANS_SCOREINPUTS NODUPKEY;
+22754      by UNAME;
+MPRINT(EM_DIAGRAM):   by UNAME;
+22755      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: There were 11 observations read from the data set WORK.TRANS_SCOREINPUTS.
+NOTE: 0 observations with duplicate key values were deleted.
+NOTE: The data set WORK.TRANS_SCOREINPUTS has 11 observations and 2 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.79 seconds
+      cpu time            0.01 seconds
+ 
+ 
+22756      filename _flowref;
+MPRINT(EM_DIAGRAM):   filename _flowref;
+NOTE: Fileref _FLOWREF has been deassigned.
+22757      %let SYSCC = 0;
+22758      *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):    *------------------------------------------------------------*;
+22759      * transformcombinevariables;
+MPRINT(EM_DIAGRAM):   * transformcombinevariables;
+22760      *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22761      data WORK.TRANS_OUTPUTVARS;
+MPRINT(EM_DIAGRAM):   data WORK.TRANS_OUTPUTVARS;
+22762      length Uname inputName $32 inputLevel $10 inputType $1 _MetaFlag 8;
+MPRINT(EM_DIAGRAM):   length Uname inputName $32 inputLevel $10 inputType $1 _MetaFlag 8;
+22763      set
+22764      EMWS1.Trans_RESULT
+22765      ;
+MPRINT(EM_DIAGRAM):   set EMWS1.Trans_RESULT ;
+22766      _MetaFlag=0;
+MPRINT(EM_DIAGRAM):   _MetaFlag=0;
+22767      uname = upcase(name);
+MPRINT(EM_DIAGRAM):   uname = upcase(name);
+22768      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: There were 11 observations read from the data set EMWS1.TRANS_RESULT.
+NOTE: The data set WORK.TRANS_OUTPUTVARS has 11 observations and 13 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+ 
+ 
+22769      data _temp;
+MPRINT(EM_DIAGRAM):    data _temp;
+22770      length UNAME $32;
+MPRINT(EM_DIAGRAM):   length UNAME $32;
+22771      set EMWS1.Trans_CMeta_TRAIN(keep=NAME LEVEL ROLE TYPE CREATOR LABEL);
+MPRINT(EM_DIAGRAM):   set EMWS1.Trans_CMeta_TRAIN(keep=NAME LEVEL ROLE TYPE CREATOR LABEL);
+22772      UNAME = upcase(name);
+MPRINT(EM_DIAGRAM):   UNAME = upcase(name);
+22773      where upcase(CREATOR) = upcase("Trans");
+MPRINT(EM_DIAGRAM):   where upcase(CREATOR) = upcase("Trans");
+22774      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: There were 11 observations read from the data set EMWS1.TRANS_CMETA_TRAIN.
+      WHERE UPCASE(CREATOR)='TRANS';
+NOTE: The data set WORK._TEMP has 11 observations and 7 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+ 
+ 
+22775      proc sort data=_temp(drop=CREATOR);
+MPRINT(EM_DIAGRAM):   proc sort data=_temp(drop=CREATOR);
+22776      by UNAME;
+MPRINT(EM_DIAGRAM):   by UNAME;
+22777      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: There were 11 observations read from the data set WORK._TEMP.
+NOTE: The data set WORK._TEMP has 11 observations and 6 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+ 
+ 
+22778      proc sort data=WORK.TRANS_OUTPUTVARS;
+MPRINT(EM_DIAGRAM):    proc sort data=WORK.TRANS_OUTPUTVARS;
+22779      by UNAME;
+MPRINT(EM_DIAGRAM):   by UNAME;
+22780      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: There were 11 observations read from the data set WORK.TRANS_OUTPUTVARS.
+NOTE: The data set WORK.TRANS_OUTPUTVARS has 11 observations and 13 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+ 
+ 
+22781      data WORK.TRANS_OUTPUTVARS;
+MPRINT(EM_DIAGRAM):   data WORK.TRANS_OUTPUTVARS;
+22782      merge WORK.TRANS_OUTPUTVARS _temp;
+MPRINT(EM_DIAGRAM):   merge WORK.TRANS_OUTPUTVARS _temp;
+22783      by UNAME;
+MPRINT(EM_DIAGRAM):   by UNAME;
+22784      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: There were 11 observations read from the data set WORK.TRANS_OUTPUTVARS.
+NOTE: There were 11 observations read from the data set WORK._TEMP.
+NOTE: The data set WORK.TRANS_OUTPUTVARS has 11 observations and 13 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+ 
+ 
+22785      *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):    *------------------------------------------------------------*;
+22786      * Trans: Get Metadata for the Score Inputs Variables;
+MPRINT(EM_DIAGRAM):   * Trans: Get Metadata for the Score Inputs Variables;
+22787      *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22788      data _temp;
+MPRINT(EM_DIAGRAM):   data _temp;
+22789      length UNAME $32;
+MPRINT(EM_DIAGRAM):   length UNAME $32;
+22790      set EMWS1.Trans_VariableSet(keep=NAME LEVEL TYPE LABEL);
+MPRINT(EM_DIAGRAM):   set EMWS1.Trans_VariableSet(keep=NAME LEVEL TYPE LABEL);
+22791      UNAME = upcase(name);
+MPRINT(EM_DIAGRAM):   UNAME = upcase(name);
+22792      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: There were 51 observations read from the data set EMWS1.TRANS_VARIABLESET.
+NOTE: The data set WORK._TEMP has 51 observations and 5 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+ 
+ 
+22793      proc sort data=_temp;
+MPRINT(EM_DIAGRAM):   proc sort data=_temp;
+22794      by UNAME;
+MPRINT(EM_DIAGRAM):   by UNAME;
+22795      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: There were 51 observations read from the data set WORK._TEMP.
+NOTE: The data set WORK._TEMP has 51 observations and 5 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+ 
+ 
+22796      data WORK.TRANS_SCOREINPUTS;
+MPRINT(EM_DIAGRAM):   data WORK.TRANS_SCOREINPUTS;
+22797      merge WORK.TRANS_SCOREINPUTS(in=_a) _temp(in=_b);
+MPRINT(EM_DIAGRAM):   merge WORK.TRANS_SCOREINPUTS(in=_a) _temp(in=_b);
+22798      by UNAME;
+MPRINT(EM_DIAGRAM):   by UNAME;
+22799      if _a and _b then output;
+MPRINT(EM_DIAGRAM):   if _a and _b then output;
+22800      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: There were 11 observations read from the data set WORK.TRANS_SCOREINPUTS.
+NOTE: There were 51 observations read from the data set WORK._TEMP.
+NOTE: The data set WORK.TRANS_SCOREINPUTS has 11 observations and 5 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+ 
+ 
+22801      *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):    *------------------------------------------------------------*;
+22802      * Trans: Computing Summary Statistics;
+MPRINT(EM_DIAGRAM):   * Trans: Computing Summary Statistics;
+22803      *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22804      proc dmdb data=EMWS1.Trans_TRAIN classout=WORK.TRANS_CLASSSTATS varout=WORK.TRANS_VARSTATS;
+MPRINT(EM_DIAGRAM):   proc dmdb data=EMWS1.Trans_TRAIN classout=WORK.TRANS_CLASSSTATS varout=WORK.TRANS_VARSTATS;
+22805      class
+22806      OPT_LIFETIME_CARD_PROM
+22807      OPT_LIFETIME_GIFT_COUNT
+22808      OPT_MEDIAN_HOME_VALUE
+22809      OPT_MEDIAN_HOUSEHOLD_INCOME
+22810      OPT_PER_CAPITA_INCOME
+22811      OPT_RECENT_RESPONSE_PROP
+22812      OPT_RECENT_STAR_STATUS
+22813      ;
+MPRINT(EM_DIAGRAM):   class OPT_LIFETIME_CARD_PROM OPT_LIFETIME_GIFT_COUNT OPT_MEDIAN_HOME_VALUE OPT_MEDIAN_HOUSEHOLD_INCOME OPT_PER_CAPITA_INCOME OPT_RECENT_RESPONSE_PROP OPT_RECENT_STAR_STATUS ;
+22814      var
+22815      FILE_AVG_GIFT
+22816      LAST_GIFT_AMT
+22817      LIFETIME_AVG_GIFT_AMT
+22818      LIFETIME_CARD_PROM
+22819      LIFETIME_GIFT_AMOUNT
+22820      LIFETIME_GIFT_COUNT
+22821      MEDIAN_HOME_VALUE
+22822      MEDIAN_HOUSEHOLD_INCOME
+22823      PER_CAPITA_INCOME
+22824      RECENT_RESPONSE_PROP
+22825      RECENT_STAR_STATUS
+22826      LG10_FILE_AVG_GIFT
+22827      LG10_LAST_GIFT_AMT
+22828      LG10_LIFETIME_AVG_GIFT_AMT
+22829      LG10_LIFETIME_GIFT_AMOUNT
+22830      ;
+MPRINT(EM_DIAGRAM):   var FILE_AVG_GIFT LAST_GIFT_AMT LIFETIME_AVG_GIFT_AMT LIFETIME_CARD_PROM LIFETIME_GIFT_AMOUNT LIFETIME_GIFT_COUNT MEDIAN_HOME_VALUE MEDIAN_HOUSEHOLD_INCOME PER_CAPITA_INCOME RECENT_RESPONSE_PROP RECENT_STAR_STATUS LG10_FILE_AVG_GIFT
+LG10_LAST_GIFT_AMT LG10_LIFETIME_AVG_GIFT_AMT LG10_LIFETIME_GIFT_AMOUNT ;
+22831      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: Variable _WARN_ is uninitialized.
+NOTE: Records processed = 10654   Memory used = 511K.
+NOTE: There were 10654 observations read from the data set EMWS1.PART_TRAIN.
+NOTE: There were 10654 observations read from the data set EMWS1.REPL_TRAIN.
+NOTE: View EMWS1.TRANS_TRAIN.VIEW used (Total process time):
+      real time           0.29 seconds
+      cpu time            0.29 seconds
+ 
+NOTE: There were 10654 observations read from the data set EMWS1.IMPT_TRAIN.
+NOTE: There were 10654 observations read from the data set EMWS1.TRANS_TRAIN.
+NOTE: The data set WORK.TRANS_CLASSSTATS has 18 observations and 9 variables.
+NOTE: The data set WORK.TRANS_VARSTATS has 15 observations and 9 variables.
+NOTE: PROCEDURE DMDB used (Total process time):
+      real time           0.32 seconds
+      cpu time            0.32 seconds
+ 
+ 
+22832      *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):    *------------------------------------------------------------*;
+22833      * Trans: Combine Information and Statistics for Class Variables;
+MPRINT(EM_DIAGRAM):   * Trans: Combine Information and Statistics for Class Variables;
+22834      *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22835      proc sort data=WORK.TRANS_OUTPUTVARS out=_temp;
+MPRINT(EM_DIAGRAM):   proc sort data=WORK.TRANS_OUTPUTVARS out=_temp;
+22836      by NAME;
+MPRINT(EM_DIAGRAM):   by NAME;
+22837      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: There were 11 observations read from the data set WORK.TRANS_OUTPUTVARS.
+NOTE: The data set WORK._TEMP has 11 observations and 13 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+ 
+ 
+22838      proc sort data=WORK.TRANS_CLASSSTATS;
+MPRINT(EM_DIAGRAM):   proc sort data=WORK.TRANS_CLASSSTATS;
+22839      by NAME;
+MPRINT(EM_DIAGRAM):   by NAME;
+22840      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: There were 18 observations read from the data set WORK.TRANS_CLASSSTATS.
+NOTE: The data set WORK.TRANS_CLASSSTATS has 18 observations and 9 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+ 
+ 
+22841      data WORK.TRANS_CLASSSTATS(keep=name nlevel nmiss);
+MPRINT(EM_DIAGRAM):   data WORK.TRANS_CLASSSTATS(keep=name nlevel nmiss);
+22842      retain nlevel nmiss;
+MPRINT(EM_DIAGRAM):   retain nlevel nmiss;
+22843      set WORK.TRANS_CLASSSTATS;
+MPRINT(EM_DIAGRAM):   set WORK.TRANS_CLASSSTATS;
+22844      by Name;
+MPRINT(EM_DIAGRAM):   by Name;
+22845      if first.Name then do;
+MPRINT(EM_DIAGRAM):   if first.Name then do;
+22846      nlevel= 0;
+MPRINT(EM_DIAGRAM):   nlevel= 0;
+22847      nmiss= 0;
+MPRINT(EM_DIAGRAM):   nmiss= 0;
+22848      end;
+MPRINT(EM_DIAGRAM):   end;
+22849      if (type='C' and CRAW='') or (type='N' and NRAW=.) then nmiss = FREQUENCY;
+MPRINT(EM_DIAGRAM):   if (type='C' and CRAW='') or (type='N' and NRAW=.) then nmiss = FREQUENCY;
+22850      else nlevel + 1;
+MPRINT(EM_DIAGRAM):   else nlevel + 1;
+22851      if last.name then output;
+MPRINT(EM_DIAGRAM):   if last.name then output;
+22852      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: There were 18 observations read from the data set WORK.TRANS_CLASSSTATS.
+NOTE: The data set WORK.TRANS_CLASSSTATS has 7 observations and 3 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+ 
+ 
+22853      /*Merge Statistics for Class Output Vars */
+22854      data WORK.TRANS_CLASSSTATS;
+MPRINT(EM_DIAGRAM):   data WORK.TRANS_CLASSSTATS;
+22855      length SOURCE $6 _METHOD_ $8 NAME $32 FORMULA $300;
+MPRINT(EM_DIAGRAM):   length SOURCE $6 _METHOD_ $8 NAME $32 FORMULA $300;
+22856      merge WORK.TRANS_CLASSSTATS(in=_a) _temp(in=_b keep=NAME InputName Formula _MetaFlag LEVEL TYPE LABEL);
+MPRINT(EM_DIAGRAM):   merge WORK.TRANS_CLASSSTATS(in=_a) _temp(in=_b keep=NAME InputName Formula _MetaFlag LEVEL TYPE LABEL);
+22857      by NAME;
+MPRINT(EM_DIAGRAM):   by NAME;
+22858      if _a and _b then do;
+MPRINT(EM_DIAGRAM):   if _a and _b then do;
+22859      SOURCE='Output';
+MPRINT(EM_DIAGRAM):   SOURCE='Output';
+22860      if _MetaFlag = 1 then _METHOD_="Meta";
+MPRINT(EM_DIAGRAM):   if _MetaFlag = 1 then _METHOD_="Meta";
+22861      else if Formula eq 'Interaction' then _METHOD_="Computed";
+MPRINT(EM_DIAGRAM):   else if Formula eq 'Interaction' then _METHOD_="Computed";
+22862      else if inputName eq '' then _METHOD_="Formula";
+MPRINT(EM_DIAGRAM):   else if inputName eq '' then _METHOD_="Formula";
+22863      else _METHOD_="Computed";
+MPRINT(EM_DIAGRAM):   else _METHOD_="Computed";
+22864      if Formula = '' then Formula = "User Code";
+MPRINT(EM_DIAGRAM):   if Formula = '' then Formula = "User Code";
+22865      end;
+MPRINT(EM_DIAGRAM):   end;
+22866      if _a then output;
+MPRINT(EM_DIAGRAM):   if _a then output;
+22867      drop inputName LEVEL TYPE _MetaFlag;
+MPRINT(EM_DIAGRAM):   drop inputName LEVEL TYPE _MetaFlag;
+22868      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: There were 7 observations read from the data set WORK.TRANS_CLASSSTATS.
+NOTE: There were 11 observations read from the data set WORK._TEMP.
+NOTE: The data set WORK.TRANS_CLASSSTATS has 7 observations and 7 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+ 
+ 
+22869      /*Merge Statistics for Class Input Vars */
+22870      proc sort data=WORK.TRANS_SCOREINPUTS(drop=TYPE LEVEL) out=_temp nodupkey;
+MPRINT(EM_DIAGRAM):   proc sort data=WORK.TRANS_SCOREINPUTS(drop=TYPE LEVEL) out=_temp nodupkey;
+22871      by NAME;
+MPRINT(EM_DIAGRAM):   by NAME;
+22872      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: There were 11 observations read from the data set WORK.TRANS_SCOREINPUTS.
+NOTE: 0 observations with duplicate key values were deleted.
+NOTE: The data set WORK._TEMP has 11 observations and 3 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+ 
+ 
+22873      data WORK.TRANS_CLASSSTATS;
+MPRINT(EM_DIAGRAM):   data WORK.TRANS_CLASSSTATS;
+22874      merge WORK.TRANS_CLASSSTATS(in=_a) _temp(in=_b);
+MPRINT(EM_DIAGRAM):   merge WORK.TRANS_CLASSSTATS(in=_a) _temp(in=_b);
+22875      by NAME;
+MPRINT(EM_DIAGRAM):   by NAME;
+22876      if _a and _b then do;
+MPRINT(EM_DIAGRAM):   if _a and _b then do;
+22877      SOURCE='Input';
+MPRINT(EM_DIAGRAM):   SOURCE='Input';
+22878      _METHOD_="Original";
+MPRINT(EM_DIAGRAM):   _METHOD_="Original";
+22879      end;
+MPRINT(EM_DIAGRAM):   end;
+22880      if _a then output;
+MPRINT(EM_DIAGRAM):   if _a then output;
+22881      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: There were 7 observations read from the data set WORK.TRANS_CLASSSTATS.
+NOTE: There were 11 observations read from the data set WORK._TEMP.
+NOTE: The data set WORK.TRANS_CLASSSTATS has 7 observations and 8 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+ 
+ 
+22882      *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):    *------------------------------------------------------------*;
+22883      * Trans: Combine Information and Statistics for Interval Variables;
+MPRINT(EM_DIAGRAM):   * Trans: Combine Information and Statistics for Interval Variables;
+22884      *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22885      proc sort data=WORK.TRANS_OUTPUTVARS out=_temp;
+MPRINT(EM_DIAGRAM):   proc sort data=WORK.TRANS_OUTPUTVARS out=_temp;
+22886      by NAME;
+MPRINT(EM_DIAGRAM):   by NAME;
+22887      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: There were 11 observations read from the data set WORK.TRANS_OUTPUTVARS.
+NOTE: The data set WORK._TEMP has 11 observations and 13 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+ 
+ 
+22888      proc sort data=WORK.TRANS_VARSTATS;
+MPRINT(EM_DIAGRAM):   proc sort data=WORK.TRANS_VARSTATS;
+22889      by NAME;
+MPRINT(EM_DIAGRAM):   by NAME;
+22890      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: There were 15 observations read from the data set WORK.TRANS_VARSTATS.
+NOTE: The data set WORK.TRANS_VARSTATS has 15 observations and 9 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+ 
+ 
+MPRINT(EM_DIAGRAM):   *Merge Statistics for Output Vars;
+22891      *Merge Statistics for Output Vars;
+22892      data WORK.TRANS_VARSTATS;
+MPRINT(EM_DIAGRAM):   data WORK.TRANS_VARSTATS;
+22893      length SOURCE $6 _METHOD_ $8 NAME $32 FORMULA $300;
+MPRINT(EM_DIAGRAM):   length SOURCE $6 _METHOD_ $8 NAME $32 FORMULA $300;
+22894      merge WORK.TRANS_VARSTATS(in=_a) _temp(in=_b keep=NAME Formula InputName _MetaFlag LEVEL TYPE LABEL);
+MPRINT(EM_DIAGRAM):   merge WORK.TRANS_VARSTATS(in=_a) _temp(in=_b keep=NAME Formula InputName _MetaFlag LEVEL TYPE LABEL);
+22895      by NAME;
+MPRINT(EM_DIAGRAM):   by NAME;
+22896      if _a and _b then do;
+MPRINT(EM_DIAGRAM):   if _a and _b then do;
+22897      SOURCE='Output';
+MPRINT(EM_DIAGRAM):   SOURCE='Output';
+22898      if _MetaFlag = 1 then _METHOD_="Meta";
+MPRINT(EM_DIAGRAM):   if _MetaFlag = 1 then _METHOD_="Meta";
+22899      else if Formula eq 'Interaction' then _METHOD_="Computed";
+MPRINT(EM_DIAGRAM):   else if Formula eq 'Interaction' then _METHOD_="Computed";
+22900      else if inputName eq '' then _METHOD_="Formula";
+MPRINT(EM_DIAGRAM):   else if inputName eq '' then _METHOD_="Formula";
+22901      else _METHOD_="Computed";
+MPRINT(EM_DIAGRAM):   else _METHOD_="Computed";
+22902      if Formula = '' then Formula = "Mixture of variables";
+MPRINT(EM_DIAGRAM):   if Formula = '' then Formula = "Mixture of variables";
+22903      end;
+MPRINT(EM_DIAGRAM):   end;
+22904      if _a then output;
+MPRINT(EM_DIAGRAM):   if _a then output;
+22905      drop inputName LEVEL TYPE _MetaFlag;
+MPRINT(EM_DIAGRAM):   drop inputName LEVEL TYPE _MetaFlag;
+22906      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: There were 15 observations read from the data set WORK.TRANS_VARSTATS.
+NOTE: There were 11 observations read from the data set WORK._TEMP.
+NOTE: The data set WORK.TRANS_VARSTATS has 15 observations and 13 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+ 
+ 
+MPRINT(EM_DIAGRAM):   *Merge Statistics for Input Vars;
+22907      *Merge Statistics for Input Vars;
+22908      proc sort data=WORK.TRANS_SCOREINPUTS(drop=TYPE LEVEL) out=_temp nodupkey;
+MPRINT(EM_DIAGRAM):   proc sort data=WORK.TRANS_SCOREINPUTS(drop=TYPE LEVEL) out=_temp nodupkey;
+22909      by NAME;
+MPRINT(EM_DIAGRAM):   by NAME;
+22910      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: There were 11 observations read from the data set WORK.TRANS_SCOREINPUTS.
+NOTE: 0 observations with duplicate key values were deleted.
+NOTE: The data set WORK._TEMP has 11 observations and 3 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+ 
+ 
+22911      data WORK.TRANS_VARSTATS;
+MPRINT(EM_DIAGRAM):   data WORK.TRANS_VARSTATS;
+22912      merge WORK.TRANS_VARSTATS(in=_a) _temp(in=_b);
+MPRINT(EM_DIAGRAM):   merge WORK.TRANS_VARSTATS(in=_a) _temp(in=_b);
+22913      by NAME;
+MPRINT(EM_DIAGRAM):   by NAME;
+22914      if _a and _b then do;
+MPRINT(EM_DIAGRAM):   if _a and _b then do;
+22915      SOURCE='Input';
+MPRINT(EM_DIAGRAM):   SOURCE='Input';
+22916      _METHOD_="Original";
+MPRINT(EM_DIAGRAM):   _METHOD_="Original";
+22917      end;
+MPRINT(EM_DIAGRAM):   end;
+22918      if _a then output;
+MPRINT(EM_DIAGRAM):   if _a then output;
+22919      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: There were 15 observations read from the data set WORK.TRANS_VARSTATS.
+NOTE: There were 11 observations read from the data set WORK._TEMP.
+NOTE: The data set WORK.TRANS_VARSTATS has 15 observations and 14 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+ 
+ 
+22920      *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):    *------------------------------------------------------------*;
+22921      * Trans: Combine statistics for class and interval variables;
+MPRINT(EM_DIAGRAM):   * Trans: Combine statistics for class and interval variables;
+22922      *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22923      data EMWS1.Trans_STATISTICS;
+MPRINT(EM_DIAGRAM):   data EMWS1.Trans_STATISTICS;
+22924      length SOURCE $6 _METHOD_ $8 NAME $32 FORMULA $300;
+MPRINT(EM_DIAGRAM):   length SOURCE $6 _METHOD_ $8 NAME $32 FORMULA $300;
+22925      label SOURCE = "%sysfunc(sasmsg(sashelp.dmine, rpt_source_vlabel,  NOQUOTE))" _METHOD_ = "%sysfunc(sasmsg(sashelp.dmine, rpt_method_vlabel,  NOQUOTE))" NAME = "%sysfunc(sasmsg(sashelp.dmine, meta_name_vlabel,  NOQUOTE))" FORMULA =
+22926         "%sysfunc(sasmsg(sashelp.dmine, rpt_formula_vlabel,   NOQUOTE))" NLEVEL = "%sysfunc(sasmsg(sashelp.dmine, rpt_numcat_vlabel,   NOQUOTE))" N = "%sysfunc(sasmsg(sashelp.dmine, rpt_nonmiss_vlabel, NOQUOTE))" NMISS =
+22927         "%sysfunc(sasmsg(sashelp.dmine, rpt_missing_vlabel, NOQUOTE))" MIN = "%sysfunc(sasmsg(sashelp.dmine, rpt_minimum_vlabel, NOQUOTE))" MAX = "%sysfunc(sasmsg(sashelp.dmine, rpt_maximum_vlabel, NOQUOTE))" MEAN =
+22928         "%sysfunc(sasmsg(sashelp.dmine, rpt_mean_vlabel,    NOQUOTE))" STD = "%sysfunc(sasmsg(sashelp.dmine, rpt_std_vlabel,     NOQUOTE))" SKEWNESS = "%sysfunc(sasmsg(sashelp.dmine, rpt_skewness_vlabel, NOQUOTE))" KURTOSIS =
+22929         "%sysfunc(sasmsg(sashelp.dmine, rpt_kurtosis_vlabel, NOQUOTE))" LABEL = "%sysfunc(sasmsg(sashelp.dmine, meta_label_vlabel, NOQUOTE))";
+MPRINT(EM_DIAGRAM):   label SOURCE = "Source" _METHOD_ = "Method" NAME = "Variable Name" FORMULA = "Formula" NLEVEL = "Number of Levels" N = "Non Missing" NMISS = "Missing" MIN = "Minimum" MAX = "Maximum" MEAN = "Mean" STD = "Standard Deviation" SKEWNESS
+= "Skewness" KURTOSIS = "Kurtosis" LABEL = "Label";
+22930      set
+22931      WORK.TRANS_CLASSSTATS
+22932      WORK.TRANS_VARSTATS
+22933      ;
+MPRINT(EM_DIAGRAM):   set WORK.TRANS_CLASSSTATS WORK.TRANS_VARSTATS ;
+22934      drop UNAME;
+MPRINT(EM_DIAGRAM):   drop UNAME;
+22935      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: There were 7 observations read from the data set WORK.TRANS_CLASSSTATS.
+NOTE: There were 15 observations read from the data set WORK.TRANS_VARSTATS.
+NOTE: The data set EMWS1.TRANS_STATISTICS has 22 observations and 14 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.14 seconds
+      cpu time            0.12 seconds
+ 
+ 
+22936      proc sort data=EMWS1.Trans_STATISTICS;
+MPRINT(EM_DIAGRAM):   proc sort data=EMWS1.Trans_STATISTICS;
+22937      by SOURCE _METHOD_ NAME;
+MPRINT(EM_DIAGRAM):   by SOURCE _METHOD_ NAME;
+22938      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: There were 22 observations read from the data set EMWS1.TRANS_STATISTICS.
+NOTE: The data set EMWS1.TRANS_STATISTICS has 22 observations and 14 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+ 
+ 
+22939      proc sort data = EMWS1.Trans_STATISTICS NOTHREADS;
+MPRINT(EM_DIAGRAM):    proc sort data = EMWS1.Trans_STATISTICS NOTHREADS;
+22940      by SOURCE NAME;
+MPRINT(EM_DIAGRAM):   by SOURCE NAME;
+22941      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: There were 22 observations read from the data set EMWS1.TRANS_STATISTICS.
+NOTE: The data set EMWS1.TRANS_STATISTICS has 22 observations and 14 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+ 
+ 
+22942      title9 ' ';
+MPRINT(EM_DIAGRAM):   title9 ' ';
+22943      proc print data = EMWS1.Trans_STATISTICS(obs=500) noobs label;
+MPRINT(EM_DIAGRAM):   proc print data = EMWS1.Trans_STATISTICS(obs=500) noobs label;
+22944      title9 "%sysfunc(sasmsg(sashelp.dmine, rpt_intervalinputStats_title, NOQUOTE))";
+MPRINT(EM_DIAGRAM):   title9 "Summary Statistics for Input Interval Variables";
+22945      title10 "%sysfunc(sasmsg(sashelp.dmine, rpt_maxObsPrinted_title, NOQUOTE))";
+MPRINT(EM_DIAGRAM):   title10 "(maximum 500 observations printed)";
+MPRINT(EM_DIAGRAM):   var Name NMISS MIN MAX MEAN STD SKEWNESS KURTOSIS;
+MPRINT(EM_DIAGRAM):   where SOURCE eq 'INPUT' and mean ne .;
+MPRINT(EM_DIAGRAM):   run;
+22946      var Name NMISS MIN MAX MEAN STD SKEWNESS KURTOSIS;
+22947      where SOURCE eq 'INPUT' and mean ne .;
+22948      run;
+ 
+NOTE: No observations were selected from data set EMWS1.TRANS_STATISTICS.
+NOTE: There were 0 observations read from the data set EMWS1.TRANS_STATISTICS.
+      WHERE (SOURCE='INPUT') and (mean not = .);
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+ 
+ 
+22949      proc print data = EMWS1.Trans_STATISTICS(obs=500) noobs label;
+MPRINT(EM_DIAGRAM):   proc print data = EMWS1.Trans_STATISTICS(obs=500) noobs label;
+22950      title9 "%sysfunc(sasmsg(sashelp.dmine, rpt_intervaloutputStats_title, NOQUOTE))";
+MPRINT(EM_DIAGRAM):   title9 "Summary Statistics for Output Interval Variables";
+22951      title10 "%sysfunc(sasmsg(sashelp.dmine, rpt_maxObsPrinted_title, NOQUOTE))";
+MPRINT(EM_DIAGRAM):   title10 "(maximum 500 observations printed)";
+MPRINT(EM_DIAGRAM):   var Name _METHOD_ NMISS MIN MAX MEAN STD SKEWNESS KURTOSIS;
+MPRINT(EM_DIAGRAM):   where SOURCE eq 'OUTPUT' and mean ne .;
+MPRINT(EM_DIAGRAM):   run;
+22952      var Name _METHOD_ NMISS MIN MAX MEAN STD SKEWNESS KURTOSIS;
+22953      where SOURCE eq 'OUTPUT' and mean ne .;
+22954      run;
+ 
+NOTE: No observations were selected from data set EMWS1.TRANS_STATISTICS.
+NOTE: There were 0 observations read from the data set EMWS1.TRANS_STATISTICS.
+      WHERE (SOURCE='OUTPUT') and (mean not = .);
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+ 
+ 
+22955      proc print data = EMWS1.Trans_STATISTICS(obs=500) noobs label;
+MPRINT(EM_DIAGRAM):   proc print data = EMWS1.Trans_STATISTICS(obs=500) noobs label;
+22956      title9 "%sysfunc(sasmsg(sashelp.dmine, rpt_classinputStats_title, NOQUOTE))";
+MPRINT(EM_DIAGRAM):   title9 "Summary Statistics for Input Class Variables";
+22957      title10 "%sysfunc(sasmsg(sashelp.dmine, rpt_maxObsPrinted_title, NOQUOTE))";
+MPRINT(EM_DIAGRAM):   title10 "(maximum 500 observations printed)";
+MPRINT(EM_DIAGRAM):   var Name NLEVEL NMISS;
+MPRINT(EM_DIAGRAM):   where SOURCE eq 'INPUT' and nlevel ne .;
+MPRINT(EM_DIAGRAM):   run;
+22958      var Name NLEVEL NMISS;
+22959      where SOURCE eq 'INPUT' and nlevel ne .;
+22960      run;
+ 
+NOTE: No observations were selected from data set EMWS1.TRANS_STATISTICS.
+NOTE: There were 0 observations read from the data set EMWS1.TRANS_STATISTICS.
+      WHERE (SOURCE='INPUT') and (nlevel not = .);
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.03 seconds
+ 
+ 
+22961      proc print data = EMWS1.Trans_STATISTICS(obs=500) noobs label;
+MPRINT(EM_DIAGRAM):   proc print data = EMWS1.Trans_STATISTICS(obs=500) noobs label;
+22962      title9 "%sysfunc(sasmsg(sashelp.dmine, rpt_classoutputStats_title, NOQUOTE))";
+MPRINT(EM_DIAGRAM):   title9 "Summary Statistics for Output Class Variables";
+22963      title10 "%sysfunc(sasmsg(sashelp.dmine, rpt_maxObsPrinted_title, NOQUOTE))";
+MPRINT(EM_DIAGRAM):   title10 "(maximum 500 observations printed)";
+MPRINT(EM_DIAGRAM):   var Name _METHOD_ NLEVEL NMISS;
+MPRINT(EM_DIAGRAM):   where SOURCE eq 'OUTPUT' and nlevel ne .;
+MPRINT(EM_DIAGRAM):   run;
+22964      var Name _METHOD_ NLEVEL NMISS;
+22965      where SOURCE eq 'OUTPUT' and nlevel ne .;
+22966      run;
+ 
+NOTE: No observations were selected from data set EMWS1.TRANS_STATISTICS.
+NOTE: There were 0 observations read from the data set EMWS1.TRANS_STATISTICS.
+      WHERE (SOURCE='OUTPUT') and (nlevel not = .);
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+ 
+ 
+22967      title9;
+MPRINT(EM_DIAGRAM):   title9;
+22968      title10;
+MPRINT(EM_DIAGRAM):   title10;
+22969      data EMWS1.Trans_EMSCOREVAR;
+MPRINT(EM_DIAGRAM):    data EMWS1.Trans_EMSCOREVAR;
+22970      length Name $32 formula $300 file $200;
+MPRINT(EM_DIAGRAM):   length Name $32 formula $300 file $200;
+22971      keep NAME Formula file;
+MPRINT(EM_DIAGRAM):   keep NAME Formula file;
+22972      set EMWS1.Trans_STATISTICS;
+MPRINT(EM_DIAGRAM):   set EMWS1.Trans_STATISTICS;
+22973      where SOURCE='Output';
+MPRINT(EM_DIAGRAM):   where SOURCE='Output';
+22974      select( _METHOD_);
+MPRINT(EM_DIAGRAM):   select( _METHOD_);
+22975      when('Computed') do;
+MPRINT(EM_DIAGRAM):   when('Computed') do;
+22976      file="TRANSFORMCODE\"!!strip(NAME)!!'.sas';
+MPRINT(EM_DIAGRAM):   file="TRANSFORMCODE\"!!strip(NAME)!!'.sas';
+22977      formula = '';
+MPRINT(EM_DIAGRAM):   formula = '';
+22978      end;
+MPRINT(EM_DIAGRAM):   end;
+22979      when('Formula') do;
+MPRINT(EM_DIAGRAM):   when('Formula') do;
+22980      if Formula eq 'Mixture of variables' then do;
+MPRINT(EM_DIAGRAM):   if Formula eq 'Mixture of variables' then do;
+22981      file= "EDITORCODE.sas";
+MPRINT(EM_DIAGRAM):   file= "EDITORCODE.sas";
+22982      formula = '';
+MPRINT(EM_DIAGRAM):   formula = '';
+22983      end;
+MPRINT(EM_DIAGRAM):   end;
+22984      if Formula = 'User Code' then do;
+MPRINT(EM_DIAGRAM):   if Formula = 'User Code' then do;
+22985      file= "EDITORCODE.sas";
+MPRINT(EM_DIAGRAM):   file= "EDITORCODE.sas";
+22986      formula = '';
+MPRINT(EM_DIAGRAM):   formula = '';
+22987      end;
+MPRINT(EM_DIAGRAM):   end;
+22988      end;
+MPRINT(EM_DIAGRAM):   end;
+22989      otherwise;
+MPRINT(EM_DIAGRAM):   otherwise;
+22990      end;
+MPRINT(EM_DIAGRAM):   end;
+22991      output;
+MPRINT(EM_DIAGRAM):   output;
+22992      run;
+MPRINT(EM_DIAGRAM):   run;
+ 
+NOTE: There were 11 observations read from the data set EMWS1.TRANS_STATISTICS.
+      WHERE SOURCE='Output';
+NOTE: The data set EMWS1.TRANS_EMSCOREVAR has 11 observations and 3 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.01 seconds
+ 
+ 
+MPRINT(EM_DIAGRAM):    proc printto;
+MPRINT(EM_DIAGRAM):   run;

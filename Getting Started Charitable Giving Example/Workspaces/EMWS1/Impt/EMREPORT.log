@@ -1,0 +1,159 @@
+MPRINT(EM_DIAGRAM):    data _null_;
+MPRINT(EM_DIAGRAM):   call symput('NLDATE', strip(put(date(), NLDATE.)));
+MPRINT(EM_DIAGRAM):   call symput('NLTIME', strip(put(datetime(), NLTIME.)));
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):   data _null_;
+MPRINT(EM_DIAGRAM):   nldate= sasmsg("sashelp.dmine", "log_date_note", 'N', "October 11, 2015" );
+MPRINT(EM_DIAGRAM):   nltime= sasmsg("sashelp.dmine", "log_time_note", 'N', "14:35:38" );
+MPRINT(EM_DIAGRAM):   put "*------------------------------------------------------------*";
+MPRINT(EM_DIAGRAM):   put "* Report Log";
+MPRINT(EM_DIAGRAM):   put nldate;
+MPRINT(EM_DIAGRAM):   put nltime;
+MPRINT(EM_DIAGRAM):   put "*------------------------------------------------------------*";
+MPRINT(EM_DIAGRAM):   run;
+*------------------------------------------------------------*
+* Report Log
+Date:                October 11, 2015
+Time:                14:35:38
+*------------------------------------------------------------*
+MPRINT(EM_DIAGRAM):    filename O27JPC7O "C:\Users\sakerb01\Desktop\SAS EM 12.3 Tutorials _ Projects\Getting Started Charitable Giving Example\Workspaces\EMWS1\Impt\EMREPORT.out" encoding="UTF-8" NOBOM;
+MPRINT(EM_DIAGRAM):   proc printto print=O27JPC7O new;
+MPRINT(EM_DIAGRAM):   run;
+30005      %let _nimpute = 0;
+30006      data EMWS1.Impt_RESULT;
+MPRINT(EM_DIAGRAM):    data EMWS1.Impt_RESULT;
+30007      label NAME = "%sysfunc(sasmsg(sashelp.dmine, meta_name_vlabel,        NOQUOTE))" METHOD = "%sysfunc(sasmsg(sashelp.dmine, rpt_imputemethod_vlabel, NOQUOTE))" IMPUTED = "%sysfunc(sasmsg(sashelp.dmine, rpt_imputedvar_vlabel,   NOQUOTE))" INDICATOR
+30007    !  =
+30008         "%sysfunc(sasmsg(sashelp.dmine, rpt_indicatorvar_vlabel, NOQUOTE))" VALUE = "%sysfunc(sasmsg(sashelp.dmine, rpt_imputevalue_vlabel,  NOQUOTE))" ROLE = "%sysfunc(sasmsg(sashelp.dmine, meta_role_vlabel,        NOQUOTE))" LEVEL =
+30009         "%sysfunc(sasmsg(sashelp.dmine, meta_level_vlabel,       NOQUOTE))" LABEL = "%sysfunc(sasmsg(sashelp.dmine, meta_label_vlabel,       NOQUOTE))" TRAIN = "%sysfunc(sasmsg(sashelp.dmine, rpt_missingcount_vlabel, NOQUOTE, TRAIN))";
+MPRINT(EM_DIAGRAM):   label NAME = "Variable Name" METHOD = "Impute Method" IMPUTED = "Imputed Variable" INDICATOR = "Indicator Variable" VALUE = "Impute Value" ROLE = "Role" LEVEL = "Measurement Level" LABEL = "Label" TRAIN = "Number of Missing for 
+TRAIN";
+30010      set EMWS1.Impt_META(where=(IMPUTED ne '') keep=NAME METHOD IMP VALUE ROLE NMISS LEVEL LABEL rename=(IMP=IMPUTED NMISS=TRAIN)) end=eof;
+MPRINT(EM_DIAGRAM):   set EMWS1.Impt_META(where=(IMPUTED ne '') keep=NAME METHOD IMP VALUE ROLE NMISS LEVEL LABEL rename=(IMP=IMPUTED NMISS=TRAIN)) end=eof;
+30011      if eof then call symput('_nimpute', '1');
+MPRINT(EM_DIAGRAM):   if eof then call symput('_nimpute', '1');
+30012      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: Variable INDICATOR is uninitialized.
+NOTE: There were 6 observations read from the data set EMWS1.IMPT_META.
+      WHERE IMPUTED not = ' ';
+NOTE: The data set EMWS1.IMPT_RESULT has 6 observations and 8 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.07 seconds
+      cpu time            0.07 seconds
+      
+
+30013      proc print data=EMWS1.Impt_RESULT(obs=500) label noobs;
+MPRINT(EM_DIAGRAM):    proc print data=EMWS1.Impt_RESULT(obs=500) label noobs;
+30014      title9 "%sysfunc(sasmsg(sashelp.dmine, rpt_imputationsummary_title, NOQUOTE))";
+MPRINT(EM_DIAGRAM):   title9 "Imputation Summary";
+30015      title10 "%sysfunc(sasmsg(sashelp.dmine, rpt_numberobs_title,         NOQUOTE))";
+MPRINT(EM_DIAGRAM):   title10 "Number Of Observations";
+MPRINT(EM_DIAGRAM):   run;
+30016      run;
+
+NOTE: There were 6 observations read from the data set EMWS1.IMPT_RESULT.
+NOTE: The PROCEDURE PRINT printed page 2.
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+      
+
+30017      proc freq data=EMWS1.Impt_RESULT noprint;
+MPRINT(EM_DIAGRAM):    proc freq data=EMWS1.Impt_RESULT noprint;
+30018      table train /out=WORK.ImptSUMMARY nocum;
+MPRINT(EM_DIAGRAM):   table train /out=WORK.ImptSUMMARY nocum;
+30019      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: There were 6 observations read from the data set EMWS1.IMPT_RESULT.
+NOTE: The data set WORK.IMPTSUMMARY has 5 observations and 3 variables.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+30020      proc sort data=WORK.ImptSUMMARY NOTHREADS;
+MPRINT(EM_DIAGRAM):   proc sort data=WORK.ImptSUMMARY NOTHREADS;
+30021      by descending TRAIN;
+MPRINT(EM_DIAGRAM):   by descending TRAIN;
+30022      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: There were 5 observations read from the data set WORK.IMPTSUMMARY.
+NOTE: The data set WORK.IMPTSUMMARY has 5 observations and 3 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+30023      proc print data=WORK.ImptSUMMARY(obs=100) label;
+MPRINT(EM_DIAGRAM):   proc print data=WORK.ImptSUMMARY(obs=100) label;
+30024      label COUNT = "%sysfunc(sasmsg(sashelp.dmine, rpt_varcount_vlabel,  NOQUOTE))" PERCENT = "%sysfunc(sasmsg(sashelp.dmine, rpt_varpercent_vlabel,  NOQUOTE))";
+MPRINT(EM_DIAGRAM):   label COUNT = "Number of Variables" PERCENT = "Percent of Variables";
+30025      title9 ' ';
+MPRINT(EM_DIAGRAM):   title9 ' ';
+30026      title10 "%sysfunc(sasmsg(sashelp.dmine, rpt_missingvardistribution_title, NOQUOTE))";
+MPRINT(EM_DIAGRAM):   title10 "Variable Distribution Training Data";
+MPRINT(EM_DIAGRAM):   run;
+30027      run;
+
+NOTE: There were 5 observations read from the data set WORK.IMPTSUMMARY.
+NOTE: The PROCEDURE PRINT printed page 3.
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+      
+
+30028      data EMWS1.Impt_EMSCOREVAR;
+MPRINT(EM_DIAGRAM):    data EMWS1.Impt_EMSCOREVAR;
+30029      length Name $32 formula $70 file $200;
+MPRINT(EM_DIAGRAM):   length Name $32 formula $70 file $200;
+30030      keep NAME Formula file;
+MPRINT(EM_DIAGRAM):   keep NAME Formula file;
+30031      if _N_=1 then do;
+MPRINT(EM_DIAGRAM):   if _N_=1 then do;
+30032      file = "IMPUTECODE\"!!"_POSTALL_.sas";
+MPRINT(EM_DIAGRAM):   file = "IMPUTECODE\"!!"_POSTALL_.sas";
+30033      output;
+MPRINT(EM_DIAGRAM):   output;
+30034      end;
+MPRINT(EM_DIAGRAM):   end;
+30035      set EMWS1.Impt_META end=eof;
+MPRINT(EM_DIAGRAM):   set EMWS1.Impt_META end=eof;
+30036      *set EMWS1.Impt_RESULT end=eof;
+MPRINT(EM_DIAGRAM):   *set EMWS1.Impt_RESULT end=eof;
+30037      if M ne '' then do;
+MPRINT(EM_DIAGRAM):   if M ne '' then do;
+30038      NAME= M;
+MPRINT(EM_DIAGRAM):   NAME= M;
+30039      file="IMPUTECODE\"!!strip(NAME)!!'.sas';
+MPRINT(EM_DIAGRAM):   file="IMPUTECODE\"!!strip(NAME)!!'.sas';
+30040      output;
+MPRINT(EM_DIAGRAM):   output;
+30041      end;
+MPRINT(EM_DIAGRAM):   end;
+30042      if IMP ne '' then do;
+MPRINT(EM_DIAGRAM):   if IMP ne '' then do;
+30043      NAME= IMP;
+MPRINT(EM_DIAGRAM):   NAME= IMP;
+30044      file="IMPUTECODE\"!!strip(NAME)!!'.sas';
+MPRINT(EM_DIAGRAM):   file="IMPUTECODE\"!!strip(NAME)!!'.sas';
+30045      output;
+MPRINT(EM_DIAGRAM):   output;
+30046      end;
+MPRINT(EM_DIAGRAM):   end;
+30047      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: Variable formula is uninitialized.
+NOTE: There were 48 observations read from the data set EMWS1.IMPT_META.
+NOTE: The data set EMWS1.IMPT_EMSCOREVAR has 55 observations and 3 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.03 seconds
+      
+
+MPRINT(EM_DIAGRAM):    proc printto;
+MPRINT(EM_DIAGRAM):   run;

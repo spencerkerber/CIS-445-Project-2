@@ -1,0 +1,1075 @@
+MPRINT(EM_DIAGRAM):    data _null_;
+MPRINT(EM_DIAGRAM):   call symput('NLDATE', strip(put(date(), NLDATE.)));
+MPRINT(EM_DIAGRAM):   call symput('NLTIME', strip(put(datetime(), NLTIME.)));
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):   data _null_;
+MPRINT(EM_DIAGRAM):   nldate= sasmsg("sashelp.dmine", "log_date_note", 'N', "October 11, 2015" );
+MPRINT(EM_DIAGRAM):   nltime= sasmsg("sashelp.dmine", "log_time_note", 'N', "14:43:01" );
+MPRINT(EM_DIAGRAM):   put "*------------------------------------------------------------*";
+MPRINT(EM_DIAGRAM):   put "* Score Log";
+MPRINT(EM_DIAGRAM):   put nldate;
+MPRINT(EM_DIAGRAM):   put nltime;
+MPRINT(EM_DIAGRAM):   put "*------------------------------------------------------------*";
+MPRINT(EM_DIAGRAM):   run;
+*------------------------------------------------------------*
+* Score Log
+Date:                October 11, 2015
+Time:                14:43:01
+*------------------------------------------------------------*
+MPRINT(EM_DIAGRAM):    filename O1VG6ND4 "C:\Users\sakerb01\Desktop\SAS EM 12.3 Tutorials _ Projects\Getting Started Charitable Giving Example\Workspaces\EMWS1\Trans\EMSCORE.out" encoding="UTF-8" NOBOM;
+MPRINT(EM_DIAGRAM):   proc printto print=O1VG6ND4 new;
+MPRINT(EM_DIAGRAM):   run;
+21846      proc sort data=EMWS1.Trans_RESULT out=WORK.TransRESULT NOTHREADS;
+MPRINT(EM_DIAGRAM):    proc sort data=EMWS1.Trans_RESULT out=WORK.TransRESULT NOTHREADS;
+21847      by INPUTNAME;
+MPRINT(EM_DIAGRAM):   by INPUTNAME;
+21848      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: There were 11 observations read from the data set EMWS1.TRANS_RESULT.
+NOTE: The data set WORK.TRANSRESULT has 11 observations and 11 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+21849      proc sort data=EMWS1.Trans_VariableSet(KEEP= NAME FAMILY REPORT rename=(NAME=INPUTNAME)) out=WORK.TransVARSET NOTHREADS;
+MPRINT(EM_DIAGRAM):   proc sort data=EMWS1.Trans_VariableSet(KEEP= NAME FAMILY REPORT rename=(NAME=INPUTNAME)) out=WORK.TransVARSET NOTHREADS;
+21850      by INPUTNAME;
+MPRINT(EM_DIAGRAM):   by INPUTNAME;
+21851      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: There were 51 observations read from the data set EMWS1.TRANS_VARIABLESET.
+NOTE: The data set WORK.TRANSVARSET has 51 observations and 3 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+      
+
+21852      data WORK.TransRESULT;
+MPRINT(EM_DIAGRAM):   data WORK.TransRESULT;
+21853      merge WORK.TransRESULT WORK.TransVARSET;
+MPRINT(EM_DIAGRAM):   merge WORK.TransRESULT WORK.TransVARSET;
+21854      by INPUTNAME;
+MPRINT(EM_DIAGRAM):   by INPUTNAME;
+21855      if NAME ne '' then output;
+MPRINT(EM_DIAGRAM):   if NAME ne '' then output;
+21856      run;
+MPRINT(EM_DIAGRAM):   run;
+
+WARNING: Multiple lengths were specified for the BY variable INPUTNAME by input data sets. This might cause unexpected results.
+NOTE: There were 11 observations read from the data set WORK.TRANSRESULT.
+NOTE: There were 51 observations read from the data set WORK.TRANSVARSET.
+NOTE: The data set WORK.TRANSRESULT has 11 observations and 13 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+21857      filename _code "C:\Users\sakerb01\Desktop\SAS EM 12.3 Tutorials _ Projects\Getting Started Charitable Giving Example\Workspaces\EMWS1\Trans\TRAINDELTACODE.sas";
+MPRINT(EM_DIAGRAM):   filename _code "C:\Users\sakerb01\Desktop\SAS EM 12.3 Tutorials _ Projects\Getting Started Charitable Giving Example\Workspaces\EMWS1\Trans\TRAINDELTACODE.sas";
+21858      data _null_;
+MPRINT(EM_DIAGRAM):   data _null_;
+21859      set WORK.TransRESULT;
+MPRINT(EM_DIAGRAM):   set WORK.TransRESULT;
+21860      length String $200;
+MPRINT(EM_DIAGRAM):   length String $200;
+21861      file _code;
+MPRINT(EM_DIAGRAM):   file _code;
+21862      String = 'if NAME="'!!strip(name)!!'" then do;';
+MPRINT(EM_DIAGRAM):   String = 'if NAME="'!!strip(name)!!'" then do;';
+21863      put / String;
+MPRINT(EM_DIAGRAM):   put / String;
+21864      if family ne '' then do;
+MPRINT(EM_DIAGRAM):   if family ne '' then do;
+21865      String = '   FAMILY ="'!!strip(family)!!'";';
+MPRINT(EM_DIAGRAM):   String = '   FAMILY ="'!!strip(family)!!'";';
+21866      put String;
+MPRINT(EM_DIAGRAM):   put String;
+21867      end;
+MPRINT(EM_DIAGRAM):   end;
+21868      select(formula);
+MPRINT(EM_DIAGRAM):   select(formula);
+21869      when('Interaction') put '   FAMILY  ="INTERACTION";';
+MPRINT(EM_DIAGRAM):   when('Interaction') put '   FAMILY  ="INTERACTION";';
+21870      when('') put '   COMMENT = "' method 'transformation of ' INPUTVAR '";';
+MPRINT(EM_DIAGRAM):   when('') put '   COMMENT = "' method 'transformation of ' INPUTVAR '";';
+21871      otherwise put '   COMMENT = "' formula '";';
+MPRINT(EM_DIAGRAM):   otherwise put '   COMMENT = "' formula '";';
+21872      end;
+MPRINT(EM_DIAGRAM):   end;
+21873      String = '   ROLE ="'!!strip(role)!!'";';
+MPRINT(EM_DIAGRAM):   String = '   ROLE ="'!!strip(role)!!'";';
+21874      put String;
+MPRINT(EM_DIAGRAM):   put String;
+21875      if REPORT="" then REPORT = "N";
+MPRINT(EM_DIAGRAM):   if REPORT="" then REPORT = "N";
+21876      String = '   REPORT ="'!!strip(report)!!'";';
+MPRINT(EM_DIAGRAM):   String = '   REPORT ="'!!strip(report)!!'";';
+21877      put String;
+MPRINT(EM_DIAGRAM):   put String;
+21878      String = '   LEVEL  ="'!!strip(level)!!'";';
+MPRINT(EM_DIAGRAM):   String = '   LEVEL  ="'!!strip(level)!!'";';
+21879      put String;
+MPRINT(EM_DIAGRAM):   put String;
+21880      put 'end;';
+MPRINT(EM_DIAGRAM):   put 'end;';
+21881      if formula ne 'Interaction' and INPUTNAME ne '' then do;
+MPRINT(EM_DIAGRAM):   if formula ne 'Interaction' and INPUTNAME ne '' then do;
+21882      String = 'if NAME="'!!strip(INPUTNAME)!!'" then delete;';
+MPRINT(EM_DIAGRAM):   String = 'if NAME="'!!strip(INPUTNAME)!!'" then delete;';
+21883      put String;
+MPRINT(EM_DIAGRAM):   put String;
+21884      end;
+MPRINT(EM_DIAGRAM):   end;
+21885      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: Variable method is uninitialized.
+NOTE: Variable INPUTVAR is uninitialized.
+NOTE: The file _CODE is:
+      Filename=C:\Users\sakerb01\Desktop\SAS EM 12.3 Tutorials _ Projects\Getting Started Charitable Giving Example\Workspaces\EMWS1\Trans\TRAINDELTACODE.sas,
+      RECFM=V,LRECL=32767,File Size (bytes)=0,
+      Last Modified=11Oct2015:14:43:01,
+      Create Time=11Oct2015:14:43:01
+
+NOTE: 88 records were written to the file _CODE.
+      The minimum record length was 0.
+      The maximum record length was 50.
+NOTE: There were 11 observations read from the data set WORK.TRANSRESULT.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+21886      filename _code;
+MPRINT(EM_DIAGRAM):   filename _code;
+NOTE: Fileref _CODE has been deassigned.
+21887      proc print data = EMWS1.Trans_FORMULA(obs=500) noobs label;
+MPRINT(EM_DIAGRAM):    proc print data = EMWS1.Trans_FORMULA(obs=500) noobs label;
+21888      title9 "%sysfunc(sasmsg(sashelp.dmine, rpt_formulatransformations_title, NOQUOTE))";
+MPRINT(EM_DIAGRAM):   title9 "Formula Transformations";
+21889      title10 "%sysfunc(sasmsg(sashelp.dmine, rpt_maxObsPrinted_title, NOQUOTE))";
+MPRINT(EM_DIAGRAM):   title10 "(maximum 500 observations printed)";
+MPRINT(EM_DIAGRAM):   var Name ROLE LEVEL FORMULA;
+MPRINT(EM_DIAGRAM):   run;
+21890      var Name ROLE LEVEL FORMULA;
+21891      run;
+
+NOTE: No observations in data set EMWS1.TRANS_FORMULA.
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+21892      title9;
+MPRINT(EM_DIAGRAM):   title9;
+21893      title10;
+MPRINT(EM_DIAGRAM):   title10;
+21894      filename emflow "C:\Users\sakerb01\Desktop\SAS EM 12.3 Tutorials _ Projects\Getting Started Charitable Giving Example\Workspaces\EMWS1\Trans\EMFLOWSCORE.sas";
+MPRINT(EM_DIAGRAM):    filename emflow "C:\Users\sakerb01\Desktop\SAS EM 12.3 Tutorials _ Projects\Getting Started Charitable Giving Example\Workspaces\EMWS1\Trans\EMFLOWSCORE.sas";
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * Trans: Scoring DATA data;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21895      *------------------------------------------------------------*;
+21896      * Trans: Scoring DATA data;
+21897      *------------------------------------------------------------*;
+21898      data EMWS1.Trans_TRAIN
+21899      / view=EMWS1.Trans_TRAIN
+21900      ;
+MPRINT(EM_DIAGRAM):   data EMWS1.Trans_TRAIN / view=EMWS1.Trans_TRAIN ;
+21901      set EMWS1.Impt_TRAIN
+21902      ;
+MPRINT(EM_DIAGRAM):   set EMWS1.Impt_TRAIN ;
+21903      %inc emflow;
+NOTE: %INCLUDE (level 1) file EMFLOW is file C:\Users\sakerb01\Desktop\SAS EM 12.3 Tutorials _ Projects\Getting Started Charitable Giving Example\Workspaces\EMWS1\Trans\EMFLOWSCORE.sas.
+21904     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21905     +* Computed Code;
+MPRINT(EM_DIAGRAM):   * Computed Code;
+21906     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21907     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21908     +* TRANSFORM: FILE_AVG_GIFT , log10(FILE_AVG_GIFT + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: FILE_AVG_GIFT , log10(FILE_AVG_GIFT + 1);
+21909     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21910     +label LG10_FILE_AVG_GIFT = 'Transformed FILE_AVG_GIFT';
+MPRINT(EM_DIAGRAM):   label LG10_FILE_AVG_GIFT = 'Transformed FILE_AVG_GIFT';
+21911     +if FILE_AVG_GIFT eq . then LG10_FILE_AVG_GIFT = .;
+MPRINT(EM_DIAGRAM):   if FILE_AVG_GIFT eq . then LG10_FILE_AVG_GIFT = .;
+21912     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+21913     +if FILE_AVG_GIFT + 1 > 0 then LG10_FILE_AVG_GIFT = log10(FILE_AVG_GIFT + 1);
+MPRINT(EM_DIAGRAM):   if FILE_AVG_GIFT + 1 > 0 then LG10_FILE_AVG_GIFT = log10(FILE_AVG_GIFT + 1);
+21914     +else LG10_FILE_AVG_GIFT = .;
+MPRINT(EM_DIAGRAM):   else LG10_FILE_AVG_GIFT = .;
+21915     +end;
+MPRINT(EM_DIAGRAM):   end;
+21916     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21917     +* TRANSFORM: LAST_GIFT_AMT , log10(LAST_GIFT_AMT + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: LAST_GIFT_AMT , log10(LAST_GIFT_AMT + 1);
+21918     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21919     +label LG10_LAST_GIFT_AMT = 'Transformed LAST_GIFT_AMT';
+MPRINT(EM_DIAGRAM):   label LG10_LAST_GIFT_AMT = 'Transformed LAST_GIFT_AMT';
+21920     +if LAST_GIFT_AMT eq . then LG10_LAST_GIFT_AMT = .;
+MPRINT(EM_DIAGRAM):   if LAST_GIFT_AMT eq . then LG10_LAST_GIFT_AMT = .;
+21921     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+21922     +if LAST_GIFT_AMT + 1 > 0 then LG10_LAST_GIFT_AMT = log10(LAST_GIFT_AMT + 1);
+MPRINT(EM_DIAGRAM):   if LAST_GIFT_AMT + 1 > 0 then LG10_LAST_GIFT_AMT = log10(LAST_GIFT_AMT + 1);
+21923     +else LG10_LAST_GIFT_AMT = .;
+MPRINT(EM_DIAGRAM):   else LG10_LAST_GIFT_AMT = .;
+21924     +end;
+MPRINT(EM_DIAGRAM):   end;
+21925     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21926     +* TRANSFORM: LIFETIME_AVG_GIFT_AMT , log10(LIFETIME_AVG_GIFT_AMT + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: LIFETIME_AVG_GIFT_AMT , log10(LIFETIME_AVG_GIFT_AMT + 1);
+21927     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21928     +label LG10_LIFETIME_AVG_GIFT_AMT = 'Transformed LIFETIME_AVG_GIFT_AMT';
+MPRINT(EM_DIAGRAM):   label LG10_LIFETIME_AVG_GIFT_AMT = 'Transformed LIFETIME_AVG_GIFT_AMT';
+21929     +if LIFETIME_AVG_GIFT_AMT eq . then LG10_LIFETIME_AVG_GIFT_AMT = .;
+MPRINT(EM_DIAGRAM):   if LIFETIME_AVG_GIFT_AMT eq . then LG10_LIFETIME_AVG_GIFT_AMT = .;
+21930     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+21931     +if LIFETIME_AVG_GIFT_AMT + 1 > 0 then LG10_LIFETIME_AVG_GIFT_AMT = log10(LIFETIME_AVG_GIFT_AMT + 1);
+MPRINT(EM_DIAGRAM):   if LIFETIME_AVG_GIFT_AMT + 1 > 0 then LG10_LIFETIME_AVG_GIFT_AMT = log10(LIFETIME_AVG_GIFT_AMT + 1);
+21932     +else LG10_LIFETIME_AVG_GIFT_AMT = .;
+MPRINT(EM_DIAGRAM):   else LG10_LIFETIME_AVG_GIFT_AMT = .;
+21933     +end;
+MPRINT(EM_DIAGRAM):   end;
+21934     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21935     +* TRANSFORM: LIFETIME_GIFT_AMOUNT , log10(LIFETIME_GIFT_AMOUNT + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: LIFETIME_GIFT_AMOUNT , log10(LIFETIME_GIFT_AMOUNT + 1);
+21936     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21937     +label LG10_LIFETIME_GIFT_AMOUNT = 'Transformed LIFETIME_GIFT_AMOUNT';
+MPRINT(EM_DIAGRAM):   label LG10_LIFETIME_GIFT_AMOUNT = 'Transformed LIFETIME_GIFT_AMOUNT';
+21938     +if LIFETIME_GIFT_AMOUNT eq . then LG10_LIFETIME_GIFT_AMOUNT = .;
+MPRINT(EM_DIAGRAM):   if LIFETIME_GIFT_AMOUNT eq . then LG10_LIFETIME_GIFT_AMOUNT = .;
+21939     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+21940     +if LIFETIME_GIFT_AMOUNT + 1 > 0 then LG10_LIFETIME_GIFT_AMOUNT = log10(LIFETIME_GIFT_AMOUNT + 1);
+MPRINT(EM_DIAGRAM):   if LIFETIME_GIFT_AMOUNT + 1 > 0 then LG10_LIFETIME_GIFT_AMOUNT = log10(LIFETIME_GIFT_AMOUNT + 1);
+21941     +else LG10_LIFETIME_GIFT_AMOUNT = .;
+MPRINT(EM_DIAGRAM):   else LG10_LIFETIME_GIFT_AMOUNT = .;
+21942     +end;
+MPRINT(EM_DIAGRAM):   end;
+21943     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21944     +* TRANSFORM: LIFETIME_CARD_PROM , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: LIFETIME_CARD_PROM , Optimal Binning(4);
+21945     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21946     +label OPT_LIFETIME_CARD_PROM = 'Transformed LIFETIME_CARD_PROM';
+MPRINT(EM_DIAGRAM):   label OPT_LIFETIME_CARD_PROM = 'Transformed LIFETIME_CARD_PROM';
+21947     +length OPT_LIFETIME_CARD_PROM $36;
+MPRINT(EM_DIAGRAM):   length OPT_LIFETIME_CARD_PROM $36;
+21948     +if (LIFETIME_CARD_PROM eq .) then OPT_LIFETIME_CARD_PROM="03:12.5-39.5, MISSING";
+MPRINT(EM_DIAGRAM):   if (LIFETIME_CARD_PROM eq .) then OPT_LIFETIME_CARD_PROM="03:12.5-39.5, MISSING";
+21949     +else
+21950     +if (LIFETIME_CARD_PROM < 7.5) then
+21951     +OPT_LIFETIME_CARD_PROM = "01:low-7.5";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_CARD_PROM < 7.5) then OPT_LIFETIME_CARD_PROM = "01:low-7.5";
+21952     +else
+21953     +if (LIFETIME_CARD_PROM >= 7.5 and LIFETIME_CARD_PROM < 12.5) then
+21954     +OPT_LIFETIME_CARD_PROM = "02:7.5-12.5";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_CARD_PROM >= 7.5 and LIFETIME_CARD_PROM < 12.5) then OPT_LIFETIME_CARD_PROM = "02:7.5-12.5";
+21955     +else
+21956     +if (LIFETIME_CARD_PROM >= 12.5 and LIFETIME_CARD_PROM < 39.5) then
+21957     +OPT_LIFETIME_CARD_PROM = "03:12.5-39.5, MISSING";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_CARD_PROM >= 12.5 and LIFETIME_CARD_PROM < 39.5) then OPT_LIFETIME_CARD_PROM = "03:12.5-39.5, MISSING";
+21958     +else
+21959     +if (LIFETIME_CARD_PROM >= 39.5) then
+21960     +OPT_LIFETIME_CARD_PROM = "04:39.5-high";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_CARD_PROM >= 39.5) then OPT_LIFETIME_CARD_PROM = "04:39.5-high";
+21961     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21962     +* TRANSFORM: LIFETIME_GIFT_COUNT , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: LIFETIME_GIFT_COUNT , Optimal Binning(4);
+21963     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21964     +label OPT_LIFETIME_GIFT_COUNT = 'Transformed LIFETIME_GIFT_COUNT';
+MPRINT(EM_DIAGRAM):   label OPT_LIFETIME_GIFT_COUNT = 'Transformed LIFETIME_GIFT_COUNT';
+21965     +length OPT_LIFETIME_GIFT_COUNT $36;
+MPRINT(EM_DIAGRAM):   length OPT_LIFETIME_GIFT_COUNT $36;
+21966     +if (LIFETIME_GIFT_COUNT eq .) then OPT_LIFETIME_GIFT_COUNT="02:4.5-13.5, MISSING";
+MPRINT(EM_DIAGRAM):   if (LIFETIME_GIFT_COUNT eq .) then OPT_LIFETIME_GIFT_COUNT="02:4.5-13.5, MISSING";
+21967     +else
+21968     +if (LIFETIME_GIFT_COUNT < 4.5) then
+21969     +OPT_LIFETIME_GIFT_COUNT = "01:low-4.5";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_GIFT_COUNT < 4.5) then OPT_LIFETIME_GIFT_COUNT = "01:low-4.5";
+21970     +else
+21971     +if (LIFETIME_GIFT_COUNT >= 4.5 and LIFETIME_GIFT_COUNT < 13.5) then
+21972     +OPT_LIFETIME_GIFT_COUNT = "02:4.5-13.5, MISSING";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_GIFT_COUNT >= 4.5 and LIFETIME_GIFT_COUNT < 13.5) then OPT_LIFETIME_GIFT_COUNT = "02:4.5-13.5, MISSING";
+21973     +else
+21974     +if (LIFETIME_GIFT_COUNT >= 13.5) then
+21975     +OPT_LIFETIME_GIFT_COUNT = "03:13.5-high";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_GIFT_COUNT >= 13.5) then OPT_LIFETIME_GIFT_COUNT = "03:13.5-high";
+21976     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21977     +* TRANSFORM: MEDIAN_HOME_VALUE , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: MEDIAN_HOME_VALUE , Optimal Binning(4);
+21978     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21979     +label OPT_MEDIAN_HOME_VALUE = 'Transformed MEDIAN_HOME_VALUE';
+MPRINT(EM_DIAGRAM):   label OPT_MEDIAN_HOME_VALUE = 'Transformed MEDIAN_HOME_VALUE';
+21980     +length OPT_MEDIAN_HOME_VALUE $36;
+MPRINT(EM_DIAGRAM):   length OPT_MEDIAN_HOME_VALUE $36;
+21981     +if (MEDIAN_HOME_VALUE eq .) then OPT_MEDIAN_HOME_VALUE="02:676.5-high, MISSING";
+MPRINT(EM_DIAGRAM):   if (MEDIAN_HOME_VALUE eq .) then OPT_MEDIAN_HOME_VALUE="02:676.5-high, MISSING";
+21982     +else
+21983     +if (MEDIAN_HOME_VALUE < 676.5) then
+21984     +OPT_MEDIAN_HOME_VALUE = "01:low-676.5";
+MPRINT(EM_DIAGRAM):   else if (MEDIAN_HOME_VALUE < 676.5) then OPT_MEDIAN_HOME_VALUE = "01:low-676.5";
+21985     +else
+21986     +if (MEDIAN_HOME_VALUE >= 676.5) then
+21987     +OPT_MEDIAN_HOME_VALUE = "02:676.5-high, MISSING";
+MPRINT(EM_DIAGRAM):   else if (MEDIAN_HOME_VALUE >= 676.5) then OPT_MEDIAN_HOME_VALUE = "02:676.5-high, MISSING";
+21988     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21989     +* TRANSFORM: MEDIAN_HOUSEHOLD_INCOME , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: MEDIAN_HOUSEHOLD_INCOME , Optimal Binning(4);
+21990     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+21991     +label OPT_MEDIAN_HOUSEHOLD_INCOME = 'Transformed MEDIAN_HOUSEHOLD_INCOME';
+MPRINT(EM_DIAGRAM):   label OPT_MEDIAN_HOUSEHOLD_INCOME = 'Transformed MEDIAN_HOUSEHOLD_INCOME';
+21992     +length OPT_MEDIAN_HOUSEHOLD_INCOME $36;
+MPRINT(EM_DIAGRAM):   length OPT_MEDIAN_HOUSEHOLD_INCOME $36;
+21993     +if (MEDIAN_HOUSEHOLD_INCOME eq .) then OPT_MEDIAN_HOUSEHOLD_INCOME="01:low-624.5, MISSING";
+MPRINT(EM_DIAGRAM):   if (MEDIAN_HOUSEHOLD_INCOME eq .) then OPT_MEDIAN_HOUSEHOLD_INCOME="01:low-624.5, MISSING";
+21994     +else
+21995     +if (MEDIAN_HOUSEHOLD_INCOME < 624.5) then
+21996     +OPT_MEDIAN_HOUSEHOLD_INCOME = "01:low-624.5, MISSING";
+MPRINT(EM_DIAGRAM):   else if (MEDIAN_HOUSEHOLD_INCOME < 624.5) then OPT_MEDIAN_HOUSEHOLD_INCOME = "01:low-624.5, MISSING";
+21997     +else
+21998     +if (MEDIAN_HOUSEHOLD_INCOME >= 624.5) then
+21999     +OPT_MEDIAN_HOUSEHOLD_INCOME = "02:624.5-high";
+MPRINT(EM_DIAGRAM):   else if (MEDIAN_HOUSEHOLD_INCOME >= 624.5) then OPT_MEDIAN_HOUSEHOLD_INCOME = "02:624.5-high";
+22000     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22001     +* TRANSFORM: PER_CAPITA_INCOME , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: PER_CAPITA_INCOME , Optimal Binning(4);
+22002     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22003     +label OPT_PER_CAPITA_INCOME = 'Transformed PER_CAPITA_INCOME';
+MPRINT(EM_DIAGRAM):   label OPT_PER_CAPITA_INCOME = 'Transformed PER_CAPITA_INCOME';
+22004     +length OPT_PER_CAPITA_INCOME $36;
+MPRINT(EM_DIAGRAM):   length OPT_PER_CAPITA_INCOME $36;
+22005     +if (PER_CAPITA_INCOME eq .) then OPT_PER_CAPITA_INCOME="01:low-14976, MISSING";
+MPRINT(EM_DIAGRAM):   if (PER_CAPITA_INCOME eq .) then OPT_PER_CAPITA_INCOME="01:low-14976, MISSING";
+22006     +else
+22007     +if (PER_CAPITA_INCOME < 14976) then
+22008     +OPT_PER_CAPITA_INCOME = "01:low-14976, MISSING";
+MPRINT(EM_DIAGRAM):   else if (PER_CAPITA_INCOME < 14976) then OPT_PER_CAPITA_INCOME = "01:low-14976, MISSING";
+22009     +else
+22010     +if (PER_CAPITA_INCOME >= 14976) then
+22011     +OPT_PER_CAPITA_INCOME = "02:14976-high";
+MPRINT(EM_DIAGRAM):   else if (PER_CAPITA_INCOME >= 14976) then OPT_PER_CAPITA_INCOME = "02:14976-high";
+22012     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22013     +* TRANSFORM: RECENT_RESPONSE_PROP , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: RECENT_RESPONSE_PROP , Optimal Binning(4);
+22014     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22015     +label OPT_RECENT_RESPONSE_PROP = 'Transformed RECENT_RESPONSE_PROP';
+MPRINT(EM_DIAGRAM):   label OPT_RECENT_RESPONSE_PROP = 'Transformed RECENT_RESPONSE_PROP';
+22016     +length OPT_RECENT_RESPONSE_PROP $36;
+MPRINT(EM_DIAGRAM):   length OPT_RECENT_RESPONSE_PROP $36;
+22017     +if (RECENT_RESPONSE_PROP eq .) then OPT_RECENT_RESPONSE_PROP="01:low-0.2125, MISSING";
+MPRINT(EM_DIAGRAM):   if (RECENT_RESPONSE_PROP eq .) then OPT_RECENT_RESPONSE_PROP="01:low-0.2125, MISSING";
+22018     +else
+22019     +if (RECENT_RESPONSE_PROP < 0.2125) then
+22020     +OPT_RECENT_RESPONSE_PROP = "01:low-0.2125, MISSING";
+MPRINT(EM_DIAGRAM):   else if (RECENT_RESPONSE_PROP < 0.2125) then OPT_RECENT_RESPONSE_PROP = "01:low-0.2125, MISSING";
+22021     +else
+22022     +if (RECENT_RESPONSE_PROP >= 0.2125) then
+22023     +OPT_RECENT_RESPONSE_PROP = "02:0.2125-high";
+MPRINT(EM_DIAGRAM):   else if (RECENT_RESPONSE_PROP >= 0.2125) then OPT_RECENT_RESPONSE_PROP = "02:0.2125-high";
+22024     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22025     +* TRANSFORM: RECENT_STAR_STATUS , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: RECENT_STAR_STATUS , Optimal Binning(4);
+22026     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22027     +label OPT_RECENT_STAR_STATUS = 'Transformed RECENT_STAR_STATUS';
+MPRINT(EM_DIAGRAM):   label OPT_RECENT_STAR_STATUS = 'Transformed RECENT_STAR_STATUS';
+22028     +length OPT_RECENT_STAR_STATUS $36;
+MPRINT(EM_DIAGRAM):   length OPT_RECENT_STAR_STATUS $36;
+22029     +if (RECENT_STAR_STATUS eq .) then OPT_RECENT_STAR_STATUS="01:low-0.5, MISSING";
+MPRINT(EM_DIAGRAM):   if (RECENT_STAR_STATUS eq .) then OPT_RECENT_STAR_STATUS="01:low-0.5, MISSING";
+22030     +else
+22031     +if (RECENT_STAR_STATUS < 0.5) then
+22032     +OPT_RECENT_STAR_STATUS = "01:low-0.5, MISSING";
+MPRINT(EM_DIAGRAM):   else if (RECENT_STAR_STATUS < 0.5) then OPT_RECENT_STAR_STATUS = "01:low-0.5, MISSING";
+22033     +else
+22034     +if (RECENT_STAR_STATUS >= 0.5 and RECENT_STAR_STATUS < 1.5) then
+22035     +OPT_RECENT_STAR_STATUS = "02:0.5-1.5";
+MPRINT(EM_DIAGRAM):   else if (RECENT_STAR_STATUS >= 0.5 and RECENT_STAR_STATUS < 1.5) then OPT_RECENT_STAR_STATUS = "02:0.5-1.5";
+22036     +else
+22037     +if (RECENT_STAR_STATUS >= 1.5) then
+22038     +OPT_RECENT_STAR_STATUS = "03:1.5-high";
+MPRINT(EM_DIAGRAM):   else if (RECENT_STAR_STATUS >= 1.5) then OPT_RECENT_STAR_STATUS = "03:1.5-high";
+NOTE: %INCLUDE (level 1) ending.
+MPRINT(EM_DIAGRAM):   run;
+22039      run;
+
+NOTE: DATA STEP view saved on file EMWS1.TRANS_TRAIN.
+NOTE: A stored DATA STEP view cannot run under a different operating system.
+NOTE: View EMWS1.IMPT_TRAIN.VIEW used (Total process time):
+      real time           0.14 seconds
+      cpu time            0.12 seconds
+      
+NOTE: DATA statement used (Total process time):
+      real time           0.18 seconds
+      cpu time            0.15 seconds
+      
+
+MPRINT(EM_DIAGRAM):   quit;
+22040      quit;
+22041      filename emflow;
+MPRINT(EM_DIAGRAM):   filename emflow;
+NOTE: Fileref EMFLOW has been deassigned.
+22042      filename emflow "C:\Users\sakerb01\Desktop\SAS EM 12.3 Tutorials _ Projects\Getting Started Charitable Giving Example\Workspaces\EMWS1\Trans\EMFLOWSCORE.sas";
+MPRINT(EM_DIAGRAM):    filename emflow "C:\Users\sakerb01\Desktop\SAS EM 12.3 Tutorials _ Projects\Getting Started Charitable Giving Example\Workspaces\EMWS1\Trans\EMFLOWSCORE.sas";
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * Trans: Scoring VALIDATE data;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22043      *------------------------------------------------------------*;
+22044      * Trans: Scoring VALIDATE data;
+22045      *------------------------------------------------------------*;
+22046      data EMWS1.Trans_VALIDATE
+22047      / view=EMWS1.Trans_VALIDATE
+22048      ;
+MPRINT(EM_DIAGRAM):   data EMWS1.Trans_VALIDATE / view=EMWS1.Trans_VALIDATE ;
+22049      set EMWS1.Impt_VALIDATE
+22050      ;
+MPRINT(EM_DIAGRAM):   set EMWS1.Impt_VALIDATE ;
+22051      %inc emflow;
+NOTE: %INCLUDE (level 1) file EMFLOW is file C:\Users\sakerb01\Desktop\SAS EM 12.3 Tutorials _ Projects\Getting Started Charitable Giving Example\Workspaces\EMWS1\Trans\EMFLOWSCORE.sas.
+22052     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22053     +* Computed Code;
+MPRINT(EM_DIAGRAM):   * Computed Code;
+22054     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22055     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22056     +* TRANSFORM: FILE_AVG_GIFT , log10(FILE_AVG_GIFT + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: FILE_AVG_GIFT , log10(FILE_AVG_GIFT + 1);
+22057     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22058     +label LG10_FILE_AVG_GIFT = 'Transformed FILE_AVG_GIFT';
+MPRINT(EM_DIAGRAM):   label LG10_FILE_AVG_GIFT = 'Transformed FILE_AVG_GIFT';
+22059     +if FILE_AVG_GIFT eq . then LG10_FILE_AVG_GIFT = .;
+MPRINT(EM_DIAGRAM):   if FILE_AVG_GIFT eq . then LG10_FILE_AVG_GIFT = .;
+22060     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+22061     +if FILE_AVG_GIFT + 1 > 0 then LG10_FILE_AVG_GIFT = log10(FILE_AVG_GIFT + 1);
+MPRINT(EM_DIAGRAM):   if FILE_AVG_GIFT + 1 > 0 then LG10_FILE_AVG_GIFT = log10(FILE_AVG_GIFT + 1);
+22062     +else LG10_FILE_AVG_GIFT = .;
+MPRINT(EM_DIAGRAM):   else LG10_FILE_AVG_GIFT = .;
+22063     +end;
+MPRINT(EM_DIAGRAM):   end;
+22064     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22065     +* TRANSFORM: LAST_GIFT_AMT , log10(LAST_GIFT_AMT + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: LAST_GIFT_AMT , log10(LAST_GIFT_AMT + 1);
+22066     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22067     +label LG10_LAST_GIFT_AMT = 'Transformed LAST_GIFT_AMT';
+MPRINT(EM_DIAGRAM):   label LG10_LAST_GIFT_AMT = 'Transformed LAST_GIFT_AMT';
+22068     +if LAST_GIFT_AMT eq . then LG10_LAST_GIFT_AMT = .;
+MPRINT(EM_DIAGRAM):   if LAST_GIFT_AMT eq . then LG10_LAST_GIFT_AMT = .;
+22069     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+22070     +if LAST_GIFT_AMT + 1 > 0 then LG10_LAST_GIFT_AMT = log10(LAST_GIFT_AMT + 1);
+MPRINT(EM_DIAGRAM):   if LAST_GIFT_AMT + 1 > 0 then LG10_LAST_GIFT_AMT = log10(LAST_GIFT_AMT + 1);
+22071     +else LG10_LAST_GIFT_AMT = .;
+MPRINT(EM_DIAGRAM):   else LG10_LAST_GIFT_AMT = .;
+22072     +end;
+MPRINT(EM_DIAGRAM):   end;
+22073     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22074     +* TRANSFORM: LIFETIME_AVG_GIFT_AMT , log10(LIFETIME_AVG_GIFT_AMT + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: LIFETIME_AVG_GIFT_AMT , log10(LIFETIME_AVG_GIFT_AMT + 1);
+22075     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22076     +label LG10_LIFETIME_AVG_GIFT_AMT = 'Transformed LIFETIME_AVG_GIFT_AMT';
+MPRINT(EM_DIAGRAM):   label LG10_LIFETIME_AVG_GIFT_AMT = 'Transformed LIFETIME_AVG_GIFT_AMT';
+22077     +if LIFETIME_AVG_GIFT_AMT eq . then LG10_LIFETIME_AVG_GIFT_AMT = .;
+MPRINT(EM_DIAGRAM):   if LIFETIME_AVG_GIFT_AMT eq . then LG10_LIFETIME_AVG_GIFT_AMT = .;
+22078     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+22079     +if LIFETIME_AVG_GIFT_AMT + 1 > 0 then LG10_LIFETIME_AVG_GIFT_AMT = log10(LIFETIME_AVG_GIFT_AMT + 1);
+MPRINT(EM_DIAGRAM):   if LIFETIME_AVG_GIFT_AMT + 1 > 0 then LG10_LIFETIME_AVG_GIFT_AMT = log10(LIFETIME_AVG_GIFT_AMT + 1);
+22080     +else LG10_LIFETIME_AVG_GIFT_AMT = .;
+MPRINT(EM_DIAGRAM):   else LG10_LIFETIME_AVG_GIFT_AMT = .;
+22081     +end;
+MPRINT(EM_DIAGRAM):   end;
+22082     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22083     +* TRANSFORM: LIFETIME_GIFT_AMOUNT , log10(LIFETIME_GIFT_AMOUNT + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: LIFETIME_GIFT_AMOUNT , log10(LIFETIME_GIFT_AMOUNT + 1);
+22084     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22085     +label LG10_LIFETIME_GIFT_AMOUNT = 'Transformed LIFETIME_GIFT_AMOUNT';
+MPRINT(EM_DIAGRAM):   label LG10_LIFETIME_GIFT_AMOUNT = 'Transformed LIFETIME_GIFT_AMOUNT';
+22086     +if LIFETIME_GIFT_AMOUNT eq . then LG10_LIFETIME_GIFT_AMOUNT = .;
+MPRINT(EM_DIAGRAM):   if LIFETIME_GIFT_AMOUNT eq . then LG10_LIFETIME_GIFT_AMOUNT = .;
+22087     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+22088     +if LIFETIME_GIFT_AMOUNT + 1 > 0 then LG10_LIFETIME_GIFT_AMOUNT = log10(LIFETIME_GIFT_AMOUNT + 1);
+MPRINT(EM_DIAGRAM):   if LIFETIME_GIFT_AMOUNT + 1 > 0 then LG10_LIFETIME_GIFT_AMOUNT = log10(LIFETIME_GIFT_AMOUNT + 1);
+22089     +else LG10_LIFETIME_GIFT_AMOUNT = .;
+MPRINT(EM_DIAGRAM):   else LG10_LIFETIME_GIFT_AMOUNT = .;
+22090     +end;
+MPRINT(EM_DIAGRAM):   end;
+22091     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22092     +* TRANSFORM: LIFETIME_CARD_PROM , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: LIFETIME_CARD_PROM , Optimal Binning(4);
+22093     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22094     +label OPT_LIFETIME_CARD_PROM = 'Transformed LIFETIME_CARD_PROM';
+MPRINT(EM_DIAGRAM):   label OPT_LIFETIME_CARD_PROM = 'Transformed LIFETIME_CARD_PROM';
+22095     +length OPT_LIFETIME_CARD_PROM $36;
+MPRINT(EM_DIAGRAM):   length OPT_LIFETIME_CARD_PROM $36;
+22096     +if (LIFETIME_CARD_PROM eq .) then OPT_LIFETIME_CARD_PROM="03:12.5-39.5, MISSING";
+MPRINT(EM_DIAGRAM):   if (LIFETIME_CARD_PROM eq .) then OPT_LIFETIME_CARD_PROM="03:12.5-39.5, MISSING";
+22097     +else
+22098     +if (LIFETIME_CARD_PROM < 7.5) then
+22099     +OPT_LIFETIME_CARD_PROM = "01:low-7.5";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_CARD_PROM < 7.5) then OPT_LIFETIME_CARD_PROM = "01:low-7.5";
+22100     +else
+22101     +if (LIFETIME_CARD_PROM >= 7.5 and LIFETIME_CARD_PROM < 12.5) then
+22102     +OPT_LIFETIME_CARD_PROM = "02:7.5-12.5";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_CARD_PROM >= 7.5 and LIFETIME_CARD_PROM < 12.5) then OPT_LIFETIME_CARD_PROM = "02:7.5-12.5";
+22103     +else
+22104     +if (LIFETIME_CARD_PROM >= 12.5 and LIFETIME_CARD_PROM < 39.5) then
+22105     +OPT_LIFETIME_CARD_PROM = "03:12.5-39.5, MISSING";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_CARD_PROM >= 12.5 and LIFETIME_CARD_PROM < 39.5) then OPT_LIFETIME_CARD_PROM = "03:12.5-39.5, MISSING";
+22106     +else
+22107     +if (LIFETIME_CARD_PROM >= 39.5) then
+22108     +OPT_LIFETIME_CARD_PROM = "04:39.5-high";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_CARD_PROM >= 39.5) then OPT_LIFETIME_CARD_PROM = "04:39.5-high";
+22109     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22110     +* TRANSFORM: LIFETIME_GIFT_COUNT , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: LIFETIME_GIFT_COUNT , Optimal Binning(4);
+22111     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22112     +label OPT_LIFETIME_GIFT_COUNT = 'Transformed LIFETIME_GIFT_COUNT';
+MPRINT(EM_DIAGRAM):   label OPT_LIFETIME_GIFT_COUNT = 'Transformed LIFETIME_GIFT_COUNT';
+22113     +length OPT_LIFETIME_GIFT_COUNT $36;
+MPRINT(EM_DIAGRAM):   length OPT_LIFETIME_GIFT_COUNT $36;
+22114     +if (LIFETIME_GIFT_COUNT eq .) then OPT_LIFETIME_GIFT_COUNT="02:4.5-13.5, MISSING";
+MPRINT(EM_DIAGRAM):   if (LIFETIME_GIFT_COUNT eq .) then OPT_LIFETIME_GIFT_COUNT="02:4.5-13.5, MISSING";
+22115     +else
+22116     +if (LIFETIME_GIFT_COUNT < 4.5) then
+22117     +OPT_LIFETIME_GIFT_COUNT = "01:low-4.5";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_GIFT_COUNT < 4.5) then OPT_LIFETIME_GIFT_COUNT = "01:low-4.5";
+22118     +else
+22119     +if (LIFETIME_GIFT_COUNT >= 4.5 and LIFETIME_GIFT_COUNT < 13.5) then
+22120     +OPT_LIFETIME_GIFT_COUNT = "02:4.5-13.5, MISSING";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_GIFT_COUNT >= 4.5 and LIFETIME_GIFT_COUNT < 13.5) then OPT_LIFETIME_GIFT_COUNT = "02:4.5-13.5, MISSING";
+22121     +else
+22122     +if (LIFETIME_GIFT_COUNT >= 13.5) then
+22123     +OPT_LIFETIME_GIFT_COUNT = "03:13.5-high";
+MPRINT(EM_DIAGRAM):   else if (LIFETIME_GIFT_COUNT >= 13.5) then OPT_LIFETIME_GIFT_COUNT = "03:13.5-high";
+22124     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22125     +* TRANSFORM: MEDIAN_HOME_VALUE , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: MEDIAN_HOME_VALUE , Optimal Binning(4);
+22126     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22127     +label OPT_MEDIAN_HOME_VALUE = 'Transformed MEDIAN_HOME_VALUE';
+MPRINT(EM_DIAGRAM):   label OPT_MEDIAN_HOME_VALUE = 'Transformed MEDIAN_HOME_VALUE';
+22128     +length OPT_MEDIAN_HOME_VALUE $36;
+MPRINT(EM_DIAGRAM):   length OPT_MEDIAN_HOME_VALUE $36;
+22129     +if (MEDIAN_HOME_VALUE eq .) then OPT_MEDIAN_HOME_VALUE="02:676.5-high, MISSING";
+MPRINT(EM_DIAGRAM):   if (MEDIAN_HOME_VALUE eq .) then OPT_MEDIAN_HOME_VALUE="02:676.5-high, MISSING";
+22130     +else
+22131     +if (MEDIAN_HOME_VALUE < 676.5) then
+22132     +OPT_MEDIAN_HOME_VALUE = "01:low-676.5";
+MPRINT(EM_DIAGRAM):   else if (MEDIAN_HOME_VALUE < 676.5) then OPT_MEDIAN_HOME_VALUE = "01:low-676.5";
+22133     +else
+22134     +if (MEDIAN_HOME_VALUE >= 676.5) then
+22135     +OPT_MEDIAN_HOME_VALUE = "02:676.5-high, MISSING";
+MPRINT(EM_DIAGRAM):   else if (MEDIAN_HOME_VALUE >= 676.5) then OPT_MEDIAN_HOME_VALUE = "02:676.5-high, MISSING";
+22136     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22137     +* TRANSFORM: MEDIAN_HOUSEHOLD_INCOME , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: MEDIAN_HOUSEHOLD_INCOME , Optimal Binning(4);
+22138     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22139     +label OPT_MEDIAN_HOUSEHOLD_INCOME = 'Transformed MEDIAN_HOUSEHOLD_INCOME';
+MPRINT(EM_DIAGRAM):   label OPT_MEDIAN_HOUSEHOLD_INCOME = 'Transformed MEDIAN_HOUSEHOLD_INCOME';
+22140     +length OPT_MEDIAN_HOUSEHOLD_INCOME $36;
+MPRINT(EM_DIAGRAM):   length OPT_MEDIAN_HOUSEHOLD_INCOME $36;
+22141     +if (MEDIAN_HOUSEHOLD_INCOME eq .) then OPT_MEDIAN_HOUSEHOLD_INCOME="01:low-624.5, MISSING";
+MPRINT(EM_DIAGRAM):   if (MEDIAN_HOUSEHOLD_INCOME eq .) then OPT_MEDIAN_HOUSEHOLD_INCOME="01:low-624.5, MISSING";
+22142     +else
+22143     +if (MEDIAN_HOUSEHOLD_INCOME < 624.5) then
+22144     +OPT_MEDIAN_HOUSEHOLD_INCOME = "01:low-624.5, MISSING";
+MPRINT(EM_DIAGRAM):   else if (MEDIAN_HOUSEHOLD_INCOME < 624.5) then OPT_MEDIAN_HOUSEHOLD_INCOME = "01:low-624.5, MISSING";
+22145     +else
+22146     +if (MEDIAN_HOUSEHOLD_INCOME >= 624.5) then
+22147     +OPT_MEDIAN_HOUSEHOLD_INCOME = "02:624.5-high";
+MPRINT(EM_DIAGRAM):   else if (MEDIAN_HOUSEHOLD_INCOME >= 624.5) then OPT_MEDIAN_HOUSEHOLD_INCOME = "02:624.5-high";
+22148     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22149     +* TRANSFORM: PER_CAPITA_INCOME , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: PER_CAPITA_INCOME , Optimal Binning(4);
+22150     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22151     +label OPT_PER_CAPITA_INCOME = 'Transformed PER_CAPITA_INCOME';
+MPRINT(EM_DIAGRAM):   label OPT_PER_CAPITA_INCOME = 'Transformed PER_CAPITA_INCOME';
+22152     +length OPT_PER_CAPITA_INCOME $36;
+MPRINT(EM_DIAGRAM):   length OPT_PER_CAPITA_INCOME $36;
+22153     +if (PER_CAPITA_INCOME eq .) then OPT_PER_CAPITA_INCOME="01:low-14976, MISSING";
+MPRINT(EM_DIAGRAM):   if (PER_CAPITA_INCOME eq .) then OPT_PER_CAPITA_INCOME="01:low-14976, MISSING";
+22154     +else
+22155     +if (PER_CAPITA_INCOME < 14976) then
+22156     +OPT_PER_CAPITA_INCOME = "01:low-14976, MISSING";
+MPRINT(EM_DIAGRAM):   else if (PER_CAPITA_INCOME < 14976) then OPT_PER_CAPITA_INCOME = "01:low-14976, MISSING";
+22157     +else
+22158     +if (PER_CAPITA_INCOME >= 14976) then
+22159     +OPT_PER_CAPITA_INCOME = "02:14976-high";
+MPRINT(EM_DIAGRAM):   else if (PER_CAPITA_INCOME >= 14976) then OPT_PER_CAPITA_INCOME = "02:14976-high";
+22160     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22161     +* TRANSFORM: RECENT_RESPONSE_PROP , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: RECENT_RESPONSE_PROP , Optimal Binning(4);
+22162     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22163     +label OPT_RECENT_RESPONSE_PROP = 'Transformed RECENT_RESPONSE_PROP';
+MPRINT(EM_DIAGRAM):   label OPT_RECENT_RESPONSE_PROP = 'Transformed RECENT_RESPONSE_PROP';
+22164     +length OPT_RECENT_RESPONSE_PROP $36;
+MPRINT(EM_DIAGRAM):   length OPT_RECENT_RESPONSE_PROP $36;
+22165     +if (RECENT_RESPONSE_PROP eq .) then OPT_RECENT_RESPONSE_PROP="01:low-0.2125, MISSING";
+MPRINT(EM_DIAGRAM):   if (RECENT_RESPONSE_PROP eq .) then OPT_RECENT_RESPONSE_PROP="01:low-0.2125, MISSING";
+22166     +else
+22167     +if (RECENT_RESPONSE_PROP < 0.2125) then
+22168     +OPT_RECENT_RESPONSE_PROP = "01:low-0.2125, MISSING";
+MPRINT(EM_DIAGRAM):   else if (RECENT_RESPONSE_PROP < 0.2125) then OPT_RECENT_RESPONSE_PROP = "01:low-0.2125, MISSING";
+22169     +else
+22170     +if (RECENT_RESPONSE_PROP >= 0.2125) then
+22171     +OPT_RECENT_RESPONSE_PROP = "02:0.2125-high";
+MPRINT(EM_DIAGRAM):   else if (RECENT_RESPONSE_PROP >= 0.2125) then OPT_RECENT_RESPONSE_PROP = "02:0.2125-high";
+22172     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22173     +* TRANSFORM: RECENT_STAR_STATUS , Optimal Binning(4);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: RECENT_STAR_STATUS , Optimal Binning(4);
+22174     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+22175     +label OPT_RECENT_STAR_STATUS = 'Transformed RECENT_STAR_STATUS';
+MPRINT(EM_DIAGRAM):   label OPT_RECENT_STAR_STATUS = 'Transformed RECENT_STAR_STATUS';
+22176     +length OPT_RECENT_STAR_STATUS $36;
+MPRINT(EM_DIAGRAM):   length OPT_RECENT_STAR_STATUS $36;
+22177     +if (RECENT_STAR_STATUS eq .) then OPT_RECENT_STAR_STATUS="01:low-0.5, MISSING";
+MPRINT(EM_DIAGRAM):   if (RECENT_STAR_STATUS eq .) then OPT_RECENT_STAR_STATUS="01:low-0.5, MISSING";
+22178     +else
+22179     +if (RECENT_STAR_STATUS < 0.5) then
+22180     +OPT_RECENT_STAR_STATUS = "01:low-0.5, MISSING";
+MPRINT(EM_DIAGRAM):   else if (RECENT_STAR_STATUS < 0.5) then OPT_RECENT_STAR_STATUS = "01:low-0.5, MISSING";
+22181     +else
+22182     +if (RECENT_STAR_STATUS >= 0.5 and RECENT_STAR_STATUS < 1.5) then
+22183     +OPT_RECENT_STAR_STATUS = "02:0.5-1.5";
+MPRINT(EM_DIAGRAM):   else if (RECENT_STAR_STATUS >= 0.5 and RECENT_STAR_STATUS < 1.5) then OPT_RECENT_STAR_STATUS = "02:0.5-1.5";
+22184     +else
+22185     +if (RECENT_STAR_STATUS >= 1.5) then
+22186     +OPT_RECENT_STAR_STATUS = "03:1.5-high";
+MPRINT(EM_DIAGRAM):   else if (RECENT_STAR_STATUS >= 1.5) then OPT_RECENT_STAR_STATUS = "03:1.5-high";
+NOTE: %INCLUDE (level 1) ending.
+MPRINT(EM_DIAGRAM):   run;
+22187      run;
+
+NOTE: DATA STEP view saved on file EMWS1.TRANS_VALIDATE.
+NOTE: A stored DATA STEP view cannot run under a different operating system.
+NOTE: View EMWS1.IMPT_VALIDATE.VIEW used (Total process time):
+      real time           0.17 seconds
+      cpu time            0.14 seconds
+      
+NOTE: DATA statement used (Total process time):
+      real time           0.20 seconds
+      cpu time            0.17 seconds
+      
+
+MPRINT(EM_DIAGRAM):   quit;
+22188      quit;
+22189      filename emflow;
+MPRINT(EM_DIAGRAM):   filename emflow;
+NOTE: Fileref EMFLOW has been deassigned.
+22190      *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):    *------------------------------------------------------------*;
+22191      * Trans: Computing metadata for TRAIN data;
+MPRINT(EM_DIAGRAM):   * Trans: Computing metadata for TRAIN data;
+22192      *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+
+NOTE: View EMWS1.TRANS_TRAIN.VIEW used (Total process time):
+      real time           0.20 seconds
+      cpu time            0.20 seconds
+      
+MPRINT(EM_DIAGRAM):    *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * &nodeid: Computing Metadata for TRAIN data;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   filename _delta "C:\Users\sakerb01\Desktop\SAS EM 12.3 Tutorials _ Projects\Getting Started Charitable Giving Example\Workspaces\EMWS1\Trans\CDELTA_TRAIN.sas";
+MPRINT(EMADVISECOLUMNS):   proc display c=sashelp.emmeta.advisecolumns.scl;
+MPRINT(EMADVISECOLUMNS):   run;
+MPRINT(EMADVISECOLUMNS):    options validvarname=any;
+MPRINT(EMADVISECOLUMNS):   proc contents data=EMWS1.Trans_TRAIN out=_tempAdvisor noprint;
+MPRINT(EMADVISECOLUMNS):   run;
+MPRINT(EMADVISECOLUMNS):   options validvarname=V7;
+MPRINT(EMADVISECOLUMNS):    data _null_;
+MPRINT(EMADVISECOLUMNS):   dsid = open('EMWS1.Trans_TRAIN');
+MPRINT(EMADVISECOLUMNS):   call symput('_dsidTable', strip(put(dsid, best.)));
+MPRINT(EMADVISECOLUMNS):   if dsid then do;
+MPRINT(EMADVISECOLUMNS):   call symput('_engineTable', attrc(dsid, 'ENGINE'));
+MPRINT(EMADVISECOLUMNS):   dsid = close(dsid);
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   run;
+MPRINT(EMADVISECOLUMNS):    proc contents data=EMWS1.Trans_TRAIN out=WORK.M2BQM8VW noprint;
+MPRINT(EMADVISECOLUMNS):   run;
+MPRINT(EMADVISECOLUMNS):    data WORK.M2BQM8VW;
+MPRINT(EMADVISECOLUMNS):   length NAME $ 64 TYPE $ 1 LABEL $ 200 FORMAT $ 20 INFORMAT $20 INDEX $ 1 INDEXTYPE $ 9;
+MPRINT(EMADVISECOLUMNS):   label NAME =;
+MPRINT(EMADVISECOLUMNS):   set WORK.M2BQM8VW(keep=name type length label format formatl formatd informat informl informd idxusage rename=(type=itype));
+MPRINT(EMADVISECOLUMNS):   if itype = 1 then type = 'N';
+MPRINT(EMADVISECOLUMNS):   else type = 'C';
+MPRINT(EMADVISECOLUMNS):   if formatl > 0 then do;
+MPRINT(EMADVISECOLUMNS):   if format ne ' ' then format = strip(format)!!strip(put(formatl, best12.))!!'.'!!strip(put(formatd, best12.));
+MPRINT(EMADVISECOLUMNS):   else format = strip(put(formatl, best12.))!!'.'!!strip(put(formatd, best12.));
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   else if format ne '' then format = strip(format)!!'.';
+MPRINT(EMADVISECOLUMNS):   if informl > 0 then do;
+MPRINT(EMADVISECOLUMNS):   if informat ne ' ' then informat = strip(informat)!!strip(put(informl, best12.))!!'.'!!strip(put(informd, best12.));
+MPRINT(EMADVISECOLUMNS):   else informat = strip(put(informl, best12.))!!'.'!!strip(put(informd, best12.));
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   else if informat ne '' then informat = strip(informat)!!'.';
+MPRINT(EMADVISECOLUMNS):   if idxusage = 'NONE' then index ="N";
+MPRINT(EMADVISECOLUMNS):   else index = "Y";
+MPRINT(EMADVISECOLUMNS):   indextype = idxusage;
+MPRINT(EMADVISECOLUMNS):   drop idxusage itype formatl formatd informl informd;
+MPRINT(EMADVISECOLUMNS):   run;
+MPRINT(EMADVISECOLUMNS):    data WORK.M2BQM8VW;
+MPRINT(EMADVISECOLUMNS):   length UNAME $64;
+MPRINT(EMADVISECOLUMNS):   set WORK.M2BQM8VW;
+MPRINT(EMADVISECOLUMNS):   UNAME = upcase(NAME);
+MPRINT(EMADVISECOLUMNS):   run;
+MPRINT(EMADVISECOLUMNS):    proc sort data=WORK.M30WA4H6 NOTHREADS;
+MPRINT(EMADVISECOLUMNS):   by UNAME;
+MPRINT(EMADVISECOLUMNS):   run;
+MPRINT(EMADVISECOLUMNS):    data WORK.M30WA4H6;
+MPRINT(EMADVISECOLUMNS):   drop UNAME;
+MPRINT(EMADVISECOLUMNS):   set WORK.M30WA4H6;
+MPRINT(EMADVISECOLUMNS):   run;
+MPRINT(EMADVISECOLUMNS):    data WORK.M0NJSYA4(keep=NAME ATTR);
+MPRINT(EMADVISECOLUMNS):   length ATTR $ 20;
+MPRINT(EMADVISECOLUMNS):   set WORK.M30WA4H6;
+MPRINT(EMADVISECOLUMNS):   if level ne "INTERVAL" then do;
+MPRINT(EMADVISECOLUMNS):   if order = ' ' then do;
+MPRINT(EMADVISECOLUMNS):   attr = 'ORDER';
+MPRINT(EMADVISECOLUMNS):   output;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   if format ne ' ' and formattype = ' ' then do;
+MPRINT(EMADVISECOLUMNS):   attr = 'FORMATTYPE';
+MPRINT(EMADVISECOLUMNS):   output;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   if role = ' ' then do;
+MPRINT(EMADVISECOLUMNS):   attr = 'ROLE';
+MPRINT(EMADVISECOLUMNS):   output;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   if level = ' ' then do;
+MPRINT(EMADVISECOLUMNS):   attr = 'LEVEL';
+MPRINT(EMADVISECOLUMNS):   output;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   if type = ' ' then do;
+MPRINT(EMADVISECOLUMNS):   attr = 'TYPE';
+MPRINT(EMADVISECOLUMNS):   output;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   if index = ' ' then do;
+MPRINT(EMADVISECOLUMNS):   attr = 'INDEX';
+MPRINT(EMADVISECOLUMNS):   output;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   if report = ' ' then do;
+MPRINT(EMADVISECOLUMNS):   attr = 'REPORT';
+MPRINT(EMADVISECOLUMNS):   output;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   run;
+MPRINT(EMADVISECOLUMNS):   proc sort NOTHREADS;
+MPRINT(EMADVISECOLUMNS):   by attr;
+MPRINT(EMADVISECOLUMNS):   run;
+MPRINT(EMADVISECOLUMNS):    data WORK.M30WA4H6;
+MPRINT(EMADVISECOLUMNS):   length NAME $64 ROLE $ 32 LEVEL $ 10 ORDER $ 8 CREATOR $32 FORMATTYPE $ 10 FAMILY $ 10 LOWERLIMIT 8 UPPERLIMIT 8 REPORT $1 DISTRIBUTION $ 20 COMMENT $64;
+MPRINT(EMADVISECOLUMNS):   length levelAssigned 8 roleAssigned 8 PRICE 8;
+MPRINT(EMADVISECOLUMNS):   set WORK.M30WA4H6;
+MPRINT(EMADVISECOLUMNS):   if formattype = ' ' then do;
+MPRINT(EMADVISECOLUMNS):   if format ne ' ' then do;
+MPRINT(EMADVISECOLUMNS):   if type = 'N' then do;
+MPRINT(EMADVISECOLUMNS):   pos = indexc(format,'.1234567890');
+MPRINT(EMADVISECOLUMNS):   if pos > 1 then tempfmt = substr(format,1, pos-1);
+MPRINT(EMADVISECOLUMNS):   else tempfmt = ' ';
+MPRINT(EMADVISECOLUMNS):   flen = length(tempfmt);
+MPRINT(EMADVISECOLUMNS):   select;
+MPRINT(EMADVISECOLUMNS):   when(tempfmt in ("DATE" "DAY" "DDMMYY" "DOWNAME" "JULDAY" "JULIAN" "MMDDYY" "MMDDYYD" "MMDDYYC" "MMDDYYN" "MMDDYYP" "MMDDYYS" "MONNAME" "MONTH" "MONYY" "NENGO" "QTR" "QTRR" "WEEKDATE" "WEEKDATX" "WEEKDAY" "WORDDATE" "WORDDATX" 
+"YEAR" "YYMMDD" "YYMON" "YYMMDDC" "YYMMDDD" "YYMMDDN" "YYMMDDP" "YYMMDDS" "EURDFDE" "NJDATE" "NLDATE" "EURDFDD" "EURDFDWN" "EURDFMN" "EURDFMY" "EURDFWK" "EURDFWKX" "EURDFWDX" "EURDFDN" "EURDFDE" )) formattype = 'DATE';
+MPRINT(EMADVISECOLUMNS):   when(tempfmt in ("DATETIME" "EURDFDT" "TOD" )) formattype = "DATETIME";
+MPRINT(EMADVISECOLUMNS):   when(tempfmt in ("HHMM" "HOUR" "MMSS" "TIME" "TIMEAMPM" )) formattype = "TIME";
+MPRINT(EMADVISECOLUMNS):   when(tempfmt in ("COMMA" "COMMAX" "DOLLAR" "DOLLARX" "E" "FRACT" "NEGPAREN" "PERCENT")) formattype="QUANTITY";
+MPRINT(EMADVISECOLUMNS):   when(tempfmt in ("BINARY" "HEX" "IB" "OCTAL" "PD" "PIB" "PK" "RB" "SSN" "Z" "ZD")) formattype = "CODING";
+MPRINT(EMADVISECOLUMNS):   otherwise do;
+MPRINT(EMADVISECOLUMNS):   formattype = "USER";
+MPRINT(EMADVISECOLUMNS):   if substr(tempfmt, 1, 6)='NLDATE' then formattype = "DATE";
+MPRINT(EMADVISECOLUMNS):   else if substr(tempfmt, 1, 6)='NLDATM' then formattype = "DATETIME";
+MPRINT(EMADVISECOLUMNS):   else if substr(tempfmt, 1, 4)='NLTIM' then formattype = "TIME";
+MPRINT(EMADVISECOLUMNS):   else if flen >= 4 then do;
+MPRINT(EMADVISECOLUMNS):   str = substr(tempfmt,1,4);
+MPRINT(EMADVISECOLUMNS):   if str in ("MMYY" "YYMM" "YYQR") then formattype ="DATE";
+MPRINT(EMADVISECOLUMNS):   else if str = "S370" then formattype = "CODING";
+MPRINT(EMADVISECOLUMNS):   else if str = "BEST" then formattype = "NUM";
+MPRINT(EMADVISECOLUMNS):   drop str;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   else if flen >=3 and substr(tempfmt,1,3) = "YYQ" then formatType = "DATE";
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   drop flen tempfmt pos;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   else do;
+MPRINT(EMADVISECOLUMNS):   formatType = "CATEGORY";
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   if formatType = "NUM" then do;
+MPRINT(EMADVISECOLUMNS):   if index = "Y" then formatType = "DISCRETE";
+MPRINT(EMADVISECOLUMNS):   else formatType = "QUANTITY";
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   if level = ' ' then do;
+MPRINT(EMADVISECOLUMNS):   if formatType in ("CATEGORY", "CODING", "ID") or type = "C" then level = "NOMINAL";
+MPRINT(EMADVISECOLUMNS):   else level = "INTERVAL";
+MPRINT(EMADVISECOLUMNS):   levelAssigned = 1;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   else level = upcase(level);
+MPRINT(EMADVISECOLUMNS):   if role = ' ' then do;
+MPRINT(EMADVISECOLUMNS):   length name_prefix $8 _uname $64;
+MPRINT(EMADVISECOLUMNS):   drop name_prefix _uname _freqflag;
+MPRINT(EMADVISECOLUMNS):   retain _freqflag;
+MPRINT(EMADVISECOLUMNS):   if LENGTH> 80 then ROLE = 'TEXT';
+MPRINT(EMADVISECOLUMNS):   _uname = upcase(NAME);
+MPRINT(EMADVISECOLUMNS):   select(_uname);
+MPRINT(EMADVISECOLUMNS):   when('_WARN_') ROLE = 'ASSESS';
+MPRINT(EMADVISECOLUMNS):   when('EM_SEGMENT') do;
+MPRINT(EMADVISECOLUMNS):   ROLE = 'SEGMENT';
+MPRINT(EMADVISECOLUMNS):   LEVEL = 'NOMINAL';
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   when('_NODE_') do;
+MPRINT(EMADVISECOLUMNS):   ROLE = 'SEGMENT';
+MPRINT(EMADVISECOLUMNS):   LEVEL = 'NOMINAL';
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   when('EM_CLASSTARGET') ROLE = 'ASSESS';
+MPRINT(EMADVISECOLUMNS):   when('EM_VALUETARGET') ROLE = 'ASSESS';
+MPRINT(EMADVISECOLUMNS):   when('EM_PREDICTION') ROLE = 'PREDICT';
+MPRINT(EMADVISECOLUMNS):   when('EM_PROBABILITY') ROLE = 'PREDICT';
+MPRINT(EMADVISECOLUMNS):   when('EM_EVENTPROBABILITY') ROLE = 'PREDICT';
+MPRINT(EMADVISECOLUMNS):   when('EM_CLASSIFICATION') ROLE = 'CLASSIFICATION';
+MPRINT(EMADVISECOLUMNS):   when('EM_DECISION') ROLE = 'DECISION';
+MPRINT(EMADVISECOLUMNS):   when('EM_PROFIT') ROLE = 'ASSESS';
+MPRINT(EMADVISECOLUMNS):   when('EM_LOSS') ROLE = 'ASSESS';
+MPRINT(EMADVISECOLUMNS):   when('EM_ROI') ROLE = 'ASSESS';
+MPRINT(EMADVISECOLUMNS):   when('URI') ROLE = 'URL';
+MPRINT(EMADVISECOLUMNS):   when('FILTERED') ROLE = 'TEXTLOC';
+MPRINT(EMADVISECOLUMNS):   otherwise do;
+MPRINT(EMADVISECOLUMNS):   if upcase(NAME) =: 'ZIP' then do;
+MPRINT(EMADVISECOLUMNS):   ROLE = 'REJECTED';
+MPRINT(EMADVISECOLUMNS):   LEVEL = 'NOMINAL';
+MPRINT(EMADVISECOLUMNS):   COMMENT = 'Rejected by: Exceed the maximum class level of %s';
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   else if upcase(NAME) in('FREQ', 'FREQUENCY') then do;
+MPRINT(EMADVISECOLUMNS):   ROLE = 'FREQ';
+MPRINT(EMADVISECOLUMNS):   if TYPE = 'C' then ROLE = 'INPUT';
+MPRINT(EMADVISECOLUMNS):   else if _freqflag =1 then ROLE='REJECTED';
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   else do;
+MPRINT(EMADVISECOLUMNS):   name_prefix = scan(_uname, 1, '_');
+MPRINT(EMADVISECOLUMNS):   if scan(_uname, 2, '_') = '' then name_prefix='';
+MPRINT(EMADVISECOLUMNS):   if name_prefix in('F', 'I', 'U') then do;
+MPRINT(EMADVISECOLUMNS):   ROLE = 'CLASSIFICATION';
+MPRINT(EMADVISECOLUMNS):   LEVEL = 'NOMINAL';
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   else if name_prefix in('P', 'V') then ROLE = 'PREDICT';
+MPRINT(EMADVISECOLUMNS):   else if name_prefix in('R', 'RS', 'RT', 'RD', 'RDS', 'RDT', 'RA', 'RAS', 'RAT') then ROLE = 'RESIDUAL';
+MPRINT(EMADVISECOLUMNS):   else if name_prefix ='D' then do;
+MPRINT(EMADVISECOLUMNS):   ROLE = 'DECISION';
+MPRINT(EMADVISECOLUMNS):   LEVEL = 'NOMINAL';
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   else if name_prefix ='B' then do;
+MPRINT(EMADVISECOLUMNS):   ROLE = 'SEGMENT';
+MPRINT(EMADVISECOLUMNS):   LEVEL = 'NOMINAL';
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   else if name_prefix in('EP', 'BP', 'CP', 'EL', 'CL', 'BL', 'W', 'ROI', 'IC') then ROLE = 'ASSESS';
+MPRINT(EMADVISECOLUMNS):   else do;
+MPRINT(EMADVISECOLUMNS):   array _ROLE_ (19) $32 _TEMPORARY_ ('ASSESS','CLASSIFICATION','CENSOR', 'COST', 'CROSSID', 'DECISION', 'ID','INPUT', 'LABEL', 'MISSING','PREDICT','REFERRER','REJECTED', 'RESIDUAL','SEGMENT', 'SEQUENCE','TARGET', 'TEXT', 'TIMEID');
+MPRINT(EMADVISECOLUMNS):   drop _found_ i;
+MPRINT(EMADVISECOLUMNS):   _found_=0;
+MPRINT(EMADVISECOLUMNS):   do i=1 to 19 until(_found_=1);
+MPRINT(EMADVISECOLUMNS):   if index(_uname, trim(_ROLE_{i}))=1 then do;
+MPRINT(EMADVISECOLUMNS):   ROLE=_ROLE_{i};
+MPRINT(EMADVISECOLUMNS):   if ROLE = 'ID' then LEVEL = 'NOMINAL';
+MPRINT(EMADVISECOLUMNS):   else if ROLE = 'SEGMENT' then LEVEL = 'NOMINAL';
+MPRINT(EMADVISECOLUMNS):   else if ROLE = 'TIMEID' and TYPE='N' then LEVEL = 'INTERVAL';
+MPRINT(EMADVISECOLUMNS):   _found_=1;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   if length(_uname)>2 then do;
+MPRINT(EMADVISECOLUMNS):   if substr(reverse(trim(_uname)), 1, 3) = 'DI_' then do;
+MPRINT(EMADVISECOLUMNS):   ROLE = 'ID';
+MPRINT(EMADVISECOLUMNS):   LEVEL = 'NOMINAL';
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   if ROLE='FREQ' then _freqflag=1;
+MPRINT(EMADVISECOLUMNS):   else if ROLE = 'CLASSIFICATION' then LEVEL = 'NOMINAL';
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   if role = ' ' then do;
+MPRINT(EMADVISECOLUMNS):   if formattype in('DATE', 'DATETIME', 'TIME') then role = 'TIMEID';
+MPRINT(EMADVISECOLUMNS):   else role = 'INPUT';
+MPRINT(EMADVISECOLUMNS):   roleAssigned = 1;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   else role = upcase(role);
+MPRINT(EMADVISECOLUMNS):   if REPORT = '' then REPORT = 'N';
+MPRINT(EMADVISECOLUMNS):   run;
+MPRINT(EMADVISECOLUMNS):    data WORK.M30WA4H6;
+MPRINT(EMADVISECOLUMNS):   set WORK.M30WA4H6;
+MPRINT(EMADVISECOLUMNS):   label NAME = "Variable Name" TYPE = "Type" ROLE = "Role" LEVEL= "Measurement Level" ORDER= "Order" CREATOR= "Creator" FORMATTYPE= "Format Type" FAMILY= "Family" DISTRIBUTION= "Distribution" PRICE= "Price" LOWERLIMIT= "Lower 
+limit" UPPERLIMIT= "Upper Limit" REPORT= "Report" COMMENT= "Comment" INDEX= "Index" INDEXTYPE= "IndexType" LABEL= "Label" LENGTH= "Length";
+MPRINT(EMADVISECOLUMNS):   drop levelAssigned roleAssigned;
+MPRINT(EMADVISECOLUMNS):   run;
+MPRINT(EMADVISECOLUMNS):   
+MPRINT(EM_DIAGRAM):  ;
+MPRINT(EM_DIAGRAM):   proc sort data=WORK.COLUMNMETA;
+MPRINT(EM_DIAGRAM):   by NAME;
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * &nodeid: Merge incoming metadata;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   proc contents data=EMWS1.Impt_TRAIN noprint out=_temp2(keep=NAME);
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):   proc sort data=_temp2;
+MPRINT(EM_DIAGRAM):   by NAME;
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):   proc sort data=EMWS1.Impt_CMeta_TRAIN out=_temp;
+MPRINT(EM_DIAGRAM):   by NAME;
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):   data EMWS1.Trans_CMeta_TRAIN;
+MPRINT(EM_DIAGRAM):   merge WORK.COLUMNMETA(in=_a) _temp2(in=_b) _temp(drop=FORMAT INFORMAT LENGTH INDEX INDEXTYPE in=_c) end=_eof_;
+MPRINT(EM_DIAGRAM):   by NAME;
+MPRINT(EM_DIAGRAM):   if (^_a and _b) or (^_c and _a and _b) then delete;
+MPRINT(EM_DIAGRAM):   if ^_b then CREATOR = "Trans";
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * Trans: Apply Delta Code;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * Computed Code;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   if NAME="LG10_FILE_AVG_GIFT" then do;
+MPRINT(EM_DIAGRAM):   COMMENT = "log10(FILE_AVG_GIFT  + 1) ";
+MPRINT(EM_DIAGRAM):   ROLE ="INPUT";
+MPRINT(EM_DIAGRAM):   REPORT ="N";
+MPRINT(EM_DIAGRAM):   LEVEL ="INTERVAL";
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   if NAME="FILE_AVG_GIFT" then delete;
+MPRINT(EM_DIAGRAM):   if NAME="LG10_LAST_GIFT_AMT" then do;
+MPRINT(EM_DIAGRAM):   COMMENT = "log10(LAST_GIFT_AMT  + 1) ";
+MPRINT(EM_DIAGRAM):   ROLE ="INPUT";
+MPRINT(EM_DIAGRAM):   REPORT ="N";
+MPRINT(EM_DIAGRAM):   LEVEL ="INTERVAL";
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   if NAME="LAST_GIFT_AMT" then delete;
+MPRINT(EM_DIAGRAM):   if NAME="LG10_LIFETIME_AVG_GIFT_AMT" then do;
+MPRINT(EM_DIAGRAM):   COMMENT = "log10(LIFETIME_AVG_GIFT_AMT  + 1) ";
+MPRINT(EM_DIAGRAM):   ROLE ="INPUT";
+MPRINT(EM_DIAGRAM):   REPORT ="N";
+MPRINT(EM_DIAGRAM):   LEVEL ="INTERVAL";
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   if NAME="LIFETIME_AVG_GIFT_AMT" then delete;
+MPRINT(EM_DIAGRAM):   if NAME="OPT_LIFETIME_CARD_PROM" then do;
+MPRINT(EM_DIAGRAM):   COMMENT = "Optimal Binning(4) ";
+MPRINT(EM_DIAGRAM):   ROLE ="INPUT";
+MPRINT(EM_DIAGRAM):   REPORT ="N";
+MPRINT(EM_DIAGRAM):   LEVEL ="NOMINAL";
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   if NAME="LIFETIME_CARD_PROM" then delete;
+MPRINT(EM_DIAGRAM):   if NAME="LG10_LIFETIME_GIFT_AMOUNT" then do;
+MPRINT(EM_DIAGRAM):   COMMENT = "log10(LIFETIME_GIFT_AMOUNT  + 1) ";
+MPRINT(EM_DIAGRAM):   ROLE ="INPUT";
+MPRINT(EM_DIAGRAM):   REPORT ="N";
+MPRINT(EM_DIAGRAM):   LEVEL ="INTERVAL";
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   if NAME="LIFETIME_GIFT_AMOUNT" then delete;
+MPRINT(EM_DIAGRAM):   if NAME="OPT_LIFETIME_GIFT_COUNT" then do;
+MPRINT(EM_DIAGRAM):   COMMENT = "Optimal Binning(4) ";
+MPRINT(EM_DIAGRAM):   ROLE ="INPUT";
+MPRINT(EM_DIAGRAM):   REPORT ="N";
+MPRINT(EM_DIAGRAM):   LEVEL ="NOMINAL";
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   if NAME="LIFETIME_GIFT_COUNT" then delete;
+MPRINT(EM_DIAGRAM):   if NAME="OPT_MEDIAN_HOME_VALUE" then do;
+MPRINT(EM_DIAGRAM):   COMMENT = "Optimal Binning(4) ";
+MPRINT(EM_DIAGRAM):   ROLE ="INPUT";
+MPRINT(EM_DIAGRAM):   REPORT ="N";
+MPRINT(EM_DIAGRAM):   LEVEL ="NOMINAL";
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   if NAME="MEDIAN_HOME_VALUE" then delete;
+MPRINT(EM_DIAGRAM):   if NAME="OPT_MEDIAN_HOUSEHOLD_INCOME" then do;
+MPRINT(EM_DIAGRAM):   COMMENT = "Optimal Binning(4) ";
+MPRINT(EM_DIAGRAM):   ROLE ="INPUT";
+MPRINT(EM_DIAGRAM):   REPORT ="N";
+MPRINT(EM_DIAGRAM):   LEVEL ="NOMINAL";
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   if NAME="MEDIAN_HOUSEHOLD_INCOME" then delete;
+MPRINT(EM_DIAGRAM):   if NAME="OPT_PER_CAPITA_INCOME" then do;
+MPRINT(EM_DIAGRAM):   COMMENT = "Optimal Binning(4) ";
+MPRINT(EM_DIAGRAM):   ROLE ="INPUT";
+MPRINT(EM_DIAGRAM):   REPORT ="N";
+MPRINT(EM_DIAGRAM):   LEVEL ="NOMINAL";
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   if NAME="PER_CAPITA_INCOME" then delete;
+MPRINT(EM_DIAGRAM):   if NAME="OPT_RECENT_RESPONSE_PROP" then do;
+MPRINT(EM_DIAGRAM):   COMMENT = "Optimal Binning(4) ";
+MPRINT(EM_DIAGRAM):   ROLE ="INPUT";
+MPRINT(EM_DIAGRAM):   REPORT ="N";
+MPRINT(EM_DIAGRAM):   LEVEL ="NOMINAL";
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   if NAME="RECENT_RESPONSE_PROP" then delete;
+MPRINT(EM_DIAGRAM):   if NAME="OPT_RECENT_STAR_STATUS" then do;
+MPRINT(EM_DIAGRAM):   COMMENT = "Optimal Binning(4) ";
+MPRINT(EM_DIAGRAM):   ROLE ="INPUT";
+MPRINT(EM_DIAGRAM):   REPORT ="N";
+MPRINT(EM_DIAGRAM):   LEVEL ="NOMINAL";
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   if NAME="RECENT_STAR_STATUS" then delete;
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):   filename _delta;
+NOTE: View EMWS1.TRANS_TRAIN.VIEW used (Total process time):
+      real time           0.17 seconds
+      cpu time            0.17 seconds
+      
+NOTE: View EMWS1.TRANS_VALIDATE.VIEW used (Total process time):
+      real time           0.15 seconds
+      cpu time            0.15 seconds
+      
+MPRINT(EM_DIAGRAM):    proc printto;
+MPRINT(EM_DIAGRAM):   run;

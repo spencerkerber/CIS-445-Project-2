@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?><_ROOT_  Location="CATALOG" Catalog="SASHELP.EMMODL.BOOST.SOURCE" ToolType="MODEL" Iterations="50"
+ CategoricalBins="30" IntervalBins="100" TrainProportion="60" Seed="12345" Shrinkage="0.1"
+ LeafFraction="0.1" SplitSize="." MinCatSize="5" MaxBranch="2" MaxDepth="2" NSurrs="0"
+ Missing="USEINSEARCH" Huber="NO" ReUseVar="1" AssessMeasure="PROFIT" NodeSize="20000"
+ Exhaustive="5000" VarSelection="Y" Performance="DISK" SubSeries="BEST" IterationNum="1"
+ ObsImportance="N" NumSingleImp="5" CreateHStat="N" ForceRun="N" RunAction="Train"
+ Component="Boost" Precision="0" Measure="PROFIT" NumPairImp="0" DataNeeded="Y" RawCreateTime="1759932712.5"
+ CreateTime="08OCT2015:14:11:52" RunId="77eb5ee4-d3a4-4972-b2be-5f2f742ce2d0" RawLastTimeRun="1760193058.4"
+ RawRunTime="65.825000048" LastTimeRun="11OCT2015:14:30:58" RunTime="0 Hr. 1 Min. 5.83 Sec."
+>
+<VARIABLEPROPERTIES/>
+<FILEPROPERTIES ><![CDATA[
+USERTRAINCODE
+USERSCORECODE
+USERREPORTCODE
+]]>
+</FILEPROPERTIES></_ROOT_>

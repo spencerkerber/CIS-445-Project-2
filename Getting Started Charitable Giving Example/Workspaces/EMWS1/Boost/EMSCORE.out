@@ -1,0 +1,22 @@
+ 
+                                                                                                                                                                                                                                                                
+ 
+Variable Importance
+
+Obs    NAME                          LABEL    NRULES    IMPORTANCE    VIMPORTANCE     RATIO
+
+  1    CLUSTER_CODE                             29        1.00000       0.25325      0.25325
+  2    RECENT_RESPONSE_COUNT                     5        0.61140       0.90928      1.48720
+  3    FREQUENCY_STATUS_97NK                     4        0.57967       1.00000      1.72512
+  4    FILE_AVG_GIFT                             3        0.42749       0.60316      1.41093
+  5    PEP_STAR                                  4        0.37286       0.62363      1.67257
+  6    FILE_CARD_GIFT                            3        0.32820       0.50965      1.55286
+  7    MEDIAN_HOME_VALUE                         3        0.27521       0.23193      0.84275
+  8    LAST_GIFT_AMT                             4        0.27058       0.58742      2.17099
+  9    RECENT_AVG_GIFT_AMT                       2        0.23787       0.51703      2.17361
+ 10    RECENT_CARD_RESPONSE_COUNT                2        0.20929       0.35737      1.70752
+ 11    RECENCY_STATUS_96NK                       1        0.20120       0.39684      1.97231
+ 12    WEALTH_RATING                             2        0.19304       0.00000      0.00000
+ 13    MONTHS_SINCE_LAST_GIFT                    1        0.19259       0.25580      1.32819
+ 14    CARD_PROM_12                              1        0.16754       0.00000      0.00000
+ 15    INCOME_GROUP                              1        0.09632       0.00000      0.00000
